@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { categories, projects } from "./projectData";
-import { FaArrowRight, FaTimes } from "react-icons/fa";
+import { FaArrowRight, FaTimes, FaExternalLinkAlt } from "react-icons/fa";
 
 export default function Projects() {
   const [activeTab, setActiveTab] = useState("Full Stack");
@@ -63,7 +63,7 @@ export default function Projects() {
           {visibleProjects.map((proj, i) => (
             <motion.div
               key={i}
-              whileHover={{ y: -6, scale: 1.02 }}
+              whileHover={{ y: -6, scale: 1.03 }}
               transition={{ type: "spring", stiffness: 250 }}
               className="relative group w-full max-w-[380px] overflow-hidden rounded-2xl bg-[#111]/60 border border-[#00C9A7]/20 shadow-[0_0_25px_rgba(0,201,167,0.15)]"
             >
@@ -71,11 +71,16 @@ export default function Projects() {
                 <h2 className="text-2xl font-semibold text-[#A5FECB] mb-3">
                   {proj.title}
                 </h2>
-                <img
-                  src={proj.image}
-                  alt={proj.title}
-                  className="w-full h-[220px] object-cover rounded-xl mb-4 transition-transform duration-700 group-hover:scale-105"
-                />
+
+                {/* Full image display */}
+                <div className="w-full h-[250px] overflow-hidden rounded-xl mb-4">
+                  <img
+                    src={proj.image}
+                    alt={proj.title}
+                    className="w-full h-full object-contain rounded-xl transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
+
                 <motion.button
                   whileHover={{
                     scale: 1.05,
@@ -122,13 +127,13 @@ export default function Projects() {
             exit={{ opacity: 0 }}
           >
             <motion.div
-              initial={{ scale: 0.8, opacity: 0, y: 50 }}
+              initial={{ scale: 0.85, opacity: 0, y: 40 }}
               animate={{ scale: 1, opacity: 1, y: 0 }}
-              exit={{ scale: 0.8, opacity: 0, y: 50 }}
+              exit={{ scale: 0.85, opacity: 0, y: 40 }}
               transition={{ duration: 0.4, type: "spring" }}
-              className="relative w-[90%] max-w-6xl rounded-3xl overflow-hidden bg-gradient-to-br from-[#0b0c10]/95 via-[#1f2833]/95 to-[#0b0c10]/95 border border-[#00C9A7]/40 shadow-[0_0_40px_#00C9A7aa] grid grid-cols-1 md:grid-cols-2"
+              className="relative w-[95%] max-w-[1300px] rounded-3xl overflow-hidden bg-gradient-to-br from-[#0b0c10]/95 via-[#1f2833]/95 to-[#0b0c10]/95 border border-[#00C9A7]/40 shadow-[0_0_60px_#00C9A7aa] grid grid-cols-1 lg:grid-cols-2 max-h-[90vh]"
             >
-              {/* Close Button - visible now */}
+              {/* Close Button */}
               <button
                 onClick={() => setSelectedProject(null)}
                 className="absolute top-4 right-4 z-50 text-gray-400 hover:text-[#A5FECB] bg-black/40 p-2 rounded-full"
@@ -137,7 +142,7 @@ export default function Projects() {
               </button>
 
               {/* Left: Details */}
-              <div className="p-10 overflow-y-auto max-h-[80vh] space-y-6">
+              <div className="p-10 overflow-y-auto max-h-[90vh] space-y-6">
                 <h2 className="text-3xl font-bold text-[#A5FECB] drop-shadow-[0_0_10px_#00C9A7]">
                   {selectedProject.title}
                 </h2>
@@ -149,24 +154,26 @@ export default function Projects() {
                   {selectedProject.tech}
                 </p>
 
-                <a
-                  href={selectedProject.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 mt-4 bg-[#00C9A7] text-black font-semibold rounded-full py-2 px-6 hover:bg-[#00B49B] transition-all w-fit"
+                {/* Live Demo Button */}
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() =>
+                    window.open(selectedProject.link || "https://broshtech.com", "_blank")
+                  }
+                  className="inline-flex items-center justify-center gap-2 mt-6 bg-[#00C9A7] text-black font-semibold rounded-full py-2 px-8 hover:bg-[#00B49B] transition-all w-fit"
                 >
-                  Live Demo <FaArrowRight />
-                </a>
+                  Live Demo <FaExternalLinkAlt size={14} />
+                </motion.button>
               </div>
 
               {/* Right: Image */}
-              <div className="relative overflow-hidden h-[400px] md:h-auto">
+              <div className="relative overflow-hidden flex items-center justify-center bg-black/40">
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.title}
-                  className="w-full h-full object-cover scale-105 hover:scale-110 transition-transform duration-1000"
+                  className="w-full h-full object-contain scale-100 hover:scale-105 transition-transform duration-1000"
                 />
-                <div className="absolute inset-0 bg-gradient-to-l from-black/60 to-transparent"></div>
               </div>
             </motion.div>
           </motion.div>
