@@ -23,7 +23,7 @@ export default function Hero() {
   };
 
   return (
-    <div className="relative flex flex-col md:flex-row items-center justify-between min-h-screen bg-gradient-to-br from-[#0b0c10] via-[#1f2833] to-[#0b0c10] text-white px-8 md:px-20 overflow-hidden">
+    <div className="relative flex flex-col md:flex-row items-center justify-between min-h-screen pt-24 md:pt-0 bg-gradient-to-br from-[#0b0c10] via-[#1f2833] to-[#0b0c10] text-white px-8 md:px-20 overflow-hidden">
       {/* Animated Particle Background */}
       <Particles
         id="tsparticles"
@@ -131,69 +131,3 @@ export default function Hero() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import React from "react";
-// import { motion } from "framer-motion";
-// // import imran from "../assets/imran.png"; // adjust the path if needed
-
-// export default function Hero() {
-//   return (
-//     <div className="flex flex-col md:flex-row items-center justify-between min-h-screen bg-gradient-to-r from-[#0f2027] via-[#203a43] to-[#2c5364] text-white px-8 md:px-20">
-//       {/* Left Section */}
-//       <motion.div
-//         className="md:w-1/2 space-y-6"
-//         initial={{ opacity: 0, x: -100 }}
-//         animate={{ opacity: 1, x: 0 }}
-//         transition={{ duration: 0.8 }}
-//       >
-//         <h1 className="text-4xl md:text-5xl font-bold">
-//           Hi, I'm <span className="text-[#00C9A7]">Muhammad Imran</span>
-//         </h1>
-//         <h2 className="text-2xl md:text-3xl font-semibold text-[#A5FECB]">
-//           MERN Stack Developer
-//         </h2>
-//         <p className="text-gray-300 max-w-lg leading-relaxed">
-//           I build scalable web applications using MongoDB, Express.js, React.js,
-//           and Node.js. Passionate about creating seamless user experiences and
-//           bringing innovative ideas to life.
-//         </p>
-
-//         <motion.button
-//           whileHover={{ scale: 1.05 }}
-//           whileTap={{ scale: 0.95 }}
-//           className="bg-[#00C9A7] hover:bg-[#00B49B] text-white px-6 py-3 rounded-full font-semibold transition-all shadow-lg"
-//         >
-//           View My Work
-//         </motion.button>
-//       </motion.div>
-
-//       {/* Right Section (Image) */}
-//       <motion.div
-//         className="md:w-1/2 flex justify-center mt-10 md:mt-0"
-//         initial={{ opacity: 0, x: 100 }}
-//         animate={{ opacity: 1, x: 0 }}
-//         transition={{ duration: 0.8 }}
-//       >
-//         <img
-//           src={'/imran.png'}
-//           alt="Muhammad Imran"
-//           className="w-80 h-80 md:w-96 md:h-96 object-cover rounded-full shadow-2xl border-4 border-[#00C9A7]"
-//         />
-//       </motion.div>
-//     </div>
-//   );
-// }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react' 
 import Hero from './Hero'
 import About from './About'
 import Skills from './Skills'
@@ -10,13 +10,13 @@ import Projects from './Projects'
 export default function MainHome() {
   return (
     <div>
-      <Hero/>
-      <About/>
-      <Skills/>
-      <Experience/>
-      <Projects/> 
-      <Education/>
-      <Contact/>
+      <div id="Home"><Hero/></div>
+      <div id="About"><About/></div>
+      <div id="Skills"><Skills/></div>
+      <div id="Experience"><Experience/></div>
+      <div id="Projects"><Projects/></div> 
+      <div id="Education"><Education/></div>
+      <div id="Contact"><Contact/></div>
     </div>
   )
 }
