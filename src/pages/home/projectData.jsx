@@ -77,7 +77,7 @@ export const projects = {
     {
       title: "Interview Simulator",
       description:
-        "An AI-powered web application that allows users to upload their resumes and instantly receive detailed feedback and insights using the OpenAI API. The system analyzes the resume content to evaluate strengths, weaknesses, keyword optimization, and overall job readiness. It also provides improvement suggestions for structure, formatting, and skill alignment with industry standards. Built for efficiency and accuracy, the platform helps users enhance their resumes for better visibility in job applications and recruitment processes.",
+        "An AI-powered web application that allows users to upload their resume and instantly receive detailed feedback and insights using the OpenAI API. The system analyzes the resume content to evaluate strengths, weaknesses, keyword optimization, and overall job readiness. It also provides improvement suggestions for structure, formatting, and skill alignment with industry standards. Built for efficiency and accuracy, the platform helps users enhance their resumes for better visibility in job applications and recruitment processes.",
       tech: "React, Node.js, Express, MongoDB, OpenAI API, Tailwind CSS, REST APIs, Cloud File Storage",
       image: "/interview-simulator.png",
       link: "https://inter-view-genius.vercel.app/",
