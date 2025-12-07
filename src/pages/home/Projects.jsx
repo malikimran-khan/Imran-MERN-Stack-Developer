@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { categories, projects } from "./projectData";
 import { FaArrowRight, FaTimes, FaExternalLinkAlt } from "react-icons/fa";
@@ -10,6 +10,15 @@ export default function Projects() {
 
   const activeProjects = projects[activeTab] || [];
   const visibleProjects = showAll ? activeProjects : activeProjects.slice(0, 6);
+
+  // Close modal with Esc key
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (e.key === "Escape") setSelectedProject(null);
+    };
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, []);
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0b0c10] via-[#1f2833] to-[#0b0c10] text-white px-6 py-16 font-[Poppins] relative overflow-hidden">
@@ -65,22 +74,22 @@ export default function Projects() {
               key={i}
               whileHover={{ y: -6, scale: 1.03 }}
               transition={{ type: "spring", stiffness: 250 }}
+              layout
               className="relative group w-full max-w-[380px] overflow-hidden rounded-2xl bg-[#111]/60 border border-[#00C9A7]/20 shadow-[0_0_25px_rgba(0,201,167,0.15)]"
+              tabIndex={0}
             >
               <div className="p-5 text-center">
                 <h2 className="text-2xl font-semibold text-[#A5FECB] mb-3">
                   {proj.title}
                 </h2>
-
-                {/* Full image display */}
                 <div className="w-full h-[250px] overflow-hidden rounded-xl mb-4">
                   <img
                     src={proj.image}
                     alt={proj.title}
+                    loading="lazy"
                     className="w-full h-full object-contain rounded-xl transition-transform duration-700 group-hover:scale-105"
                   />
                 </div>
-
                 <motion.button
                   whileHover={{
                     scale: 1.05,
@@ -90,6 +99,7 @@ export default function Projects() {
                   whileTap={{ scale: 0.95 }}
                   onClick={() => setSelectedProject(proj)}
                   className="transition-all inline-flex items-center justify-center gap-2 text-[#00C9A7] border border-[#00C9A7] font-semibold rounded-full py-2 px-6"
+                  aria-label={`View details of ${proj.title}`}
                 >
                   View Details <FaArrowRight />
                 </motion.button>
@@ -99,7 +109,7 @@ export default function Projects() {
         </motion.div>
       </AnimatePresence>
 
-      {/* Show More / Less Button */}
+      {/* Show More / Less */}
       {activeProjects.length > 6 && (
         <div className="flex justify-center mt-12">
           <motion.button
@@ -111,6 +121,7 @@ export default function Projects() {
             whileTap={{ scale: 0.95 }}
             onClick={() => setShowAll(!showAll)}
             className="px-8 py-2 border border-[#00C9A7] text-[#A5FECB] rounded-full font-semibold transition-all"
+            aria-label={showAll ? "Show fewer projects" : "Show all projects"}
           >
             {showAll ? "Show Less" : "Show More"}
           </motion.button>
@@ -125,6 +136,9 @@ export default function Projects() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="project-modal-title"
           >
             <motion.div
               initial={{ scale: 0.85, opacity: 0, y: 40 }}
@@ -137,13 +151,17 @@ export default function Projects() {
               <button
                 onClick={() => setSelectedProject(null)}
                 className="absolute top-4 right-4 z-50 text-gray-400 hover:text-[#A5FECB] bg-black/40 p-2 rounded-full"
+                aria-label="Close project modal"
               >
                 <FaTimes size={20} />
               </button>
 
               {/* Left: Details */}
               <div className="p-10 overflow-y-auto max-h-[90vh] space-y-6">
-                <h2 className="text-3xl font-bold text-[#A5FECB] drop-shadow-[0_0_10px_#00C9A7]">
+                <h2
+                  id="project-modal-title"
+                  className="text-3xl font-bold text-[#A5FECB] drop-shadow-[0_0_10px_#00C9A7]"
+                >
                   {selectedProject.title}
                 </h2>
                 <p className="text-gray-300 leading-relaxed text-[15px]">
@@ -153,8 +171,6 @@ export default function Projects() {
                   <span className="font-semibold">Tech Stack:</span>{" "}
                   {selectedProject.tech}
                 </p>
-
-                {/* Live Demo Button */}
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
@@ -162,6 +178,7 @@ export default function Projects() {
                     window.open(selectedProject.link || "https://broshtech.com", "_blank")
                   }
                   className="inline-flex items-center justify-center gap-2 mt-6 bg-[#00C9A7] text-black font-semibold rounded-full py-2 px-8 hover:bg-[#00B49B] transition-all w-fit"
+                  aria-label={`Open live demo of ${selectedProject.title}`}
                 >
                   Live Demo <FaExternalLinkAlt size={14} />
                 </motion.button>
@@ -172,6 +189,7 @@ export default function Projects() {
                 <img
                   src={selectedProject.image}
                   alt={selectedProject.title}
+                  loading="lazy"
                   className="w-full h-full object-contain scale-100 hover:scale-105 transition-transform duration-1000"
                 />
               </div>

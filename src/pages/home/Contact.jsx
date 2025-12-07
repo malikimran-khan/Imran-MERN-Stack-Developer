@@ -4,48 +4,41 @@ import { Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-react";
 
 export default function Contact() {
   return (
-    <section className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#0b0c10] via-[#1f2833] to-[#0b0c10] text-white px-6 py-24 font-[Poppins] overflow-hidden">
-      {/* Heading */}
-      <motion.h1
-        initial={{ opacity: 0, y: -50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        viewport={{ once: true }}
-        className="text-5xl md:text-6xl font-bold text-center mb-6 bg-gradient-to-r from-[#00C9A7] to-[#A5FECB] bg-clip-text text-transparent"
-      >
-        Get In Touch
-      </motion.h1>
+    <section
+      className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-[#0b0c10] via-[#1f2833] to-[#0b0c10] text-white px-6 py-24 font-[Poppins] overflow-hidden"
+      aria-label="Contact Section"
+    >
+      {/* Header */}
+      <header className="text-center mb-16">
+        <motion.h1
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-[#00C9A7] to-[#A5FECB] bg-clip-text text-transparent"
+        >
+          Get In Touch
+        </motion.h1>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-        viewport={{ once: true }}
-        className="text-gray-300 text-center max-w-2xl mb-16 leading-relaxed text-lg"
-      >
-        I’m always open to discussing new projects, creative ideas, or
-        opportunities to collaborate. Let’s connect and build something
-        exceptional together.
-      </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3, duration: 0.8 }}
+          viewport={{ once: true }}
+          className="text-gray-300 max-w-2xl mx-auto leading-relaxed text-lg"
+        >
+          I’m always open to discussing new projects, creative ideas, or
+          opportunities to collaborate. Let’s connect and build something
+          exceptional together.
+        </motion.p>
+      </header>
 
-      {/* Contact Info Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-6xl mb-16">
+      {/* Contact Info */}
+      <address className="grid grid-cols-1 md:grid-cols-3 gap-10 w-full max-w-6xl mb-16 not-italic">
         {[
-          {
-            icon: <Mail className="w-9 h-9 text-[#00C9A7]" />,
-            title: "Email",
-            info: "malikimranawan801@gmail.com",
-          },
-          {
-            icon: <Phone className="w-9 h-9 text-[#00C9A7]" />,
-            title: "Phone",
-            info: "+92 308 5029266",
-          },
-          {
-            icon: <MapPin className="w-9 h-9 text-[#00C9A7]" />,
-            title: "Location",
-            info: "Faisalabad, Pakistan",
-          },
+          { icon: <Mail className="w-9 h-9 text-[#00C9A7]" aria-hidden />, label: "Email", info: "malikimranawan801@gmail.com", href: "mailto:malikimranawan801@gmail.com" },
+          { icon: <Phone className="w-9 h-9 text-[#00C9A7]" aria-hidden />, label: "Phone", info: "+92 308 5029266", href: "tel:+923085029266" },
+          { icon: <MapPin className="w-9 h-9 text-[#00C9A7]" aria-hidden />, label: "Location", info: "Faisalabad, Pakistan" },
         ].map((item, i) => (
           <motion.div
             key={i}
@@ -54,13 +47,15 @@ export default function Contact() {
             className="bg-gradient-to-br from-[#00C9A7]/10 to-[#A5FECB]/5 backdrop-blur-xl border border-[#00C9A7]/20 p-8 rounded-3xl text-center shadow-lg hover:shadow-[#00C9A7]/40 transition-all"
           >
             <div className="flex justify-center mb-5">{item.icon}</div>
-            <h3 className="text-2xl font-semibold text-[#00C9A7] mb-2">
-              {item.title}
-            </h3>
-            <p className="text-gray-300">{item.info}</p>
+            <h3 className="text-2xl font-semibold text-[#00C9A7] mb-2">{item.label}</h3>
+            {item.href ? (
+              <a href={item.href} className="text-gray-300 hover:text-[#00C9A7]" aria-label={item.label}>{item.info}</a>
+            ) : (
+              <p className="text-gray-300">{item.info}</p>
+            )}
           </motion.div>
         ))}
-      </div>
+      </address>
 
       {/* Contact Form */}
       <motion.form
@@ -69,42 +64,47 @@ export default function Contact() {
         transition={{ duration: 0.8 }}
         viewport={{ once: true }}
         className="w-full max-w-3xl bg-gradient-to-br from-[#00C9A7]/10 to-[#A5FECB]/5 backdrop-blur-lg border border-[#00C9A7]/20 rounded-3xl p-10 shadow-2xl"
+        aria-label="Contact Form"
       >
         <div className="grid md:grid-cols-2 gap-6">
           <div className="flex flex-col">
-            <label className="text-gray-400 mb-2 text-sm uppercase tracking-wider">
-              Your Name
-            </label>
+            <label htmlFor="name" className="text-gray-400 mb-2 text-sm uppercase tracking-wider">Your Name</label>
             <input
+              id="name"
+              name="name"
               type="text"
               placeholder="Enter your name"
               className="p-3 rounded-lg bg-transparent border border-gray-700 text-white placeholder-gray-500 focus:border-[#00C9A7] outline-none transition-all"
+              required
             />
           </div>
           <div className="flex flex-col">
-            <label className="text-gray-400 mb-2 text-sm uppercase tracking-wider">
-              Your Email
-            </label>
+            <label htmlFor="email" className="text-gray-400 mb-2 text-sm uppercase tracking-wider">Your Email</label>
             <input
+              id="email"
+              name="email"
               type="email"
               placeholder="Enter your email"
               className="p-3 rounded-lg bg-transparent border border-gray-700 text-white placeholder-gray-500 focus:border-[#00C9A7] outline-none transition-all"
+              required
             />
           </div>
         </div>
 
         <div className="flex flex-col mt-6">
-          <label className="text-gray-400 mb-2 text-sm uppercase tracking-wider">
-            Message
-          </label>
+          <label htmlFor="message" className="text-gray-400 mb-2 text-sm uppercase tracking-wider">Message</label>
           <textarea
+            id="message"
+            name="message"
             placeholder="Write your message here..."
             rows="5"
             className="p-3 rounded-lg bg-transparent border border-gray-700 text-white placeholder-gray-500 focus:border-[#00C9A7] outline-none transition-all"
+            required
           ></textarea>
         </div>
 
         <motion.button
+          type="submit"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
           className="mt-8 w-full md:w-auto px-10 py-3 flex items-center justify-center gap-2 bg-[#00C9A7] text-[#0b0c10] font-semibold rounded-full text-lg hover:bg-[#00a489] transition-all duration-300 shadow-md hover:shadow-[#00C9A7]/40"
@@ -120,22 +120,19 @@ export default function Contact() {
         transition={{ delay: 0.4 }}
         viewport={{ once: true }}
         className="flex space-x-10 mt-16"
+        aria-label="Social Links"
       >
         {[
-          { icon: <Github className="w-7 h-7" />, href: "https://github.com/" },
-          {
-            icon: <Linkedin className="w-7 h-7" />,
-            href: "https://linkedin.com/",
-          },
-          {
-            icon: <Mail className="w-7 h-7" />,
-            href: "mailto:malikimranawan801@gmail.com",
-          },
+          { icon: <Github className="w-7 h-7" aria-hidden />, href: "https://github.com/", label: "Github Profile" },
+          { icon: <Linkedin className="w-7 h-7" aria-hidden />, href: "https://linkedin.com/", label: "LinkedIn Profile" },
+          { icon: <Mail className="w-7 h-7" aria-hidden />, href: "mailto:malikimranawan801@gmail.com", label: "Send Email" },
         ].map((link, i) => (
           <motion.a
             key={i}
             href={link.href}
             target="_blank"
+            rel="noopener noreferrer"
+            aria-label={link.label}
             whileHover={{ scale: 1.2 }}
             className="hover:text-[#00C9A7] transition"
           >

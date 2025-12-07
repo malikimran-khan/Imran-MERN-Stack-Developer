@@ -30,33 +30,33 @@ export default function Skills() {
 
   const categories = {
     Frontend: [
-      { name: "React.js", icon: <FaReact className="text-[#61DBFB]" /> },
-      { name: "Next.js", icon: <SiNextdotjs className="text-white" /> },
-      { name: "TypeScript", icon: <SiTypescript className="text-[#3178C6]" /> },
-      { name: "Tailwind CSS", icon: <SiTailwindcss className="text-[#38BDF8]" /> },
-      { name: "Material-UI", icon: <SiMui className="text-[#007FFF]" /> },
-      { name: "Redux Toolkit", icon: <SiRedux className="text-[#764ABC]" /> },
+      { name: "React.js", icon: <FaReact aria-hidden="true" className="text-[#61DBFB]" /> },
+      { name: "Next.js", icon: <SiNextdotjs aria-hidden="true" className="text-white" /> },
+      { name: "TypeScript", icon: <SiTypescript aria-hidden="true" className="text-[#3178C6]" /> },
+      { name: "Tailwind CSS", icon: <SiTailwindcss aria-hidden="true" className="text-[#38BDF8]" /> },
+      { name: "Material-UI", icon: <SiMui aria-hidden="true" className="text-[#007FFF]" /> },
+      { name: "Redux Toolkit", icon: <SiRedux aria-hidden="true" className="text-[#764ABC]" /> },
     ],
     Backend: [
-      { name: "Node.js", icon: <FaNodeJs className="text-[#3C873A]" /> },
-      { name: "Express.js", icon: <SiExpress className="text-gray-300" /> },
-      { name: "MongoDB", icon: <SiMongodb className="text-[#4DB33D]" /> },
-      { name: "PostgreSQL", icon: <SiPostgresql className="text-[#336791]" /> },
-      { name: "Firebase", icon: <SiFirebase className="text-[#FFA611]" /> },
+      { name: "Node.js", icon: <FaNodeJs aria-hidden="true" className="text-[#3C873A]" /> },
+      { name: "Express.js", icon: <SiExpress aria-hidden="true" className="text-gray-300" /> },
+      { name: "MongoDB", icon: <SiMongodb aria-hidden="true" className="text-[#4DB33D]" /> },
+      { name: "PostgreSQL", icon: <SiPostgresql aria-hidden="true" className="text-[#336791]" /> },
+      { name: "Firebase", icon: <SiFirebase aria-hidden="true" className="text-[#FFA611]" /> },
       { name: "REST & GraphQL APIs", icon: "🧭" },
     ],
     Tools: [
-      { name: "Git / GitHub", icon: <FaGitAlt className="text-[#F1502F]" /> },
-      { name: "Docker", icon: <FaDocker className="text-[#0db7ed]" /> },
-      { name: "CI/CD - Jenkins", icon: <SiJenkins className="text-[#D24939]" /> },
-      { name: "GitHub Actions", icon: <FaGithub className="text-gray-200" /> },
-      { name: "Vercel / Netlify", icon: <SiVercel className="text-white" /> },
+      { name: "Git / GitHub", icon: <FaGitAlt aria-hidden="true" className="text-[#F1502F]" /> },
+      { name: "Docker", icon: <FaDocker aria-hidden="true" className="text-[#0db7ed]" /> },
+      { name: "CI/CD - Jenkins", icon: <SiJenkins aria-hidden="true" className="text-[#D24939]" /> },
+      { name: "GitHub Actions", icon: <FaGithub aria-hidden="true" className="text-gray-200" /> },
+      { name: "Vercel / Netlify", icon: <SiVercel aria-hidden="true" className="text-white" /> },
       { name: "Postman / ThunderClient", icon: "📬" },
     ],
     AI: [
-      { name: "LangChain.js", icon: <SiLangchain className="text-[#00B4D8]" /> },
-      { name: "TensorFlow", icon: <SiTensorflow className="text-[#FF6F00]" /> },
-      { name: "Python AI", icon: <FaPython className="text-[#FFD43B]" /> },
+      { name: "LangChain.js", icon: <SiLangchain aria-hidden="true" className="text-[#00B4D8]" /> },
+      { name: "TensorFlow", icon: <SiTensorflow aria-hidden="true" className="text-[#FF6F00]" /> },
+      { name: "Python AI", icon: <FaPython aria-hidden="true" className="text-[#FFD43B]" /> },
       { name: "Neural Networks", icon: "🧠" },
       { name: "OpenAI / RAG", icon: "🤖" },
       { name: "AI Chat Agents", icon: "💬" },
@@ -64,16 +64,21 @@ export default function Skills() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#0b0c10] via-[#1f2833] to-[#0b0c10] text-white px-6 md:px-16 py-20 flex flex-col items-center">
+    <section
+      id="Skills"
+      aria-labelledby="skills-heading"
+      className="min-h-screen bg-gradient-to-br from-[#0b0c10] via-[#1f2833] to-[#0b0c10] text-white px-6 md:px-16 py-20 flex flex-col items-center"
+    >
       {/* Heading */}
-      <motion.h1
+      <motion.h2
+        id="skills-heading"
         initial={{ opacity: 0, y: -30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6 }}
         className="text-5xl font-bold mb-6 bg-gradient-to-r from-[#00C9A7] to-[#A5FECB] bg-clip-text text-transparent"
       >
         Technical Skills
-      </motion.h1>
+      </motion.h2>
 
       <motion.p
         initial={{ opacity: 0 }}
@@ -81,17 +86,17 @@ export default function Skills() {
         transition={{ delay: 0.3, duration: 0.8 }}
         className="text-gray-300 max-w-3xl text-center mb-10 leading-relaxed"
       >
-        I’ve honed a diverse skill set in modern full-stack development and AI-powered
-        systems — blending creativity, logic, and performance to deliver exceptional
-        digital experiences.
+        I’ve honed a diverse skill set in <strong>modern full-stack development</strong> and <strong>AI-powered systems</strong> — blending creativity, logic, and performance to deliver exceptional digital experiences.
       </motion.p>
 
       {/* Tabs */}
-      <div className="flex flex-wrap justify-center gap-4 mb-10">
+      <div role="tablist" className="flex flex-wrap justify-center gap-4 mb-10">
         {Object.keys(categories).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
+            role="tab"
+            aria-selected={activeTab === tab}
             className={`px-5 py-2 rounded-full text-lg font-medium transition-all duration-300 ${
               activeTab === tab
                 ? "bg-[#00C9A7] text-[#0B0C10] shadow-md shadow-[#00C9A7]/40"
@@ -119,7 +124,7 @@ export default function Skills() {
           >
             <div className="text-5xl mb-3 drop-shadow-lg">{skill.icon}</div>
             <h3 className="text-lg font-semibold text-gray-100 text-center">
-              {skill.name}
+              <strong>{skill.name}</strong>
             </h3>
           </motion.div>
         ))}
@@ -144,6 +149,6 @@ export default function Skills() {
           Explore My Projects
         </button>
       </motion.div>
-    </div>
+    </section>
   );
 }
