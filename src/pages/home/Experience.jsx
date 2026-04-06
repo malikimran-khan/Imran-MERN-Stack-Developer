@@ -1,9 +1,19 @@
-import React from "react";
-import { motion } from "framer-motion";
+import React, { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { FaCodeBranch, FaLaptopCode, FaGem } from "react-icons/fa";
 import { GiRocketThruster, GiNetworkBars } from "react-icons/gi";
 
 export default function Experience() {
+  const containerRef = useRef(null);
+
+  // Scroll tracking for the glowing timeline line
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end end"],
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+
   const experiences = [
     {
       role: "Associate Software Engineer",
@@ -15,8 +25,10 @@ export default function Experience() {
         "Implemented OCR functionality and ChargeCloud API integration.",
         "Managing multiple branches with different deployment environments.",
       ],
-      icon: <FaGem aria-hidden="true" className="text-[#CC342D]" />,
-      color: "from-[#CC342D]/10 to-[#00C9A7]/5",
+      icon: <FaGem className="text-white" />,
+      glowColor: "rgba(204, 52, 45, 0.4)", // Ruby Red
+      bgGrad: "from-[#CC342D]/20",
+      accent: "#CC342D",
     },
     {
       role: "MERN Stack Developer",
@@ -27,8 +39,10 @@ export default function Experience() {
         "Built AI-powered Electron.js desktop tools and PWAs.",
         "Collaborated with teams to deliver high-performance solutions.",
       ],
-      icon: <GiRocketThruster aria-hidden="true" className="text-[#00C9A7]" />,
-      color: "from-[#00C9A7]/10 to-[#00C9A7]/5",
+      icon: <GiRocketThruster className="text-white" />,
+      glowColor: "rgba(0, 201, 167, 0.4)", // Teal
+      bgGrad: "from-[#00C9A7]/20",
+      accent: "#00C9A7",
     },
     {
       role: "MERN Stack Intern",
@@ -39,8 +53,10 @@ export default function Experience() {
         "Integrated REST APIs using Express.js and MongoDB.",
         "Enhanced front-end responsiveness with Tailwind CSS.",
       ],
-      icon: <FaLaptopCode aria-hidden="true" className="text-[#3b82f6]" />,
-      color: "from-[#3b82f6]/10 to-[#00C9A7]/5",
+      icon: <FaLaptopCode className="text-white" />,
+      glowColor: "rgba(59, 130, 246, 0.4)", // Blue
+      bgGrad: "from-[#3b82f6]/20",
+      accent: "#3b82f6",
     },
     {
       role: "Front-End Developer Intern",
@@ -51,90 +67,148 @@ export default function Experience() {
         "Improved performance and accessibility of existing codebases.",
         "Worked closely with designers to refine user experience.",
       ],
-      icon: <GiNetworkBars aria-hidden="true" className="text-[#A5FECB]" />,
-      color: "from-[#A5FECB]/10 to-[#00C9A7]/5",
+      icon: <GiNetworkBars className="text-white" />,
+      glowColor: "rgba(165, 254, 203, 0.4)", // Light Green
+      bgGrad: "from-[#A5FECB]/20",
+      accent: "#A5FECB",
     },
   ];
 
   return (
     <section
       id="experience"
-      aria-labelledby="experience-heading"
-      className="min-h-screen bg-gradient-to-br from-[#050505] via-[#111827] to-[#0b0c10] text-white px-6 md:px-16 py-20 font-['Poppins']"
+      className="relative min-h-screen bg-[#060b19] text-white px-6 md:px-16 py-24 flex flex-col items-center overflow-hidden font-['Poppins']"
     >
+      {/* Background Ambient Glows */}
+      <div className="absolute top-[15%] left-[-10%] w-[40rem] h-[40rem] bg-[#CC342D] rounded-full mix-blend-screen filter blur-[250px] opacity-10 pointer-events-none"></div>
+      <div className="absolute bottom-[20%] right-[-10%] w-[35rem] h-[35rem] bg-[#00C9A7] rounded-full mix-blend-screen filter blur-[250px] opacity-10 pointer-events-none"></div>
+
       {/* Title */}
-      <motion.h2
-        id="experience-heading"
+      <motion.div
         initial={{ opacity: 0, y: -40 }}
-        animate={{ opacity: 1, y: 0 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
         transition={{ duration: 0.8 }}
-        className="text-5xl md:text-6xl font-extrabold text-center mb-6 bg-gradient-to-r from-[#00C9A7] to-[#3b82f6] bg-clip-text text-transparent drop-shadow-lg"
+        className="text-center z-10 mb-20"
       >
-        Experience
-      </motion.h2>
+        <span className="inline-block bg-[#0a192f] border border-[#00C9A7]/30 text-[#A5FECB] px-5 py-2 rounded-full text-sm font-semibold tracking-wide backdrop-blur-md shadow-lg mb-6">
+          ✦ Career Journey
+        </span>
+        <h2 className="text-5xl md:text-7xl font-extrabold mb-6">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00C9A7] via-[#A5FECB] to-[#3b82f6]">
+            Experience
+          </span>
+        </h2>
+        <p className="text-gray-400 max-w-2xl mx-auto leading-relaxed text-lg">
+          Exploring innovation through <strong>full-stack development</strong> — from crafting
+          dynamic interfaces to engineering <strong>robust backend architectures</strong>.
+        </p>
+      </motion.div>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.3, duration: 0.8 }}
-        className="text-gray-300 text-center max-w-3xl mx-auto mb-20 leading-relaxed text-lg"
-      >
-        Exploring innovation through <strong>full-stack development</strong> — from crafting
-        dynamic interfaces to integrating <strong>robust backend systems</strong>.
-      </motion.p>
+      {/* Timeline Wrapper */}
+      <div ref={containerRef} className="relative w-full max-w-6xl mx-auto z-10">
+        
+        {/* The Track (Faint background line) */}
+        <div className="absolute left-6 md:left-1/2 top-0 bottom-0 w-[2px] bg-white/5 transform md:-translate-x-1/2 rounded-full"></div>
+        
+        {/* The Animated Scrolling Line */}
+        <motion.div 
+          className="absolute left-6 md:left-1/2 top-0 w-[4px] bg-gradient-to-b from-[#A5FECB] via-[#00C9A7] to-[#3b82f6] transform md:-translate-x-1/2 rounded-full shadow-[0_0_15px_#00C9A7]"
+          style={{ height: lineHeight }}
+        ></motion.div>
 
-      {/* Timeline */}
-      <div className="relative max-w-5xl mx-auto" role="list">
-        <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-[2px] bg-gradient-to-b from-[#00C9A7]/60 to-[#3b82f6]/50 rounded-full"></div>
-
-        {experiences.map((exp, index) => (
-          <motion.div
-            key={index}
-            initial={{ opacity: 0, y: 60 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-            viewport={{ once: true }}
-            className={`relative flex flex-col md:flex-row items-center mb-20 ${
-              index % 2 === 0 ? "md:justify-start" : "md:justify-end"
-            }`}
-          >
-            {/* Card */}
-            <div
-              className={`w-full md:w-[45%] bg-gradient-to-br ${exp.color} border border-[#00C9A7]/20 backdrop-blur-md p-8 rounded-3xl shadow-[0_0_25px_#00C9A740] hover:shadow-[0_0_35px_#00C9A780] transition-all duration-300 hover:-translate-y-1 hover:scale-[1.02]`}
-              role="listitem"
+        {/* Timeline Events */}
+        <div className="flex flex-col gap-12 md:gap-24">
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.6 }}
+              className={`relative flex flex-col md:flex-row items-center w-full ${
+                index % 2 === 0 ? "md:flex-row-reverse" : ""
+              }`}
             >
-              <div className="flex items-center gap-4 mb-4">
-                <div className="text-5xl drop-shadow-md">{exp.icon}</div>
-                <h3 className="text-2xl md:text-3xl font-semibold tracking-wide">{exp.role}</h3>
+              {/* Spacer for desktop layout balance */}
+              <div className="hidden md:block w-1/2"></div>
+              
+              {/* Connector Node / Icon */}
+              <div 
+                className="absolute left-6 md:left-1/2 transform -translate-x-1/2 flex items-center justify-center w-12 h-12 md:w-14 md:h-14 rounded-full border-4 border-[#060b19] z-20 text-xl md:text-2xl"
+                style={{ 
+                  backgroundColor: exp.accent,
+                  boxShadow: `0 0 20px ${exp.glowColor}`
+                }}
+              >
+                {exp.icon}
               </div>
-              <h4 className="text-[#00C9A7] font-medium text-lg mb-2">{exp.company}</h4>
-              <p className="text-gray-400 mb-4 italic text-sm">{exp.duration}</p>
-              <ul className="space-y-3 text-gray-300 text-base leading-relaxed">
-                {exp.highlights.map((point, i) => (
-                  <li key={i} className="flex items-start gap-2">
-                    <FaCodeBranch className="text-[#00C9A7] mt-1 text-sm" aria-hidden="true" />
-                    <span>{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
 
-            {/* Connector Dot */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-7 h-7 rounded-full bg-[#00C9A7] border-4 border-[#111827] shadow-[0_0_15px_#00C9A7] z-10"></div>
-          </motion.div>
-        ))}
+              {/* Glassmorphic Job Card */}
+              <motion.div
+                whileHover={{ scale: 1.03, y: -5 }}
+                className={`w-full md:w-5/12 ml-16 md:ml-0 ${
+                  index % 2 === 0 ? "md:mr-auto" : "md:ml-auto"
+                }`}
+              >
+                <div 
+                  className={`bg-[#0a192f]/60 backdrop-blur-xl p-8 rounded-3xl border border-white/5 shadow-2xl relative overflow-hidden group`}
+                  style={{
+                    boxShadow: `0 10px 40px rgba(0,0,0,0.5), inset 0 0 0 1px rgba(255,255,255,0.02)`
+                  }}
+                >
+                  {/* Internal ambient corner glow */}
+                  <div className={`absolute -top-10 -right-10 w-32 h-32 bg-gradient-to-br ${exp.bgGrad} to-transparent rounded-full filter blur-[50px] opacity-opacity-0 group-hover:opacity-100 transition-opacity duration-700`}></div>
+
+                  <h3 className="text-2xl md:text-3xl font-bold tracking-wide text-white mb-1">{exp.role}</h3>
+                  <h4 
+                    className="font-semibold text-lg mb-2"
+                    style={{ color: exp.accent }}
+                  >
+                    {exp.company}
+                  </h4>
+                  
+                  <div className="inline-block bg-white/5 border border-white/10 px-3 py-1 rounded-full text-gray-300 text-xs tracking-wider mb-6">
+                    {exp.duration}
+                  </div>
+
+                  <ul className="space-y-4">
+                    {exp.highlights.map((point, i) => (
+                      <li key={i} className="flex items-start gap-3">
+                        <FaCodeBranch 
+                          className="mt-1 flex-shrink-0" 
+                          style={{ color: exp.accent }}
+                          aria-hidden="true" 
+                        />
+                        <span className="text-gray-300 leading-relaxed text-sm md:text-base">{point}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              </motion.div>
+            </motion.div>
+          ))}
+        </div>
       </div>
 
       {/* CTA */}
-      <div className="flex justify-center mt-16">
-        <motion.a
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2 }}
+        className="mt-24 z-10"
+      >
+        <motion.a 
           href="#projects"
           whileHover={{ scale: 1.05 }}
-          className="bg-gradient-to-r from-[#00C9A7] to-[#3b82f6] text-[#0b0c10] px-10 py-4 rounded-full font-semibold text-lg tracking-wide shadow-lg hover:shadow-[#00C9A7]/40 transition-all"
+          whileTap={{ scale: 0.95 }}
+          className="inline-block relative overflow-hidden group bg-[#0a192f] border border-[#00C9A7]/50 text-[#A5FECB] hover:text-[#060b19] px-10 py-4 rounded-full font-bold shadow-[0_0_20px_rgba(0,201,167,0.15)] transition-all"
         >
-          View My Projects
+          <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#00C9A7] to-[#A5FECB] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+          <span className="relative z-10 transition-colors duration-300">View My Projects</span>
         </motion.a>
-      </div>
+      </motion.div>
     </section>
   );
 }

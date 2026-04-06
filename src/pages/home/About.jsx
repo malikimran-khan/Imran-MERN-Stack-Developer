@@ -1,143 +1,176 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaReact, FaDatabase, FaAward, FaBriefcase, FaCheckCircle } from "react-icons/fa";
+import { FaReact, FaDatabase, FaAward, FaBriefcase, FaCheckCircle, FaRocket } from "react-icons/fa";
+import { SiRubyonrails } from "react-icons/si";
 
 export default function About() {
+  // Staggered Animations
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
+  };
+
+  const cardHover = {
+    rest: { scale: 1, rotateY: 0, boxShadow: "0px 0px 0px rgba(0,0,0,0)" },
+    hover: { 
+      scale: 1.05, 
+      transition: { type: "spring", stiffness: 300, damping: 20 },
+      boxShadow: "0px 20px 40px rgba(0, 201, 167, 0.15)"
+    }
+  };
+
   return (
     <section
       id="About"
       aria-labelledby="about-heading"
-      className="min-h-screen bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#334155] text-white px-4 sm:px-6 md:px-20 py-16 flex flex-col items-center justify-center overflow-x-hidden"
+      className="relative min-h-screen bg-[#060b19] text-white px-4 sm:px-6 md:px-20 py-24 flex flex-col items-center justify-center overflow-hidden"
     >
-      {/* Header */}
+      {/* Background Ambient Glows */}
+      <div className="absolute top-[-10%] right-[-5%] w-96 h-96 bg-[#00C9A7] rounded-full mix-blend-screen filter blur-[200px] opacity-10 pointer-events-none"></div>
+      <div className="absolute bottom-[-10%] left-[-10%] w-[30rem] h-[30rem] bg-[#3b82f6] rounded-full mix-blend-screen filter blur-[200px] opacity-10 pointer-events-none"></div>
+
+      {/* Section Header */}
       <motion.div
-        initial={{ opacity: 0, y: -40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-center mb-12 md:mb-16"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        className="text-center mb-16 md:mb-20 z-10"
       >
-        <button
-          className="bg-[#00C9A7]/10 border border-[#00C9A7]/30 text-[#00C9A7] px-4 py-2 rounded-full text-sm font-semibold hover:bg-[#00C9A7]/20 transition"
-          aria-label="Get to know Muhammad Imran"
-        >
-          ✦ Get to know me
-        </button>
+        <motion.div variants={itemVariants}>
+          <span className="inline-block bg-[#0a192f] border border-[#00C9A7]/30 text-[#A5FECB] px-5 py-2 rounded-full text-sm font-semibold tracking-wide backdrop-blur-md shadow-lg mb-6">
+            ✦ Discover My Journey
+          </span>
+        </motion.div>
 
-        <h2
-          id="about-heading"
-          className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mt-4 mb-3"
-        >
-          About <span className="bg-gradient-to-r from-[#00C9A7] to-[#A5FECB] bg-clip-text text-transparent">Me</span>
-        </h2>
+        <motion.h2 variants={itemVariants} id="about-heading" className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
+          About <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00C9A7] via-[#A5FECB] to-[#3b82f6]">Me</span>
+        </motion.h2>
 
-        <p className="text-gray-300 text-sm sm:text-base md:text-lg max-w-full md:max-w-2xl mx-auto leading-relaxed">
-          Passionate about creating <strong>innovative solutions</strong> that bridge the gap between technology and human needs.
-        </p>
+        <motion.p variants={itemVariants} className="text-gray-400 text-base md:text-xl max-w-3xl mx-auto leading-relaxed">
+          I am a passionate engineer driven by the desire to build <strong>innovative, scalable solutions</strong> that bridge the gap between complex technology and seamless user experiences.
+        </motion.p>
       </motion.div>
 
-      {/* Main Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 w-full max-w-full">
-        {/* Left Column */}
-        <motion.div
-          initial={{ opacity: 0, x: -60 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-6 bg-white/5 backdrop-blur-md p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 shadow-xl w-full"
-        >
-          <p className="text-gray-300 text-sm sm:text-base md:text-lg leading-relaxed">
-            I’m <strong className="text-[#A5FECB]">Muhammad Imran</strong>, a dedicated <strong>MERN Stack Developer</strong> with hands-on experience
-            in building scalable web and desktop applications using <strong className="text-[#A5FECB]">React.js, Node.js, Express.js, and MongoDB</strong>. 
-            I specialize in integrating <strong>AI solutions</strong> with LangChain.js to develop intelligent systems that enhance business performance.
-          </p>
+      {/* Main Layout Grid */}
+      <motion.div 
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-50px" }}
+        className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-7xl z-10"
+      >
+        
+        {/* Left Column: Bio & Highlights */}
+        <motion.div variants={itemVariants} className="lg:col-span-7 flex flex-col gap-6">
+          <div className="bg-[#0a192f]/40 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/5 shadow-2xl relative overflow-hidden group h-full">
+            {/* Subtle card glow on hover */}
+            <div className="absolute inset-0 bg-gradient-to-br from-[#00C9A7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 
-          <h3 className="text-xl md:text-2xl font-bold text-[#00C9A7] mt-4 flex items-center gap-2">
-            <FaCheckCircle aria-hidden="true" /> Key Highlights
-          </h3>
+            <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">
+              Hello, I'm <span className="text-[#A5FECB]">Muhammad Imran</span>
+            </h3>
+            
+            <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-8">
+              A dedicated software engineer with hands-on experience architecting scalable web applications. I specialize in the <strong>MERN stack</strong> and <strong>Ruby on Rails</strong>, seamlessly integrating <strong>AI solutions</strong> like LangChain to develop deeply intelligent systems that elevate business performance and product value.
+            </p>
 
-          <ul className="space-y-3 mt-4 text-gray-300">
-            <li className="bg-white/10 p-2 sm:p-3 rounded-lg border border-white/10 hover:border-[#00C9A7]/50 transition text-sm md:text-base">
-              <strong>Associate Software Engineer</strong> at <strong>Techbolic Solutions</strong> — Working on product-based projects with Ruby on Rails.
-            </li>
-            <li className="bg-white/10 p-2 sm:p-3 rounded-lg border border-white/10 hover:border-[#00C9A7]/50 transition text-sm md:text-base">
-              Former <strong>MERN Stack Developer</strong> at <strong>BroshTech</strong> — Built full-stack AI-integrated web applications.
-            </li>
-            <li className="bg-white/10 p-2 sm:p-3 rounded-lg border border-white/10 hover:border-[#00C9A7]/50 transition text-sm md:text-base">
-              Former <strong>MERN Stack Intern</strong> at <strong>Nexo Mark</strong> — Designed and debugged modern MERN applications.
-            </li>
-            <li className="bg-white/10 p-2 sm:p-3 rounded-lg border border-white/10 hover:border-[#00C9A7]/50 transition text-sm md:text-base">
-              Former <strong>Frontend Intern</strong> at <strong>EMAK Solution</strong>, developing responsive and optimized interfaces using React.js.
-            </li>
-            <li className="bg-white/10 p-2 sm:p-3 rounded-lg border border-white/10 hover:border-[#00C9A7]/50 transition text-sm md:text-base">
-              Skilled in <strong>Ruby on Rails, Next.js, Tailwind, MUI, LangChain.js, and Electron.js</strong>.
-            </li>
-            <li className="bg-white/10 p-2 sm:p-3 rounded-lg border border-white/10 hover:border-[#00C9A7]/50 transition text-sm md:text-base">
-              Experienced in building <strong>PWA</strong> and desktop applications with <strong>AI integrations</strong>.
-            </li>
-            <li className="bg-white/10 p-2 sm:p-3 rounded-lg border border-white/10 hover:border-[#00C9A7]/50 transition text-sm md:text-base">
-              Enthusiastic about <strong>clean code, performance optimization,</strong> and user-focused design.
-            </li>
-          </ul>
+            <h4 className="text-xl font-bold text-[#00C9A7] flex items-center gap-3 mb-5">
+              <FaCheckCircle className="text-xl" /> Core Highlights
+            </h4>
 
-          <button
-            className="mt-4 md:mt-6 bg-gradient-to-r from-[#00C9A7] to-[#A5FECB] px-4 sm:px-5 md:px-6 py-2 sm:py-2.5 md:py-3 rounded-lg font-semibold text-gray-900 hover:opacity-90 transition text-sm sm:text-base md:text-base w-full md:w-auto"
-          >
-            Let’s Work Together
-          </button>
+            <ul className="space-y-4">
+              {[
+                { title: "Associate Software Engineer at Techbolic Solutions", desc: "Building scalable product-based architectures with Ruby on Rails." },
+                { title: "Former MERN Stack Developer at BroshTech", desc: "Built full-stack AI-integrated web and desktop applications (Electron)." },
+                { title: "AI & Modern Tech Integrator", desc: "Experienced in LangChain.js, OpenAI RAG, Secucard APIs, and OCR integrations." },
+                { title: "Performance & UX Obsessed", desc: "Committed to writing clean code and delivering highly optimized, user-centric designs." }
+              ].map((highlight, idx) => (
+                <li key={idx} className="flex flex-col sm:flex-row sm:items-start gap-3 bg-[#060b19]/60 p-4 rounded-2xl border border-white/5 hover:border-[#00C9A7]/30 transition-colors duration-300">
+                  <div className="mt-1 min-w-[24px]">
+                    <FaRocket className="text-[#3b82f6] text-lg" />
+                  </div>
+                  <div>
+                    <strong className="text-gray-100 block mb-1">{highlight.title}</strong>
+                    <span className="text-gray-400 text-sm">{highlight.desc}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+
+          </div>
         </motion.div>
 
-        {/* Right Column */}
-        <motion.div
-          initial={{ opacity: 0, x: 60 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-4 md:space-y-8 w-full"
-        >
-          {/* Metrics */}
-          <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-6 bg-white/5 backdrop-blur-md p-4 md:p-6 rounded-2xl border border-white/10 shadow-lg w-full">
-            <div className="flex flex-col items-center">
-              <FaBriefcase className="text-3xl md:text-3xl text-[#00C9A7]" aria-hidden="true" />
-              <p className="text-2xl md:text-3xl font-bold mt-1 md:mt-2 text-white"><strong>1+</strong></p>
-              <p className="text-gray-400 text-xs md:text-sm text-center">Years Experience</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <FaAward className="text-3xl md:text-3xl text-[#A5FECB]" aria-hidden="true" />
-              <p className="text-2xl md:text-3xl font-bold mt-1 md:mt-2 text-white"><strong>20+</strong></p>
-              <p className="text-gray-400 text-xs md:text-sm text-center">Projects Completed</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <FaReact className="text-3xl md:text-3xl text-[#61DAFB]" aria-hidden="true" />
-              <p className="text-2xl md:text-3xl font-bold mt-1 md:mt-2 text-white"><strong>10+</strong></p>
-              <p className="text-gray-400 text-xs md:text-sm text-center">Technologies Mastered</p>
-            </div>
-            <div className="flex flex-col items-center">
-              <FaDatabase className="text-3xl md:text-3xl text-[#00C9A7]" aria-hidden="true" />
-              <p className="text-2xl md:text-3xl font-bold mt-1 md:mt-2 text-white"><strong>5+</strong></p>
-              <p className="text-gray-400 text-xs md:text-sm text-center">Databases Worked</p>
-            </div>
+        {/* Right Column: Metrics & Latest Experience */}
+        <motion.div variants={itemVariants} className="lg:col-span-5 flex flex-col gap-6">
+          
+          {/* Metrics Grid */}
+          <div className="grid grid-cols-2 gap-4 md:gap-6">
+            {[
+              { icon: <FaBriefcase />, value: "1+", label: "Years Exp.", color: "text-[#00C9A7]" },
+              { icon: <FaAward />, value: "20+", label: "Projects", color: "text-[#A5FECB]" },
+              { icon: <FaReact />, value: "10+", label: "Tech Mastered", color: "text-[#61DAFB]" },
+              { icon: <FaDatabase />, value: "5+", label: "Databases", color: "text-[#3b82f6]" }
+            ].map((metric, idx) => (
+              <motion.div 
+                key={idx}
+                variants={cardHover}
+                initial="rest"
+                whileHover="hover"
+                className="bg-[#0a192f]/40 backdrop-blur-xl p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center text-center cursor-default"
+              >
+                <div className={`text-4xl mb-3 ${metric.color}`}>{metric.icon}</div>
+                <h4 className="text-3xl font-extrabold text-white mb-1">{metric.value}</h4>
+                <p className="text-gray-400 text-sm font-medium">{metric.label}</p>
+              </motion.div>
+            ))}
           </div>
 
-          {/* Latest Experience */}
-          <div className="bg-white/5 backdrop-blur-md p-4 md:p-8 rounded-2xl border border-white/10 shadow-lg w-full">
-            <h3 className="text-xl md:text-2xl font-bold text-[#00C9A7] mb-3 md:mb-4">Latest Experience</h3>
-            <div>
-              <h4 className="text-lg md:text-xl font-semibold text-white">Techbolic Solutions</h4>
-              <p className="text-gray-400 text-xs md:text-sm mb-2">
-                Associate Software Engineer | Jan 2026 – Present
-              </p>
-              <p className="text-gray-300 text-sm md:text-base leading-relaxed">
-                Working on <strong>product-based projects</strong> using Ruby on Rails. Integrating <strong>Secucard</strong> for payment & voucher processing, <strong>OCR</strong> functionality, and <strong>ChargeCloud API</strong> across multiple deployment environments.
-              </p>
-              <div className="flex flex-wrap gap-1 sm:gap-2 mt-2 md:mt-4">
-                {["Ruby on Rails", "Secucard", "OCR", "ChargeCloud API"].map((tech, i) => (
-                  <span key={i} className="px-2 py-1 text-xs md:text-sm bg-[#CC342D]/10 border border-[#CC342D]/40 rounded-full text-[#ff8a80]">
-                    <strong>{tech}</strong>
-                  </span>
-                ))}
+          {/* Latest Role Card */}
+          <motion.div 
+            variants={cardHover}
+            initial="rest"
+            whileHover="hover"
+            className="bg-gradient-to-br from-[#0a192f]/80 to-[#060b19]/90 backdrop-blur-xl p-8 rounded-3xl border border-[#CC342D]/20 shadow-lg relative overflow-hidden flex-1 flex flex-col justify-center"
+          >
+            {/* Ambient Ruby Glow */}
+            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#CC342D] rounded-full filter blur-[80px] opacity-20 pointer-events-none"></div>
+
+            <div className="flex items-center gap-4 mb-5">
+              <div className="bg-[#CC342D]/10 p-3 rounded-2xl border border-[#CC342D]/30">
+                <SiRubyonrails className="text-4xl text-[#CC342D]" />
+              </div>
+              <div>
+                <h4 className="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Current Role</h4>
+                <h3 className="text-xl font-bold text-white leading-tight">Techbolic Solutions</h3>
               </div>
             </div>
-          </div>
+            
+            <h5 className="text-[#ff8a80] font-semibold mb-3">Associate Software Engineer</h5>
+            
+            <p className="text-gray-300 text-sm leading-relaxed mb-6">
+              Engineering product-based applications utilizing Ruby on Rails. Managing complex API integrations including <strong>Secucard</strong> and <strong>ChargeCloud</strong>, while developing OCR modules across varied deployment environments.
+            </p>
+
+            <div className="flex flex-wrap gap-2 mt-auto">
+              {["Ruby on Rails", "Secucard", "OCR", "ChargeCloud"].map((tech, idx) => (
+                <span key={idx} className="bg-[#060b19] border border-white/10 px-3 py-1.5 rounded-full text-xs font-medium text-gray-300">
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </motion.div>
+
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
