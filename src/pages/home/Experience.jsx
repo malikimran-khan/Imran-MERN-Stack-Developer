@@ -1,15 +1,27 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaCodeBranch } from "react-icons/fa";
+import { FaCodeBranch, FaLaptopCode, FaGem } from "react-icons/fa";
 import { GiRocketThruster, GiNetworkBars } from "react-icons/gi";
-import { FaLaptopCode } from "react-icons/fa";
 
 export default function Experience() {
   const experiences = [
     {
+      role: "Associate Software Engineer",
+      company: "Techbolic Solutions",
+      duration: "Jan 2026 – Present",
+      highlights: [
+        "Working on product-based projects using Ruby on Rails.",
+        "Integrated Secucard for card, voucher, and payment processing.",
+        "Implemented OCR functionality and ChargeCloud API integration.",
+        "Managing multiple branches with different deployment environments.",
+      ],
+      icon: <FaGem aria-hidden="true" className="text-[#CC342D]" />,
+      color: "from-[#CC342D]/10 to-[#00C9A7]/5",
+    },
+    {
       role: "MERN Stack Developer",
       company: "BroshTech",
-      duration: "Feb 2025 – Present",
+      duration: "Feb 2025 – Jan 2026",
       highlights: [
         "Developed scalable full-stack web apps using React.js, Node.js, and MongoDB.",
         "Built AI-powered Electron.js desktop tools and PWAs.",

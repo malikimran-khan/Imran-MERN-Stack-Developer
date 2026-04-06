@@ -23,6 +23,8 @@ import {
   SiVercel,
   SiFirebase,
   SiJenkins,
+  SiRubyonrails,
+  SiRuby,
 } from "react-icons/si";
 
 export default function Skills() {
@@ -38,12 +40,22 @@ export default function Skills() {
       { name: "Redux Toolkit", icon: <SiRedux aria-hidden="true" className="text-[#764ABC]" /> },
     ],
     Backend: [
+      { name: "Ruby on Rails", icon: <SiRubyonrails aria-hidden="true" className="text-[#CC0000]" /> },
+      { name: "Ruby", icon: <SiRuby aria-hidden="true" className="text-[#CC342D]" /> },
       { name: "Node.js", icon: <FaNodeJs aria-hidden="true" className="text-[#3C873A]" /> },
       { name: "Express.js", icon: <SiExpress aria-hidden="true" className="text-gray-300" /> },
       { name: "MongoDB", icon: <SiMongodb aria-hidden="true" className="text-[#4DB33D]" /> },
       { name: "PostgreSQL", icon: <SiPostgresql aria-hidden="true" className="text-[#336791]" /> },
       { name: "Firebase", icon: <SiFirebase aria-hidden="true" className="text-[#FFA611]" /> },
       { name: "REST & GraphQL APIs", icon: "🧭" },
+    ],
+    Integrations: [
+      { name: "Secucard API", icon: "💳" },
+      { name: "ChargeCloud API", icon: "⚡" },
+      { name: "OCR", icon: "📄" },
+      { name: "Payment Systems", icon: "💰" },
+      { name: "Voucher Processing", icon: "🎫" },
+      { name: "Multi-Env Deployment", icon: "🌐" },
     ],
     Tools: [
       { name: "Git / GitHub", icon: <FaGitAlt aria-hidden="true" className="text-[#F1502F]" /> },

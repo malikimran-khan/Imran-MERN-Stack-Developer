@@ -56,13 +56,19 @@ export default function About() {
 
           <ul className="space-y-3 mt-4 text-gray-300">
             <li className="bg-white/10 p-2 sm:p-3 rounded-lg border border-white/10 hover:border-[#00C9A7]/50 transition text-sm md:text-base">
-              <strong>MERN Stack Developer</strong> at <strong>BroshTech</strong> — Building full-stack AI-integrated web applications.
+              <strong>Associate Software Engineer</strong> at <strong>Techbolic Solutions</strong> — Working on product-based projects with Ruby on Rails.
+            </li>
+            <li className="bg-white/10 p-2 sm:p-3 rounded-lg border border-white/10 hover:border-[#00C9A7]/50 transition text-sm md:text-base">
+              Former <strong>MERN Stack Developer</strong> at <strong>BroshTech</strong> — Built full-stack AI-integrated web applications.
+            </li>
+            <li className="bg-white/10 p-2 sm:p-3 rounded-lg border border-white/10 hover:border-[#00C9A7]/50 transition text-sm md:text-base">
+              Former <strong>MERN Stack Intern</strong> at <strong>Nexo Mark</strong> — Designed and debugged modern MERN applications.
             </li>
             <li className="bg-white/10 p-2 sm:p-3 rounded-lg border border-white/10 hover:border-[#00C9A7]/50 transition text-sm md:text-base">
               Former <strong>Frontend Intern</strong> at <strong>EMAK Solution</strong>, developing responsive and optimized interfaces using React.js.
             </li>
             <li className="bg-white/10 p-2 sm:p-3 rounded-lg border border-white/10 hover:border-[#00C9A7]/50 transition text-sm md:text-base">
-              Skilled in <strong>Next.js, Tailwind, MUI, LangChain.js, and Electron.js</strong>.
+              Skilled in <strong>Ruby on Rails, Next.js, Tailwind, MUI, LangChain.js, and Electron.js</strong>.
             </li>
             <li className="bg-white/10 p-2 sm:p-3 rounded-lg border border-white/10 hover:border-[#00C9A7]/50 transition text-sm md:text-base">
               Experienced in building <strong>PWA</strong> and desktop applications with <strong>AI integrations</strong>.
@@ -114,16 +120,16 @@ export default function About() {
           <div className="bg-white/5 backdrop-blur-md p-4 md:p-8 rounded-2xl border border-white/10 shadow-lg w-full">
             <h3 className="text-xl md:text-2xl font-bold text-[#00C9A7] mb-3 md:mb-4">Latest Experience</h3>
             <div>
-              <h4 className="text-lg md:text-xl font-semibold text-white">BroshTech</h4>
+              <h4 className="text-lg md:text-xl font-semibold text-white">Techbolic Solutions</h4>
               <p className="text-gray-400 text-xs md:text-sm mb-2">
-                MERN Stack Developer | Feb 2025 – Present
+                Associate Software Engineer | Jan 2026 – Present
               </p>
               <p className="text-gray-300 text-sm md:text-base leading-relaxed">
-                Building full-stack <strong>AI-integrated web applications</strong> using React.js, Node.js, and MongoDB. Collaborating on scalable and high-performance business solutions.
+                Working on <strong>product-based projects</strong> using Ruby on Rails. Integrating <strong>Secucard</strong> for payment & voucher processing, <strong>OCR</strong> functionality, and <strong>ChargeCloud API</strong> across multiple deployment environments.
               </p>
               <div className="flex flex-wrap gap-1 sm:gap-2 mt-2 md:mt-4">
-                {["React.js", "LangChain.js", "MongoDB", "Next.js"].map((tech, i) => (
-                  <span key={i} className="px-2 py-1 text-xs md:text-sm bg-[#00C9A7]/10 border border-[#00C9A7]/40 rounded-full text-[#A5FECB]">
+                {["Ruby on Rails", "Secucard", "OCR", "ChargeCloud API"].map((tech, i) => (
+                  <span key={i} className="px-2 py-1 text-xs md:text-sm bg-[#CC342D]/10 border border-[#CC342D]/40 rounded-full text-[#ff8a80]">
                     <strong>{tech}</strong>
                   </span>
                 ))}

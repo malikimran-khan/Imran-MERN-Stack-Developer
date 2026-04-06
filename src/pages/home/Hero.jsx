@@ -11,7 +11,7 @@ import {
   FaLaptopCode,
   FaRobot,
 } from "react-icons/fa";
-import { SiNextdotjs, SiMongodb, SiTailwindcss, SiElectron, SiLangchain } from "react-icons/si";
+import { SiNextdotjs, SiMongodb, SiTailwindcss, SiElectron, SiLangchain, SiRubyonrails } from "react-icons/si";
 import Particles from "react-tsparticles";
 import { loadFull } from "tsparticles";
 
@@ -67,12 +67,12 @@ export default function Hero() {
 
         {/* ✅ H2 for Secondary Keywords */}
         <h2 className="text-2xl md:text-3xl font-semibold text-[#A5FECB]">
-          React, Node.js, LangChain & Electron Specialist
+          React, Node.js, Ruby on Rails, LangChain & Electron Specialist
         </h2>
 
         <p className="text-gray-300 max-w-lg leading-relaxed">
           Passionate developer experienced in{" "}
-          <strong>React.js, Node.js, LangChain.js, and Electron.js</strong>, crafting
+          <strong>React.js, Node.js, Ruby on Rails, LangChain.js, and Electron.js</strong>, crafting
           AI-powered web and desktop applications with seamless user experiences
           and modern UI design.
         </p>
@@ -140,6 +140,7 @@ export default function Hero() {
             { icon: <FaDatabase />, bottom: "35%", right: "5%", color: "#A5FECB" },
             { icon: <FaJsSquare />, top: "30%", left: "50%", color: "#F7DF1E" },
             { icon: <FaLaptopCode />, bottom: "45%", left: "60%", color: "#00E0FF" },
+            { icon: <SiRubyonrails />, top: "25%", right: "25%", color: "#CC0000" },
           ].map((item, i) => (
             <motion.div
               key={i}
