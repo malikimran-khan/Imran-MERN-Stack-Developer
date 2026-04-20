@@ -53,14 +53,13 @@ export default function UserNavbar() {
         initial={{ y: 0 }}
         animate={{ y: showNavbar ? 0 : -100 }}
         transition={{ duration: 0.3, ease: "easeInOut" }}
-        className={`fixed top-0 left-0 w-full z-50 transition-all font-['Poppins'] duration-500 ${
-          scrolled 
-            ? "bg-[#060b19]/90 backdrop-blur-2xl border-b border-[#00C9A7]/10 py-3" 
+        className={`fixed top-0 left-0 w-full z-50 transition-all font-['Poppins'] duration-500 ${scrolled
+            ? "bg-[#060b19]/90 backdrop-blur-2xl border-b border-[#00C9A7]/10 py-3"
             : "bg-transparent py-5"
-        }`}
+          }`}
       >
         <div className="max-w-[90rem] mx-auto px-6 md:px-12 flex justify-between items-center">
-          
+
           {/* Logo */}
           <motion.div
             whileHover={{ scale: 1.05 }}
@@ -74,7 +73,7 @@ export default function UserNavbar() {
           </motion.div>
 
           {/* Simple Bold Navigation Links with Magic Sliding Tab */}
-          <nav 
+          <nav
             className="hidden lg:flex items-center gap-2 relative bg-white/5 border border-white/10 px-2 py-1.5 rounded-full backdrop-blur-md"
             onMouseLeave={() => setHoveredTab(null)}
           >
@@ -92,7 +91,7 @@ export default function UserNavbar() {
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
-                
+
                 <span className={`relative z-10 transition-colors duration-300 ${hoveredTab === item ? "text-[#060b19]" : "text-gray-400 group-hover:text-white"}`}>
                   {item}
                 </span>
@@ -135,7 +134,7 @@ export default function UserNavbar() {
             className="fixed inset-0 z-40 bg-[#060b19] flex flex-col justify-center items-center px-6"
           >
             <div className="absolute top-1/4 left-1/4 w-[30rem] h-[30rem] bg-[#00C9A7] rounded-full mix-blend-screen filter blur-[150px] opacity-[0.1] pointer-events-none"></div>
-            
+
             <ul className="flex flex-col items-center gap-6 w-full relative z-10">
               {navMenuItems.map((item, index) => (
                 <motion.li key={index} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: index * 0.05 }} className="w-full">
@@ -144,11 +143,11 @@ export default function UserNavbar() {
                   </button>
                 </motion.li>
               ))}
-              
+
               <motion.li initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5 }} className="w-full mt-10">
-                 <button onClick={() => window.location.href = "mailto:malikimranawan801@gmail.com"} className="w-full bg-[#00C9A7] text-[#060b19] py-6 rounded-3xl font-black uppercase tracking-widest text-lg shadow-2xl flex items-center justify-center gap-3">
-                    Start Hiring <FaPaperPlane />
-                 </button>
+                <button onClick={() => window.location.href = "mailto:malikimranawan801@gmail.com"} className="w-full bg-[#00C9A7] text-[#060b19] py-6 rounded-3xl font-black uppercase tracking-widest text-lg shadow-2xl flex items-center justify-center gap-3">
+                  Start Hiring <FaPaperPlane />
+                </button>
               </motion.li>
             </ul>
           </motion.div>

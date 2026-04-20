@@ -4,7 +4,7 @@ import { categories, projects } from "./projectData";
 import { FaArrowRight, FaTimes, FaExternalLinkAlt, FaGithub } from "react-icons/fa";
 
 export default function Projects() {
-  const [activeTab, setActiveTab] = useState("Full Stack");
+  const [activeTab, setActiveTab] = useState("Frontend");
   const [selectedProject, setSelectedProject] = useState(null);
   const [showAll, setShowAll] = useState(false);
 
@@ -23,29 +23,30 @@ export default function Projects() {
   // Framer Motion variants
   const gridVariants = {
     hidden: { opacity: 0 },
-    visible: { 
-      opacity: 1, 
-      transition: { staggerChildren: 0.1 } 
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.1 },
     },
-    exit: { 
-      opacity: 0, 
-      transition: { duration: 0.2 } 
-    }
+    exit: {
+      opacity: 0,
+      transition: { duration: 0.2 },
+    },
   };
 
   const cardVariants = (index) => ({
     hidden: { opacity: 0, y: 50 },
-    visible: { 
-      opacity: 1, 
-      y: 0, 
-      transition: { type: "spring", stiffness: 200, damping: 20 } 
-    }
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { type: "spring", stiffness: 200, damping: 20 },
+    },
   });
 
   return (
-    <section 
+    <section
       id="projects"
-      className="relative min-h-screen bg-[#060b19] text-white px-6 md:px-16 py-24 font-['Poppins'] flex flex-col items-center overflow-hidden"
+      className="relative min-h-screen text-white px-6 md:px-16 py-24 font-['Poppins'] flex flex-col items-center overflow-hidden"
+      style={{ backgroundColor: "#000000" }}
     >
       {/* Deep Ambient Glows */}
       <div className="absolute top-[10%] left-[-10%] w-[30rem] h-[30rem] bg-[#00C9A7] rounded-full mix-blend-screen filter blur-[200px] opacity-10 pointer-events-none"></div>
@@ -68,7 +69,8 @@ export default function Projects() {
           </span>
         </h2>
         <p className="text-gray-400 max-w-2xl mx-auto leading-relaxed text-lg">
-          A showcase of my recent engineering challenges, from full-stack architectures to deeply integrated AI solutions.
+          A showcase of my recent engineering challenges, from full-stack
+          architectures to deeply integrated AI solutions.
         </p>
       </motion.div>
 
@@ -81,9 +83,10 @@ export default function Projects() {
               setActiveTab(cat.name);
               setShowAll(false);
             }}
-            className={`relative px-5 md:px-6 py-2.5 rounded-full text-sm md:text-base font-semibold flex items-center gap-2 transition-colors duration-300 ${
-              activeTab === cat.name ? "text-[#060b19]" : "text-gray-400 hover:text-white"
-            }`}
+            className={`relative px-5 md:px-6 py-2.5 rounded-full text-sm md:text-base font-semibold flex items-center gap-2 transition-colors duration-300 ${activeTab === cat.name
+              ? "text-[#060b19]"
+              : "text-gray-400 hover:text-white"
+              }`}
           >
             {activeTab === cat.name && (
               <motion.div
@@ -93,7 +96,6 @@ export default function Projects() {
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               />
             )}
-            {/* The icon and text need to be strictly above the layoutId background */}
             <span className="relative z-10 flex items-center gap-2">
               <span className="opacity-80">{cat.icon}</span>
               {cat.name}
@@ -114,37 +116,34 @@ export default function Projects() {
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 pb-10 items-start"
           >
             {visibleProjects.map((proj, i) => {
-              // Creating the staggered masonry effect:
-              // On large screens, the middle column is pushed down.
-              // On medium screens, every second item is pushed down.
-              const isMiddleCol = i % 3 === 1; 
-              const isRightColDesktop = i % 3 === 2;
+              const isMiddleCol = i % 3 === 1;
               const isOddMd = i % 2 === 1;
 
               return (
-                 <motion.div
+                <motion.div
                   key={i}
                   variants={cardVariants(i)}
-                  className={`relative group w-full h-[400px] overflow-hidden rounded-3xl bg-[#0a192f] border border-white/10 shadow-[0_10px_30px_rgba(0,0,0,0.5)] cursor-pointer
-                    lg:mt-${isMiddleCol ? '12' : '0'} 
-                    md:mt-${isOddMd ? '8' : '0'} lg:mt-0
+                  className={`relative group w-full h-[400px] overflow-hidden rounded-3xl shadow-[0_10px_30px_rgba(0,0,0,0.5)] cursor-pointer
+                    lg:mt-${isMiddleCol ? "12" : "0"}
+                    md:mt-${isOddMd ? "8" : "0"} lg:mt-0
                   `}
+                  style={{ backgroundColor: "#000000" }}
                   onClick={() => setSelectedProject(proj)}
                 >
-                  {/* Background Image (fills the card) */}
+                  {/* Background Image — black bg, object-contain, no border */}
                   <img
                     src={proj.image}
                     alt={proj.title}
-                    className="absolute inset-0 w-full h-full object-cover sm:object-contain bg-[#060b19] transition-transform duration-[800ms] ease-out group-hover:scale-110"
+                    className="absolute inset-0 w-full h-full object-contain transition-transform duration-[800ms] ease-out group-hover:scale-110"
+                    style={{ backgroundColor: "#000000" }}
                     loading="lazy"
                   />
-                  
-                  {/* Dark Gradient Overlay (always slightly visible, darkens heavily on hover) */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#060b19] via-[#060b19]/60 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500"></div>
+
+                  {/* Dark Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent opacity-60 group-hover:opacity-90 transition-opacity duration-500"></div>
 
                   {/* Slide-Up Content */}
                   <div className="absolute inset-0 p-6 flex flex-col justify-end transform translate-y-8 group-hover:translate-y-0 transition-transform duration-500 ease-out">
-                    
                     {/* Always visible title */}
                     <h3 className="text-2xl font-bold text-white drop-shadow-md mb-1 transform -translate-y-4 group-hover:translate-y-0 transition-transform duration-500">
                       {proj.title}
@@ -155,12 +154,12 @@ export default function Projects() {
                       <p className="text-[#00C9A7] font-medium text-sm mb-4 line-clamp-1">
                         {proj.tech}
                       </p>
-                      
-                      <button 
+
+                      <button
                         className="flex items-center gap-2 bg-white/10 hover:bg-[#00C9A7] hover:text-[#060b19] text-white border border-white/20 hover:border-transparent px-5 py-2.5 rounded-full text-sm font-semibold transition-all duration-300 backdrop-blur-md"
                         aria-label={`View details of ${proj.title}`}
                         onClick={(e) => {
-                          e.stopPropagation(); // prevent double modal triggering
+                          e.stopPropagation();
                           setSelectedProject(proj);
                         }}
                       >
@@ -177,7 +176,7 @@ export default function Projects() {
 
       {/* Show More / Less */}
       {activeProjects.length > 6 && (
-        <motion.div 
+        <motion.div
           className="mt-6 z-10"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -191,7 +190,9 @@ export default function Projects() {
             aria-label={showAll ? "Show fewer projects" : "Show all projects"}
           >
             <span className="absolute inset-0 w-full h-full bg-[#00C9A7] opacity-0 group-hover:opacity-10 transition-opacity duration-300"></span>
-            <span className="relative z-10">{showAll ? "View Less" : "View All Projects"}</span>
+            <span className="relative z-10">
+              {showAll ? "View Less" : "View All Projects"}
+            </span>
           </motion.button>
         </motion.div>
       )}
@@ -200,10 +201,11 @@ export default function Projects() {
       <AnimatePresence>
         {selectedProject && (
           <motion.div
-            className="fixed inset-0 flex items-center justify-center bg-[#060b19]/90 backdrop-blur-2xl z-50 p-4 md:p-8 overflow-y-auto"
-            initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            animate={{ opacity: 1, backdropFilter: "blur(40px)" }}
-            exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
+            className="fixed inset-0 flex items-center justify-center backdrop-blur-2xl z-50 p-4 md:p-8 overflow-y-auto"
+            style={{ backgroundColor: "rgba(0,0,0,0.92)" }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
             role="dialog"
             aria-modal="true"
             aria-labelledby="project-modal-title"
@@ -236,30 +238,35 @@ export default function Projects() {
               {/* Data Section */}
               <div className="w-full lg:w-1/2 flex flex-col items-start gap-6">
                 <span className="inline-block bg-[#00C9A7]/10 text-[#00C9A7] border border-[#00C9A7]/20 px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide">
-                  {selectedProject.tech.split(', ')[0] || "Featured Project"} 
+                  {selectedProject.tech.split(", ")[0] || "Featured Project"}
                 </span>
-                
+
                 <h2
                   id="project-modal-title"
                   className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-white leading-tight"
                 >
                   {selectedProject.title}
                 </h2>
-                
+
                 <p className="text-gray-300 text-lg leading-relaxed max-w-2xl">
                   {selectedProject.description}
                 </p>
-                
+
                 <div className="w-full h-[1px] bg-white/10 my-2"></div>
-                
+
                 <div className="w-full">
-                  <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">Core Technologies</h4>
+                  <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-widest mb-3">
+                    Core Technologies
+                  </h4>
                   <div className="flex flex-wrap gap-2 text-[#A5FECB]">
-                     {selectedProject.tech.split(',').map((tech, idx) => (
-                        <span key={idx} className="bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-sm hover:border-[#00C9A7]/50 transition-colors">
-                          {tech.trim()}
-                        </span>
-                     ))}
+                    {selectedProject.tech.split(",").map((tech, idx) => (
+                      <span
+                        key={idx}
+                        className="bg-white/5 border border-white/10 px-4 py-2 rounded-xl text-sm hover:border-[#00C9A7]/50 transition-colors"
+                      >
+                        {tech.trim()}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
@@ -268,30 +275,32 @@ export default function Projects() {
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
                     onClick={() =>
-                      window.open(selectedProject.link || "https://broshtech.com", "_blank")
+                      window.open(
+                        selectedProject.link || "https://broshtech.com",
+                        "_blank"
+                      )
                     }
                     className="inline-flex items-center gap-3 bg-[#00C9A7] text-[#060b19] font-bold rounded-full py-4 px-8 hover:shadow-[0_0_20px_rgba(0,201,167,0.4)] transition-all"
                   >
                     View Live Demo <FaExternalLinkAlt size={16} />
                   </motion.button>
-                  
-                  {/* Placeholder for GitHub link if needed */}
+
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    onClick={() => alert("Source code repository link placeholder.")}
+                    onClick={() =>
+                      alert("Source code repository link placeholder.")
+                    }
                     className="inline-flex items-center gap-3 bg-transparent text-white border border-white/20 font-bold rounded-full py-4 px-8 hover:bg-white/5 transition-all"
                   >
                     Source Code <FaGithub size={18} />
                   </motion.button>
                 </div>
-
               </div>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
-
     </section>
   );
 }
