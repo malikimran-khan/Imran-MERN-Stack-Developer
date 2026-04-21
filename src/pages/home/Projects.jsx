@@ -270,31 +270,31 @@ export default function Projects() {
                   </div>
                 </div>
 
+                {/* Conditional Action Buttons */}
                 <div className="flex flex-wrap items-center gap-4 mt-6">
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() =>
-                      window.open(
-                        selectedProject.link || "https://broshtech.com",
-                        "_blank"
-                      )
-                    }
-                    className="inline-flex items-center gap-3 bg-[#00C9A7] text-[#060b19] font-bold rounded-full py-4 px-8 hover:shadow-[0_0_20px_rgba(0,201,167,0.4)] transition-all"
-                  >
-                    View Live Demo <FaExternalLinkAlt size={16} />
-                  </motion.button>
+                  {/* Show Live Demo button only if link exists */}
+                  {selectedProject.link && (
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => window.open(selectedProject.link, "_blank")}
+                      className="inline-flex items-center gap-3 bg-[#00C9A7] text-[#060b19] font-bold rounded-full py-4 px-8 hover:shadow-[0_0_20px_rgba(0,201,167,0.4)] transition-all"
+                    >
+                      View Live Demo <FaExternalLinkAlt size={16} />
+                    </motion.button>
+                  )}
 
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    onClick={() =>
-                      alert("Source code repository link placeholder.")
-                    }
-                    className="inline-flex items-center gap-3 bg-transparent text-white border border-white/20 font-bold rounded-full py-4 px-8 hover:bg-white/5 transition-all"
-                  >
-                    Source Code <FaGithub size={18} />
-                  </motion.button>
+                  {/* Show Source Code button only if github exists */}
+                  {selectedProject.github && (
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onClick={() => window.open(selectedProject.github, "_blank")}
+                      className="inline-flex items-center gap-3 bg-transparent text-white border border-white/20 font-bold rounded-full py-4 px-8 hover:bg-white/5 transition-all"
+                    >
+                      Source Code <FaGithub size={18} />
+                    </motion.button>
+                  )}
                 </div>
               </div>
             </motion.div>

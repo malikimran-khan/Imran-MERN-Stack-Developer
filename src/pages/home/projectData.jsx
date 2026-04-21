@@ -11,198 +11,230 @@ export const categories = [
   { name: "Frontend", icon: <FaReact /> },
   { name: "Full Stack", icon: <FaLaptopCode /> },
   { name: "AI Powered", icon: <FaRobot /> },
-  { name: "PWA", icon: <FaCloud /> },
-
-  { name: "Electron App", icon: <FaDesktop /> },
 ];
 
 export const projects = {
   "Full Stack": [
     {
       title: "Ai Verse",
-      description: "Ai Verse is a cutting-edge digital agency and software house, specializing in web development, games, 3D modeling, digital marketing, and creative software solutions. We craft innovative digital experiences that combine technology and creativity, helping businesses stand out online, achieve measurable results, and embrace future-ready solutions. Our team leverages React, Framer Motion, Tailwind, Three.js, AI Integration, and IoT to build scalable, interactive, and intelligent digital products for clients worldwide.",
-      tech: "React, Framer Motion, Tailwind, Three.js, AI Integration, IoT, Web Development, 3D Modeling, Games, Digital Marketing",
+      description:
+        "Ai Verse is a cutting-edge digital agency and software house, specializing in web development, games, 3D modeling, digital marketing, and creative software solutions. We craft innovative digital experiences that combine technology and creativity, helping businesses stand out online, achieve measurable results, and embrace future-ready solutions.",
+      tech: "React, Framer Motion, Tailwind, Three.js, AI Integration, IoT",
       image: "/ai-verse.png",
-      link: "https://www.aiverse.pk/"
+      link: "https://www.aiverse.pk/",
     },
+
     {
       title: "Biz Axis",
       description:
-        "Biz Axis Global FZC LLC is a trusted UAE-based consulting firm delivering expert Accounting, Taxation, Business Setup, and Financial Advisory services. With 200+ professionals, Biz Axis combines financial expertise and technology integration to empower businesses with compliant, efficient, and growth-focused solutions. Their mission is to build lasting partnerships through transparency, innovation, and reliability — driving sustainable success across global markets.",
-      tech: "React, Framer Motion, Tailwind, Three.js, Animation, Responsive Design, Financial Dashboard",
+        "Biz Axis Global FZC LLC is a trusted UAE-based consulting firm delivering expert Accounting, Taxation, Business Setup, and Financial Advisory services with a strong focus on technology integration and business growth.",
+      tech: "React, Framer Motion, Tailwind, Three.js",
       image: "/bizzaxis.webp",
       link: "https://bizaxis.net/",
     },
+
     {
       title: "Waaris Fabric Store",
       description:
-        "Waaris Fabric Store is an elegant online platform for premium unstitched fabrics and custom stitching services. Built with React and powered by Shopify on the backend, it offers a seamless e-commerce experience where customers can explore collections, customize outfits, and place personalized stitching orders. Focused on quality, style, and convenience, Waaris combines modern design with traditional craftsmanship for a smooth and luxurious shopping journey.",
-      tech: "React, Framer Motion, Tailwind, Shopify, Responsive Design, E-commerce Integration",
+        "An e-commerce platform for premium fabrics and custom stitching services, allowing users to explore collections, customize outfits, and place orders with a seamless shopping experience.",
+      tech: "React, Shopify, Tailwind",
       image: "/waaris.webp",
       link: "https://www.waaris.store/",
     },
+
     {
       title: "Netrics",
       description:
-        "An AI-powered automation tool built with the MERN stack and LangChain.js that allows users to generate professional LinkedIn posts using the OpenAI API. Users can enter a topic name, instantly receive AI-generated content, edit it if needed, and automatically publish it to their LinkedIn account. The system integrates scraping and LinkedIn API automation for seamless posting, combining NLP with full-stack development for smart social media management.",
-      tech: "LangChain.js, React, Node.js, Express, MongoDB, OpenAI API, LinkedIn Automation, Tailwind CSS",
+        "An AI-powered LinkedIn automation platform that generates professional posts using OpenAI and allows users to edit and publish content directly to LinkedIn with automation workflows.",
+      tech: "LangChain.js, React, Node.js, MongoDB, OpenAI API",
       image: "/netrics.png",
       link: "https://post-pilot-ai-beige.vercel.app/",
+      github: "https://github.com/malikimran-khan/Netrics",
     },
+
     {
       title: "Intelligent Quiz System",
       description:
-        "An AI-powered quiz platform where users can register, select their education level (School, College, or University), and generate topic-based multiple-choice questions using the OpenAI API. The system provides 10 randomized questions per attempt, giving users 2 minutes to complete the quiz. After submission, users can instantly view correct and incorrect answers with detailed explanations. Each user has a personalized dashboard to track past performance, scores, accuracy percentages, and trending topics. The platform combines AI-driven question generation with real-time performance analytics to create an engaging, adaptive learning experience.",
-      tech: "React, Node.js, Express, MongoDB, OpenAI API, PWA, Tailwind CSS, JWT Authentication, REST APIs, Chart.js",
+        "An AI-powered quiz platform that generates topic-based MCQs based on user level and provides real-time evaluation, explanations, and performance tracking through dashboards.",
+      tech: "React, Node.js, MongoDB, OpenAI API, Chart.js",
       image: "/quiz.png",
+      github: "https://github.com/malikimran-khan/Intelligent-quiz-system",
     },
+
     {
       title: "Resume Analyzer",
       description:
-        "An AI-powered web application that allows users to upload their resumes and instantly receive detailed feedback and insights using the OpenAI API. The system analyzes the resume content to evaluate strengths, weaknesses, keyword optimization, and overall job readiness. It also provides improvement suggestions for structure, formatting, and skill alignment with industry standards. Built for efficiency and accuracy, the platform helps users enhance their resumes for better visibility in job applications and recruitment processes.",
-      tech: "React, Node.js, Express, MongoDB, OpenAI API, Tailwind CSS, REST APIs, Cloud File Storage",
+        "An AI-based application that analyzes resumes and provides feedback on strengths, weaknesses, keyword optimization, and job readiness to improve hiring chances.",
+      tech: "React, Node.js, MongoDB, OpenAI API",
       image: "/resume-analyzer.png",
-      link: "https://resume-analyzzer.vercel.app/",
+      link: "https://resume-analyzer-hduo.vercel.app/",
+      github: "https://github.com/malikimran-khan/resume-analyzer",
     },
+
     {
       title: "personal-chat-bot",
       description:
-        "An AI-powered web application that allows users to upload their resumes and instantly receive detailed feedback and insights using the OpenAI API. The system analyzes the resume content to evaluate strengths, weaknesses, keyword optimization, and overall job readiness. It also provides improvement suggestions for structure, formatting, and skill alignment with industry standards. Built for efficiency and accuracy, the platform helps users enhance their resumes for better visibility in job applications and recruitment processes.",
-      tech: "React, Node.js, Express, MongoDB, OpenAI API, Tailwind CSS, REST APIs, Cloud File Storage",
+        "A customizable AI chatbot platform where users can interact with an intelligent assistant for answering queries, generating content, and performing productivity tasks using OpenAI.",
+      tech: "React, Node.js, MongoDB, OpenAI API",
       image: "/personal-chat-bot.png",
-      link: "https://ai-learning-assistant-blue.vercel.app/",
+      link: "https://personal-ai-chatbot-platform.vercel.app/",
+      github: "https://github.com/malikimran-khan/personal-ai-chatbot",
     },
+
     {
       title: "Interview Simulator",
       description:
-        "An AI-powered web application that allows users to upload their resume and instantly receive detailed feedback and insights using the OpenAI API. The system analyzes the resume content to evaluate strengths, weaknesses, keyword optimization, and overall job readiness. It also provides improvement suggestions for structure, formatting, and skill alignment with industry standards. Built for efficiency and accuracy, the platform helps users enhance their resumes for better visibility in job applications and recruitment processes.",
-      tech: "React, Node.js, Express, MongoDB, OpenAI API, Tailwind CSS, REST APIs, Cloud File Storage",
+        "An AI-powered interview preparation system that simulates real interview scenarios, generates role-based questions, and provides feedback, scoring, and improvement suggestions.",
+      tech: "React, Node.js, MongoDB, OpenAI API",
       image: "/Interview-simulator.png",
-      link: "https://inter-view-genius.vercel.app/",
+      link: "https://ai-interview-simulator-7e54.vercel.app/",
+      github: "https://github.com/malikimran-khan/ai-interview-simulator",
     },
+
     {
       title: "Care Connect",
       description:
-        "A community-driven volunteer management platform built with the MERN stack that bridges the gap between volunteers and organizers. Volunteers can discover opportunities aligned with their skills and passions, connect with organizations, and track their contributions. Organizers can post volunteering opportunities, manage participants, and measure their social impact through an intuitive dashboard. The platform also includes a real-time chat system to facilitate communication between volunteers and organizers, fostering collaboration and engagement for social good.",
-      tech: "React, Node.js, Express, MongoDB, Socket.IO, Tailwind CSS, JWT Authentication, REST APIs",
+        "A volunteer management platform connecting volunteers with organizations, featuring opportunity discovery, dashboards, and real-time chat for collaboration.",
+      tech: "React, Node.js, MongoDB, Socket.IO",
       image: "/careconnect.png",
       link: "https://imran-mern-stack-trial-task.vercel.app/",
+      github: "https://github.com/malikimran-khan/imran-mern-stack-trial-task",
     },
+
     {
       title: "YouTube Sentiment Bot",
       description:
-        "An AI-powered MERN stack web app that analyzes YouTube video comments using LangChain.js to determine audience sentiment. Users can enter any YouTube video URL, and the bot automatically fetches top comments, processes them through an LLM-based pipeline, and provides a summary showing whether the public response is positive, negative, or neutral. Built with React, Node.js, Express, MongoDB, and LangChain.js integrated with the OpenAI API.",
-      tech: "LangChain.js, React, Node.js, Express, MongoDB, OpenAI API, YouTube Data API, Tailwind CSS",
+        "An AI-powered application that analyzes YouTube comments and determines sentiment (positive, negative, neutral) using LLM pipelines.",
+      tech: "LangChain.js, React, Node.js, MongoDB, OpenAI API",
       image: "/youtube-sentiment-bot.png",
-      link: "https://youtub-sentiment-bot.vercel.app/",
+      github: "https://github.com/malikimran-khan/youtube-sentiment-bot",
+    },
+
+    {
+      title: "Skill Swap",
+      description:
+        "A PWA-based employee attendance and management system with verification, admin controls, and salary calculations based on working hours.",
+      tech: "React, Node.js, MongoDB, PWA",
+      image: "/skill-swap.png",
+      github: "https://github.com/malikimran-khan/Skill-Swap",
+    },
+
+    {
+      title: "Smart health connect system",
+      description:
+        "A full-stack real-time healthcare platform connecting patients and doctors. It enables appointment booking, real-time chat using Socket.IO, doctor dashboards, and an admin panel with analytics. Includes an AI chatbot for basic health assistance.",
+      tech: "React, Node.js, Express, MongoDB, Socket.IO, JWT, OpenAI API",
+      image: "/health-system.png",
+      github: "https://github.com/malikimran-khan/Smart-health-connect-system",
     },
 
     {
       title: "Auto LinkedIn Poster",
       description:
-        "An AI-powered automation tool built with the MERN stack and LangChain.js that allows users to generate professional LinkedIn posts using the OpenAI API. Users can enter a topic name, instantly receive AI-generated content, edit it if needed, and automatically publish it to their LinkedIn account. The system integrates scraping and LinkedIn API automation for seamless posting, combining NLP with full-stack development for smart social media management.",
-      tech: "LangChain.js, React, Node.js, Express, MongoDB, OpenAI API, LinkedIn Automation, Tailwind CSS",
+        "An AI-powered automation tool that generates LinkedIn posts and publishes them automatically using OpenAI and LinkedIn API integration.",
+      tech: "LangChain.js, React, Node.js, MongoDB, OpenAI API",
       image: "/auto-linkdin-poster.png",
-      link: "https://post-pilot-ai-beige.vercel.app/",
+      github:
+        "https://github.com/malikimran-khan/smart-content-generator-post-on-linkdin",
     },
+
     {
       title: "AI Emporium",
       description:
-        "A full-featured AI-powered eCommerce platform built with the MERN stack and LangChain.js, offering multi-role access for Super Admin, Admin, Seller, and Buyer. The Super Admin can create sub-admins to manage users, sellers, categories, and policies such as privacy, security, and return guidelines. Sellers can register, manage, and perform CRUD operations on their own products, while buyers can browse and purchase items seamlessly. The platform includes an intelligent analytics dashboard with interactive graphs for sellers and admins, providing insights into sales and performance. It also integrates an AI chatbot connected to database tables, allowing users to ask product- or category-related questions for instant, data-driven responses.",
-      tech: "LangChain.js, React, Node.js, Express, MongoDB, OpenAI API, Chart.js, Tailwind CSS, JWT Authentication, REST APIs",
+        "A multi-role AI-powered eCommerce platform with Admin, Seller, and Buyer dashboards, product management, analytics, and an AI chatbot that retrieves product data directly from the database.",
+      tech: "React, Node.js, MongoDB, OpenAI API, Chart.js",
       image: "/ai-emporium.png",
-      link: "https://ai-emporium.vercel.app/",
+      github: "https://github.com/malikimran-khan/Ai-Emporium",
     },
+
     {
       title: "Smart Office Attendance & Management System",
       description:
-        "A Progressive Web App (PWA) built with the MERN stack to streamline office attendance and employee management. Employees can mark their attendance through an online system that captures both their presence and image verification, ensuring attendance is only possible within the office network. The admin panel allows administrators to verify newly registered users before granting login access. Admins can also manage employee salaries, where payments are calculated automatically based on verified attendance records and total working hours. The platform provides a seamless experience with offline support, secure authentication, and role-based access for efficient workforce monitoring.",
-      tech: "React, Node.js, Express, MongoDB, PWA, Tailwind CSS, JWT Authentication, REST APIs, Cloud Image Storage",
+        "A MERN-based attendance and workforce management system with role-based access, employee verification, attendance tracking, and automated salary calculations.",
+      tech: "React, Node.js, MongoDB, PWA",
       image: "/attendence-system.png",
-      link: "https://pay-role-system.vercel.app/",
-    },
-    {
-      title: "Smart POS & Profit Management System",
-      description:
-        "A comprehensive MERN stack Point of Sale (POS) system designed to manage sales, purchases, and inventory with real-time profit and loss tracking. The system enables users to record product buying and selling transactions, automatically calculate profit margins, and generate detailed financial reports. It features secure authentication, product management, sales analytics, and transaction history. The platform provides business owners with clear insights into daily revenue, expenses, and stock performance, helping them make data-driven decisions for improved profitability.",
-      tech: "React, Node.js, Express, MongoDB, Tailwind CSS, JWT Authentication, REST APIs, Chart.js",
-      image: "/pos.png",
-      link: "https://pos-frontend-rose.vercel.app/",
+      github: "https://github.com/malikimran-khan/payout-managment-system",
     },
   ],
+
   Frontend: [
     {
       title: "Saleem Enter prises",
       description:
-        "Innovating modern agriculture through AI, IoT, and sustainable design — Saleem Enterprises develops smart greenhouse systems that optimize climate, irrigation, and energy efficiency. These intelligent solutions empower growers with real-time data control, sustainable automation, and enhanced crop productivity for a greener, smarter future.",
-      tech: "React, Framer Motion, Tailwind, Three.js, AI Integration, IoT",
+        "Smart agriculture platform using AI and IoT to optimize greenhouse climate, irrigation, and crop productivity with real-time monitoring.",
+      tech: "React, Tailwind, Three.js",
       image: "/saleem.webp",
       link: "https://saleementerprises.com/",
     },
+
     {
       title: "Libra Printing",
       description:
-        "With over 25 years of excellence, Libra Printing Services delivers premium printing solutions for textiles and corporate clients. Combining creative design, offset technology, and sustainable practices, we craft precise, high-quality prints with trusted reliability. Our advanced Heidelberg machinery ensures color accuracy, durability, and efficiency — redefining printing standards with innovation and environmental responsibility.",
-      tech: "React, Framer Motion, Tailwind, Three.js, Animation, Responsive Design",
+        "A professional website for printing services showcasing high-quality printing solutions, modern design, and industrial capabilities.",
+      tech: "React, Tailwind",
       image: "/legend-club.webp",
       link: "https://www.lagendclub.info",
     },
+
     {
       title: "Ab Exports",
       description:
-        "With over 25 years of excellence, Libra Printing Services delivers premium printing solutions for textiles and corporate clients. Combining creative design, offset technology, and sustainable practices, we craft precise, high-quality prints with trusted reliability. Our advanced Heidelberg machinery ensures color accuracy, durability, and efficiency — redefining printing standards with innovation and environmental responsibility.",
-      tech: "React, Framer Motion, Tailwind, Three.js, Animation, Responsive Design",
+        "A business website for textile exports highlighting products, services, and global trade operations with modern UI design.",
+      tech: "React, Tailwind",
       image: "/ab.webp",
       link: "https://www.ab.com.pk",
     },
+
     {
       title: "Broshtech",
       description:
-        "Innovating modern agriculture through AI, IoT, and sustainable design — Saleem Enterprises develops smart greenhouse systems that optimize climate, irrigation, and energy efficiency. These intelligent solutions empower growers with real-time data control, sustainable automation, and enhanced crop productivity for a greener, smarter future.",
-      tech: "React, Framer Motion, Tailwind, Three.js, AI Integration, IoT",
+        "A tech-focused business website showcasing innovative solutions with modern UI, animations, and responsive design.",
+      tech: "React, Tailwind",
       image: "/broshtech.png",
       link: "https://broshtech.com/",
     },
+
     {
       title: "Para Mount Solutions",
       description:
-        "Para Mount Solutions is a global sourcing and indenting company with 20+ years of experience in international trade. The platform connects global buyers with verified manufacturers, ensuring quality, transparency, and timely delivery. Through a streamlined process—from requirement sharing to shipment—Para Mount Solutions simplifies global sourcing with expert negotiation, supplier verification, and complete trade compliance for reliable partnerships worldwide.",
-      tech: "React, Framer Motion, Tailwind, Three.js, Animation, Responsive Design, Business Workflow Integration",
+        "A global sourcing platform connecting buyers with manufacturers, ensuring transparency, compliance, and efficient trade operations.",
+      tech: "React, Tailwind",
       image: "/para.png",
       link: "https://www.paramountsolutions.online/",
     },
+
     {
       title: "Iqbal Pipes",
       description:
-        "Iqbal Pipe Trader is a trusted name in the MS pipe industry, delivering high-quality pipes, fittings, and customized solutions for industrial, construction, and infrastructure projects. With over 45 years of experience, the company ensures durability, precision, and reliability through advanced manufacturing and packaging standards. Committed to excellence, Iqbal Pipes continues to set the benchmark in quality, performance, and customer satisfaction across Pakistan.",
-      tech: "React, Framer Motion, Tailwind, Three.js, Animation, Responsive Design, Industrial Product Showcase",
+        "An industrial website showcasing pipe products, services, and company expertise with a focus on durability and engineering quality.",
+      tech: "React, Tailwind",
       image: "/iqbal.png",
       link: "https://iqbal-pipe-traders.vercel.app/",
     },
+
     {
       title: "Money Move",
       description:
-        "Best Builders & Interiors transforms architectural visions into luxurious realities. Specializing in modern construction and premium interior design, the company blends innovation, craftsmanship, and timeless elegance to create iconic residential and commercial spaces. From structural excellence to refined interiors, Best Builders delivers projects that embody style, sophistication, and durability — redefining the art of luxury living.",
-      tech: "React, Framer Motion, Tailwind, Three.js, Animation, Responsive Design, Architectural Visualization",
+        "A construction and interior design website presenting premium projects with modern UI and luxury-focused visuals.",
+      tech: "React, Tailwind",
       image: "/money-move.png",
       link: "https://money-move-seven.vercel.app/",
     },
-  ],
-  PWA: [
+
     {
-      title: "Smart Office Attendance & Management System",
+      title: "Naseem Febrics",
       description:
-        "A Progressive Web App (PWA) built with the MERN stack to streamline office attendance and employee management. Employees can mark their attendance through an online system that captures both their presence and image verification, ensuring attendance is only possible within the office network. The admin panel allows administrators to verify newly registered users before granting login access. Admins can also manage employee salaries, where payments are calculated automatically based on verified attendance records and total working hours. The platform provides a seamless experience with offline support, secure authentication, and role-based access for efficient workforce monitoring.",
-      tech: "React, Node.js, Express, MongoDB, PWA, Tailwind CSS, JWT Authentication, REST APIs, Cloud Image Storage",
-      image: "/attendence-system.png",
-      link: "https://pay-role-system.vercel.app/",
+        "A textile and fashion website showcasing fabric collections with a modern and responsive design.",
+      tech: "React, Tailwind",
+      image: "/naseem.png",
+      link: "https://naseem-febrics-six.vercel.app/",
     },
   ],
   "AI Powered": [
     {
       title: "Biz Axis",
       description:
-        "Biz Axis Global FZC LLC is a trusted UAE-based consulting firm delivering expert Accounting, Taxation, Business Setup, and Financial Advisory services. With 200+ professionals, Biz Axis combines financial expertise and technology integration to empower businesses with compliant, efficient, and growth-focused solutions. Their mission is to build lasting partnerships through transparency, innovation, and reliability — driving sustainable success across global markets.",
+        "Biz Axis Global FZC LLC is a UAE-based consulting firm offering Accounting, Taxation, Business Setup, and Financial Advisory services. The platform integrates modern UI/UX with scalable frontend architecture to present complex financial services in a clean, user-friendly way, helping businesses make informed decisions and streamline operations.",
       tech: "React, Framer Motion, Tailwind, Three.js, Animation, Responsive Design, Financial Dashboard",
       image: "/bizzaxis.webp",
       link: "https://bizaxis.net/",
@@ -210,68 +242,76 @@ export const projects = {
     {
       title: "YouTube Sentiment Bot",
       description:
-        "An AI-powered MERN stack web app that analyzes YouTube video comments using LangChain.js to determine audience sentiment. Users can enter any YouTube video URL, and the bot automatically fetches top comments, processes them through an LLM-based pipeline, and provides a summary showing whether the public response is positive, negative, or neutral. Built with React, Node.js, Express, MongoDB, and LangChain.js integrated with the OpenAI API.",
+        "An AI-powered MERN stack application that analyzes YouTube video comments to determine audience sentiment. Users provide a video URL, and the system fetches comments using the YouTube Data API, processes them through LangChain.js and OpenAI, and generates a clear sentiment summary (positive, negative, or neutral) with insights.",
       tech: "LangChain.js, React, Node.js, Express, MongoDB, OpenAI API, YouTube Data API, Tailwind CSS",
       image: "/youtube-sentiment-bot.png",
-      link: "https://youtub-sentiment-bot.vercel.app/",
+      github: "https://github.com/malikimran-khan/youtube-sentiment-bot",
     },
 
     {
       title: "Auto LinkedIn Poster",
       description:
-        "An AI-powered automation tool built with the MERN stack and LangChain.js that allows users to generate professional LinkedIn posts using the OpenAI API. Users can enter a topic name, instantly receive AI-generated content, edit it if needed, and automatically publish it to their LinkedIn account. The system integrates scraping and LinkedIn API automation for seamless posting, combining NLP with full-stack development for smart social media management.",
+        "An AI-driven content automation tool that generates professional LinkedIn posts based on user input topics. Built using MERN stack and LangChain.js, the system uses OpenAI to create engaging content and automates posting through LinkedIn integration, helping users maintain consistent and high-quality social media presence.",
       tech: "LangChain.js, React, Node.js, Express, MongoDB, OpenAI API, LinkedIn Automation, Tailwind CSS",
       image: "/auto-linkdin-poster.png",
-      link: "https://post-pilot-ai-beige.vercel.app/",
+      github: "https://github.com/malikimran-khan/smart-content-generator-post-on-linkdin",
     },
+
     {
       title: "AI Emporium",
       description:
-        "A full-featured AI-powered eCommerce platform built with the MERN stack and LangChain.js, offering multi-role access for Super Admin, Admin, Seller, and Buyer. The Super Admin can create sub-admins to manage users, sellers, categories, and policies such as privacy, security, and return guidelines. Sellers can register, manage, and perform CRUD operations on their own products, while buyers can browse and purchase items seamlessly. The platform includes an intelligent analytics dashboard with interactive graphs for sellers and admins, providing insights into sales and performance. It also integrates an AI chatbot connected to database tables, allowing users to ask product- or category-related questions for instant, data-driven responses.",
+        "A full-featured AI-powered eCommerce platform built with the MERN stack and LangChain.js. It supports multiple roles including Super Admin, Admin, Seller, and Buyer. Sellers can manage products, while buyers can explore and purchase items. The platform includes an AI chatbot that answers product and category-related queries using database-driven responses, along with analytics dashboards for performance tracking.",
       tech: "LangChain.js, React, Node.js, Express, MongoDB, OpenAI API, Chart.js, Tailwind CSS, JWT Authentication, REST APIs",
       image: "/ai-emporium.png",
-      link: "https://ai-emporium.vercel.app/",
+      github: "https://github.com/malikimran-khan/ai-emporium",
     },
+
     {
       title: "Intelligent Quiz System",
       description:
-        "An AI-powered quiz platform where users can register, select their education level (School, College, or University), and generate topic-based multiple-choice questions using the OpenAI API. The system provides 10 randomized questions per attempt, giving users 2 minutes to complete the quiz. After submission, users can instantly view correct and incorrect answers with detailed explanations. Each user has a personalized dashboard to track past performance, scores, accuracy percentages, and trending topics. The platform combines AI-driven question generation with real-time performance analytics to create an engaging, adaptive learning experience.",
+        "An AI-powered quiz platform that dynamically generates multiple-choice questions based on selected topics and education levels. Using OpenAI, the system creates unique quizzes for each attempt, evaluates answers in real-time, and provides detailed explanations. Users can track their performance through a personalized dashboard with analytics and progress insights.",
       tech: "React, Node.js, Express, MongoDB, OpenAI API, PWA, Tailwind CSS, JWT Authentication, REST APIs, Chart.js",
       image: "/quiz.png",
+      github: "https://github.com/malikimran-khan/Intelligent-quiz-system",
     },
+
     {
       title: "Resume Analyzer",
       description:
-        "An AI-powered web application that allows users to upload their resumes and instantly receive detailed feedback and insights using the OpenAI API. The system analyzes the resume content to evaluate strengths, weaknesses, keyword optimization, and overall job readiness. It also provides improvement suggestions for structure, formatting, and skill alignment with industry standards. Built for efficiency and accuracy, the platform helps users enhance their resumes for better visibility in job applications and recruitment processes.",
+        "An AI-powered resume analysis tool that evaluates resumes for strengths, weaknesses, and keyword optimization. Users can upload their resumes and receive actionable feedback, including formatting improvements, skill suggestions, and ATS optimization tips to improve job application success.",
       tech: "React, Node.js, Express, MongoDB, OpenAI API, Tailwind CSS, REST APIs, Cloud File Storage",
       image: "/resume-analyzer.png",
-      link: "https://resume-analyzzer.vercel.app/",
+      link: "https://resume-analyzer-hduo.vercel.app/",
+      github: "https://github.com/malikimran-khan/resume-analyzer",
     },
+
     {
-      title: "personal-chat-bot",
+      title: "Personal AI Chatbot",
       description:
-        "An AI-powered web application that allows users to upload their resumes and instantly receive detailed feedback and insights using the OpenAI API. The system analyzes the resume content to evaluate strengths, weaknesses, keyword optimization, and overall job readiness. It also provides improvement suggestions for structure, formatting, and skill alignment with industry standards. Built for efficiency and accuracy, the platform helps users enhance their resumes for better visibility in job applications and recruitment processes.",
-      tech: "React, Node.js, Express, MongoDB, OpenAI API, Tailwind CSS, REST APIs, Cloud File Storage",
+        "A customizable AI chatbot platform that allows users to create and interact with their own intelligent assistants. Built using the MERN stack and OpenAI API, the chatbot can answer queries, provide recommendations, and simulate human-like conversations, making it useful for personal productivity and business automation.",
+      tech: "React, Node.js, Express, MongoDB, OpenAI API, Tailwind CSS, REST APIs",
       image: "/personal-chat-bot.png",
-      link: "https://ai-learning-assistant-blue.vercel.app/",
+      link: "https://personal-ai-chatbot-platform.vercel.app/",
+      github: "https://github.com/malikimran-khan/personal-ai-chatbot",
     },
+
     {
       title: "Interview Simulator",
       description:
-        "An AI-powered web application that allows users to upload their resumes and instantly receive detailed feedback and insights using the OpenAI API. The system analyzes the resume content to evaluate strengths, weaknesses, keyword optimization, and overall job readiness. It also provides improvement suggestions for structure, formatting, and skill alignment with industry standards. Built for efficiency and accuracy, the platform helps users enhance their resumes for better visibility in job applications and recruitment processes.",
-      tech: "React, Node.js, Express, MongoDB, OpenAI API, Tailwind CSS, REST APIs, Cloud File Storage",
+        "An AI-powered interview preparation platform that simulates real interview scenarios. Users can upload resumes or select roles, and the system generates relevant interview questions using OpenAI. It provides feedback on answers, helping users improve communication skills and boost confidence for real-world interviews.",
+      tech: "React, Node.js, Express, MongoDB, OpenAI API, Tailwind CSS, REST APIs",
       image: "/Interview-simulator.png",
-      link: "https://inter-view-genius.vercel.app/",
+      link: "https://ai-interview-simulator-7e54.vercel.app/",
+      github: "https://github.com/malikimran-khan/ai-interview-simulator",
     },
-  ],
-  "Electron App": [
+
     {
-      title: "Smart POS & Profit Management System",
+      title: "AI Career Advisor",
       description:
-        "A comprehensive MERN stack Point of Sale (POS) system designed to manage sales, purchases, and inventory with real-time profit and loss tracking. The system enables users to record product buying and selling transactions, automatically calculate profit margins, and generate detailed financial reports. It features secure authentication, product management, sales analytics, and transaction history. The platform provides business owners with clear insights into daily revenue, expenses, and stock performance, helping them make data-driven decisions for improved profitability.",
-      tech: "React, Node.js, Express, MongoDB, Tailwind CSS, JWT Authentication, REST APIs, Chart.js",
-      image: "/pos.png",
-      link: "https://pos-frontend-rose.vercel.app/",
+        "An AI-powered career guidance platform that analyzes user skills, education, and interests to recommend suitable career paths. It provides personalized suggestions, required skills, and learning roadmaps, helping users make informed career decisions using intelligent data-driven insights.",
+      tech: "React, Node.js, Express, MongoDB, OpenAI API, Tailwind CSS, REST APIs",
+      image: "/ai-career.png",
+      github: "https://github.com/malikimran-khan/Ai-Career-Advisor",
     },
-  ],
+  ]
 };
