@@ -1,13 +1,11 @@
-import React, { useRef, useEffect } from "react";
-import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaChevronUp } from "react-icons/fa";
-import { Home, User, Briefcase, GraduationCap, Code, Layout, MessageSquare } from "lucide-react";
+import React, { useRef, useEffect, useState } from "react";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
+import { FaGithub, FaLinkedin, FaEnvelope, FaPhoneAlt, FaMapMarkerAlt, FaChevronUp, FaTwitter, FaInstagram } from "react-icons/fa";
+import { Home, User, Briefcase, GraduationCap, Code, Layout, MessageSquare, ArrowRight, Sparkles } from "lucide-react";
 
-// ── AURORA RIPPLE WAVE ──────────────────────────────────────────────────────
-// Design: multiple sinusoidal bands sweep LEFT→RIGHT across the footer
-// with a deep aurora/northern-lights color bleed — distinct from the
-// top-down perspective grid used in Experience.
-function AuroraWaveCanvas() {
+// ── COSMIC PARTICLE CANVAS ──────────────────────────────────────────────────
+// A sophisticated particle field that flows with a "neural" or "cosmic" feel.
+function CosmicParticleCanvas() {
   const canvasRef = useRef(null);
   const animRef = useRef(null);
 
@@ -15,140 +13,77 @@ function AuroraWaveCanvas() {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext("2d");
-    let t = 0;
+    let particles = [];
+    let w, h;
 
     const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
+      w = canvas.width = canvas.offsetWidth;
+      h = canvas.height = canvas.offsetHeight;
+      initParticles();
     };
-    resize();
-    window.addEventListener("resize", resize);
 
-    // Wave band definitions — each has its own frequency, phase, speed, color
-    const bands = [
-      { freq: 0.006, amp: 28, speed: 0.008, phase: 0.0, color: [0, 201, 167], alpha: 0.18, width: 1.2 },
-      { freq: 0.009, amp: 18, speed: 0.012, phase: 1.4, color: [59, 130, 246], alpha: 0.14, width: 0.9 },
-      { freq: 0.005, amp: 36, speed: 0.006, phase: 2.8, color: [165, 254, 203], alpha: 0.10, width: 0.7 },
-      { freq: 0.011, amp: 14, speed: 0.018, phase: 0.7, color: [0, 201, 167], alpha: 0.09, width: 0.6 },
-      { freq: 0.007, amp: 24, speed: 0.010, phase: 3.5, color: [99, 102, 241], alpha: 0.10, width: 0.8 },
-      { freq: 0.004, amp: 42, speed: 0.005, phase: 1.0, color: [0, 201, 167], alpha: 0.06, width: 1.8 },
-    ];
-
-    // Distribute bands across 4 vertical "rows" in the footer
-    const ROWS = 4;
-
-    const draw = () => {
-      const W = canvas.width;
-      const H = canvas.height;
-      ctx.clearRect(0, 0, W, H);
-
-      // ── Background — very dark, almost black with slight blue tint
-      ctx.fillStyle = "#060b19";
-      ctx.fillRect(0, 0, W, H);
-
-      // ── Per-row band pass — each row renders all bands offset by row
-      for (let row = 0; row < ROWS; row++) {
-        const baseY = (H / ROWS) * (row + 0.5);
-
-        bands.forEach((b, bi) => {
-          const rowPhaseShift = (row * Math.PI * 0.6) + (bi * 0.4);
-          ctx.beginPath();
-
-          for (let x = 0; x <= W; x += 2) {
-            const y = baseY
-              + Math.sin(x * b.freq + t * b.speed * 60 + b.phase + rowPhaseShift) * b.amp
-              + Math.sin(x * b.freq * 1.7 + t * b.speed * 40 + rowPhaseShift) * (b.amp * 0.35);
-
-            x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-          }
-
-          const [r, g, bl] = b.color;
-          ctx.strokeStyle = `rgba(${r},${g},${bl},${b.alpha})`;
-          ctx.lineWidth = b.width;
-          ctx.shadowColor = `rgba(${r},${g},${bl},0.5)`;
-          ctx.shadowBlur = 8;
-          ctx.stroke();
+    const initParticles = () => {
+      particles = [];
+      const count = Math.floor((w * h) / 15000);
+      for (let i = 0; i < count; i++) {
+        particles.push({
+          x: Math.random() * w,
+          y: Math.random() * h,
+          size: Math.random() * 1.5 + 0.5,
+          speedX: (Math.random() - 0.5) * 0.3,
+          speedY: (Math.random() - 0.5) * 0.3,
+          color: i % 3 === 0 ? "#00C9A7" : i % 3 === 1 ? "#3b82f6" : "#A5FECB",
+          opacity: Math.random() * 0.5 + 0.2,
         });
       }
+    };
 
-      ctx.shadowBlur = 0;
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      ctx.fillStyle = "#060b19";
+      ctx.fillRect(0, 0, w, h);
 
-      // ── Filled glowing band — bottom wave body for depth
-      const fillBand = bands[0];
-      ctx.beginPath();
-      for (let x = 0; x <= W; x += 2) {
-        const y = H * 0.72
-          + Math.sin(x * fillBand.freq + t * fillBand.speed * 60 + 0.5) * 20
-          + Math.sin(x * 0.003 + t * 0.3) * 12;
-        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-      }
-      ctx.lineTo(W, H);
-      ctx.lineTo(0, H);
-      ctx.closePath();
-      const fillGrad = ctx.createLinearGradient(0, H * 0.65, 0, H);
-      fillGrad.addColorStop(0, "rgba(0,201,167,0.04)");
-      fillGrad.addColorStop(1, "rgba(0,201,167,0)");
-      ctx.fillStyle = fillGrad;
-      ctx.fill();
+      particles.forEach((p, i) => {
+        p.x += p.speedX;
+        p.y += p.speedY;
 
-      // ── Top edge glow line
-      ctx.beginPath();
-      for (let x = 0; x <= W; x += 2) {
-        const y = 2 + Math.sin(x * 0.005 + t * 0.4) * 3;
-        x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
-      }
-      const topGrad = ctx.createLinearGradient(0, 0, W, 0);
-      topGrad.addColorStop(0, "rgba(0,201,167,0)");
-      topGrad.addColorStop(0.3, "rgba(0,201,167,0.5)");
-      topGrad.addColorStop(0.5, "rgba(165,254,203,0.8)");
-      topGrad.addColorStop(0.7, "rgba(0,201,167,0.5)");
-      topGrad.addColorStop(1, "rgba(0,201,167,0)");
-      ctx.strokeStyle = topGrad;
-      ctx.lineWidth = 1.2;
-      ctx.shadowColor = "#A5FECB";
-      ctx.shadowBlur = 14;
-      ctx.stroke();
-      ctx.shadowBlur = 0;
+        if (p.x < 0) p.x = w;
+        if (p.x > w) p.x = 0;
+        if (p.y < 0) p.y = h;
+        if (p.y > h) p.y = 0;
 
-      // ── Floating particle dots riding the waves
-      const PARTICLES = 28;
-      for (let i = 0; i < PARTICLES; i++) {
-        const px = (i / PARTICLES) * W;
-        const row = Math.floor((i * 7) % ROWS);
-        const b = bands[i % bands.length];
-        const rowPhaseShift = row * Math.PI * 0.6;
-        const py = (H / ROWS) * (row + 0.5)
-          + Math.sin(px * b.freq + t * b.speed * 60 + b.phase + rowPhaseShift) * b.amp;
-
-        const pulse = 0.5 + 0.5 * Math.sin(t * 80 * b.speed + i * 1.3);
-        const [r, g, bl] = b.color;
         ctx.beginPath();
-        ctx.arc(px, py, 1.5 + pulse * 1.2, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${r},${g},${bl},${0.4 + pulse * 0.4})`;
-        ctx.shadowColor = `rgba(${r},${g},${bl},0.9)`;
-        ctx.shadowBlur = 6;
+        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+        ctx.fillStyle = p.color;
+        ctx.globalAlpha = p.opacity;
         ctx.fill();
-        ctx.shadowBlur = 0;
-      }
 
-      // ── Vignette: darken left & right edges
-      const vigL = ctx.createLinearGradient(0, 0, W * 0.18, 0);
-      vigL.addColorStop(0, "rgba(6,11,25,0.7)");
-      vigL.addColorStop(1, "rgba(6,11,25,0)");
-      ctx.fillStyle = vigL;
-      ctx.fillRect(0, 0, W * 0.18, H);
+        // Connect particles
+        for (let j = i + 1; j < particles.length; j++) {
+          const p2 = particles[j];
+          const dx = p.x - p2.x;
+          const dy = p.y - p2.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
 
-      const vigR = ctx.createLinearGradient(W, 0, W * 0.82, 0);
-      vigR.addColorStop(0, "rgba(6,11,25,0.7)");
-      vigR.addColorStop(1, "rgba(6,11,25,0)");
-      ctx.fillStyle = vigR;
-      ctx.fillRect(W * 0.82, 0, W * 0.18, H);
+          if (dist < 100) {
+            ctx.beginPath();
+            ctx.strokeStyle = p.color;
+            ctx.globalAlpha = (1 - dist / 100) * 0.15;
+            ctx.lineWidth = 0.5;
+            ctx.moveTo(p.x, p.y);
+            ctx.lineTo(p2.x, p2.y);
+            ctx.stroke();
+          }
+        }
+      });
 
-      t += 0.016;
       animRef.current = requestAnimationFrame(draw);
     };
 
+    resize();
+    window.addEventListener("resize", resize);
     draw();
+
     return () => {
       cancelAnimationFrame(animRef.current);
       window.removeEventListener("resize", resize);
@@ -165,6 +100,8 @@ function AuroraWaveCanvas() {
 
 // ────────────────────────────────────────────────────────────────────────────
 export default function Footer() {
+  const [hoveredLink, setHoveredLink] = useState(null);
+
   const handleScrollToSection = (item) => {
     const element = document.getElementById(item.toLowerCase());
     if (element) {
@@ -185,139 +122,171 @@ export default function Footer() {
     { name: "Contact", icon: <MessageSquare className="w-4 h-4" /> },
   ];
 
+  const socialLinks = [
+    { name: "GitHub", link: "https://github.com/malikimranawan", icon: <FaGithub />, color: "#333" },
+    { name: "LinkedIn", link: "https://linkedin.com/in/malikimranawan", icon: <FaLinkedin />, color: "#0077b5" },
+    { name: "Instagram", link: "#", icon: <FaInstagram />, color: "#e4405f" },
+    { name: "Email", link: "mailto:malikimranawan801@gmail.com", icon: <FaEnvelope />, color: "#ea4335" },
+  ];
+
   return (
-    <footer className="relative bg-[#060b19] pt-28 pb-12 font-['Poppins'] overflow-hidden border-t border-white/5">
+    <footer className="relative bg-[#060b19] pt-32 pb-16 font-['Poppins'] overflow-hidden">
+      
+      {/* Background Canvas */}
+      <CosmicParticleCanvas />
 
-      {/* Aurora Ripple Wave Canvas */}
-      <AuroraWaveCanvas />
-
-      {/* Static ambient colour blooms — sit above canvas */}
-      <div className="absolute top-0 left-[10%] w-[40rem] h-[40rem] bg-[#00C9A7] rounded-full mix-blend-screen filter blur-[220px] opacity-[0.04] pointer-events-none" />
-      <div className="absolute bottom-0 right-[10%] w-[35rem] h-[35rem] bg-[#3b82f6] rounded-full mix-blend-screen filter blur-[220px] opacity-[0.04] pointer-events-none" />
+      {/* Glossy Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#060b19] via-transparent to-[#060b19] opacity-80 pointer-events-none" />
+      
+      {/* Animated Glows */}
+      <div className="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-[#00C9A7]/10 rounded-full blur-[120px] animate-pulse" />
+      <div className="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-[#3b82f6]/10 rounded-full blur-[120px] animate-pulse" style={{ animationDelay: "2s" }} />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-16 relative z-10">
-
-        {/* TOP SECTION */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-16">
-
-          {/* BRAND */}
-          <div className="lg:col-span-4 space-y-8">
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              className="flex items-center gap-4 cursor-pointer group"
-              onClick={scrollToTop}
+        
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 items-start">
+          
+          {/* Brand Identity */}
+          <div className="lg:col-span-5 space-y-8">
+            <motion.div 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              className="space-y-6"
             >
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-tr from-[#00C9A7] to-[#3b82f6] flex items-center justify-center text-[#060b19] shadow-[0_10px_30px_rgba(0,201,167,0.3)] group-hover:rotate-12 transition-transform duration-500">
-                <span className="font-black text-2xl tracking-tighter">I</span>
+              <div 
+                className="flex items-center gap-3 cursor-pointer group"
+                onClick={scrollToTop}
+              >
+                <div className="relative">
+                  <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#00C9A7] to-[#3b82f6] flex items-center justify-center text-white shadow-2xl group-hover:rotate-[10deg] transition-transform duration-500 overflow-hidden">
+                    <span className="font-black text-3xl italic">I</span>
+                    <div className="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity" />
+                  </div>
+                  <div className="absolute -top-2 -right-2 w-6 h-6 bg-white rounded-full flex items-center justify-center text-[#060b19] shadow-lg animate-bounce">
+                    <Sparkles size={12} />
+                  </div>
+                </div>
+                <div className="flex flex-col">
+                  <h2 className="text-4xl font-black text-white tracking-tighter leading-none">
+                    IMRAN<span className="text-[#00C9A7]">.</span>
+                  </h2>
+                  <span className="text-[10px] font-bold text-gray-500 uppercase tracking-[0.3em] mt-1">Full-Stack Architect</span>
+                </div>
               </div>
-              <h2 className="text-3xl font-black text-white tracking-widest uppercase leading-none">
-                Imran<span className="text-[#00C9A7]">.</span>
-              </h2>
-            </motion.div>
 
-            <p className="text-gray-400 text-sm leading-relaxed max-w-sm font-bold border-l-4 border-[#00C9A7]/30 pl-6 py-2 uppercase tracking-widest">
-              Crafting High-End <br /> Digital Experiences <br />
-              <span className="text-white">With Precision & Logic.</span>
-            </p>
+              <p className="text-gray-400 text-lg leading-relaxed max-w-md">
+                Building the digital future with <span className="text-white font-semibold">bold ideas</span> and <span className="text-[#00C9A7] font-semibold">clean code</span>. Let's create something extraordinary together.
+              </p>
+
+              <div className="flex flex-wrap gap-4 pt-4">
+                {socialLinks.map((social, idx) => (
+                  <motion.a
+                    key={idx}
+                    href={social.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ y: -5, scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
+                    className="w-12 h-12 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-white hover:bg-white/10 hover:border-white/20 transition-all duration-300 shadow-xl backdrop-blur-md"
+                  >
+                    <span className="text-xl">{social.icon}</span>
+                  </motion.a>
+                ))}
+              </div>
+            </motion.div>
           </div>
 
-          {/* DIRECTORY */}
-          <div className="lg:col-span-3 space-y-8">
-            <h3 className="text-[#00C9A7] text-[10px] font-black uppercase tracking-[0.4em]">Directory</h3>
-            <ul className="grid grid-cols-1 gap-y-4">
+          {/* Navigation Links */}
+          <div className="lg:col-span-4">
+            <h3 className="text-white font-bold text-sm uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
+              <div className="w-8 h-[1px] bg-[#00C9A7]" /> Quick Links
+            </h3>
+            <ul className="grid grid-cols-2 gap-x-8 gap-y-4">
               {footerLinks.map((item, i) => (
-                <li key={i}>
+                <motion.li 
+                  key={i}
+                  initial={{ opacity: 0, x: -10 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
+                  viewport={{ once: true }}
+                >
                   <button
                     onClick={() => handleScrollToSection(item.name)}
-                    className="flex items-center gap-3 text-sm font-black text-gray-500 hover:text-white transition-all uppercase tracking-widest group"
+                    onMouseEnter={() => setHoveredLink(item.name)}
+                    onMouseLeave={() => setHoveredLink(null)}
+                    className="flex items-center gap-2 text-sm text-gray-500 hover:text-white transition-colors group"
                   >
-                    <span className="text-[#00C9A7]/50 group-hover:text-[#00C9A7] group-hover:scale-110 transition-all font-bold">
-                      {item.icon}
-                    </span>
+                    <span className={`w-1.5 h-1.5 rounded-full bg-[#00C9A7] transition-all duration-300 ${hoveredLink === item.name ? "scale-150 opacity-100" : "scale-0 opacity-0"}`} />
                     {item.name}
                   </button>
-                </li>
+                </motion.li>
               ))}
             </ul>
           </div>
 
-          {/* CONNECT */}
-          <div className="lg:col-span-2 space-y-8">
-            <h3 className="text-[#00C9A7] text-[10px] font-black uppercase tracking-[0.4em]">Connect</h3>
-            <address className="not-italic space-y-6">
-              <motion.a
-                href="mailto:malikimranawan801@gmail.com"
+          {/* Contact & CTA */}
+          <div className="lg:col-span-3">
+            <h3 className="text-white font-bold text-sm uppercase tracking-[0.2em] mb-8 flex items-center gap-2">
+              <div className="w-8 h-[1px] bg-[#3b82f6]" /> Get in Touch
+            </h3>
+            <div className="space-y-6">
+              <motion.div 
                 whileHover={{ x: 5 }}
-                className="flex items-center gap-4 group"
+                className="flex items-start gap-4 group"
               >
-                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-500 group-hover:text-[#00C9A7] group-hover:bg-[#00C9A7]/10 transition-all">
-                  <FaEnvelope />
+                <div className="w-10 h-10 rounded-lg bg-[#00C9A7]/10 flex items-center justify-center text-[#00C9A7] group-hover:bg-[#00C9A7] group-hover:text-[#060b19] transition-all">
+                  <FaEnvelope size={16} />
                 </div>
-              </motion.a>
+                <div>
+                  <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Email Me</p>
+                  <a href="mailto:malikimranawan801@gmail.com" className="text-sm text-gray-300 hover:text-white transition-colors">malikimranawan801@gmail.com</a>
+                </div>
+              </motion.div>
 
-              <motion.a
-                href="tel:+923085029266"
+              <motion.div 
                 whileHover={{ x: 5 }}
-                className="flex items-center gap-4 group"
+                className="flex items-start gap-4 group"
               >
-                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-500 group-hover:text-[#00C9A7] group-hover:bg-[#00C9A7]/10 transition-all">
-                  <FaPhoneAlt />
+                <div className="w-10 h-10 rounded-lg bg-[#3b82f6]/10 flex items-center justify-center text-[#3b82f6] group-hover:bg-[#3b82f6] group-hover:text-[#060b19] transition-all">
+                  <FaPhoneAlt size={16} />
                 </div>
-              </motion.a>
-
-              <div className="flex items-center gap-4 group cursor-help">
-                <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center text-gray-500 group-hover:text-[#3b82f6] group-hover:bg-[#3b82f6]/10 transition-all">
-                  <FaMapMarkerAlt />
+                <div>
+                  <p className="text-[10px] text-gray-500 font-bold uppercase tracking-widest mb-1">Call Me</p>
+                  <a href="tel:+923085029266" className="text-sm text-gray-300 hover:text-white transition-colors">+92 308 5029266</a>
                 </div>
-              </div>
-            </address>
-          </div>
+              </motion.div>
 
-          {/* NETWORK */}
-          <div className="lg:col-span-3 space-y-8">
-            <h3 className="text-[#00C9A7] text-[10px] font-black uppercase tracking-[0.4em]">Network</h3>
-            <div className="grid grid-cols-2 gap-4">
-              {[
-                { name: "GitHub", link: "https://github.com/malikimranawan", icon: <FaGithub />, color: "hover:text-white" },
-                { name: "LinkedIn", link: "https://linkedin.com/in/malikimranawan", icon: <FaLinkedin />, color: "hover:text-[#3b82f6]" },
-              ].map((social, idx) => (
-                <motion.a
-                  key={idx}
-                  href={social.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ y: -5 }}
-                  className={`bg-white/5 border border-white/10 p-5 rounded-2xl flex flex-col items-center justify-center gap-3 text-gray-500 transition-all duration-300 ${social.color} group relative overflow-hidden`}
-                >
-                  <div className="absolute inset-0 bg-current opacity-0 group-hover:opacity-[0.03] transition-opacity" />
-                  <span className="text-2xl relative z-10">{social.icon}</span>
-                  <span className="text-[9px] font-black uppercase tracking-widest relative z-10">{social.name}</span>
-                </motion.a>
-              ))}
+              <motion.button
+                onClick={scrollToTop}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full mt-4 py-4 rounded-xl bg-gradient-to-r from-[#00C9A7] to-[#3b82f6] text-[#060b19] font-black uppercase text-[10px] tracking-[0.2em] flex items-center justify-center gap-3 shadow-lg shadow-[#00C9A7]/20 group"
+              >
+                Back to Top
+                <FaChevronUp className="group-hover:animate-bounce" />
+              </motion.button>
             </div>
-
-            <motion.button
-              onClick={scrollToTop}
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              className="w-full bg-[#00C9A7] text-[#060b19] px-6 py-4 rounded-xl font-black uppercase text-xs tracking-widest shadow-xl flex items-center justify-center gap-3 group relative overflow-hidden mt-4"
-            >
-              <span className="relative z-10">Back to Top</span>
-              <FaChevronUp className="relative z-10 group-hover:animate-bounce" />
-            </motion.button>
-          </div>
-
-        </div>
-
-        {/* BOTTOM META */}
-        <div className="mt-24 pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-center md:text-left">
-          <div className="flex items-center gap-4">
-            <span className="text-[9px] text-gray-700 font-bold uppercase tracking-[0.5em] leading-relaxed text-center w-full">
-              © {new Date().getFullYear()} MUHAMMAD IMRAN • ALL SYSTEMS ONLINE • v2.1.5
-            </span>
           </div>
         </div>
 
+        {/* Divider */}
+        <div className="mt-20 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+          <p className="text-[11px] text-gray-600 font-medium tracking-wider uppercase">
+            © {new Date().getFullYear()} <span className="text-gray-400">Muhammad Imran</span>. All rights reserved.
+          </p>
+          
+          <div className="flex items-center gap-8">
+            <a href="#" className="text-[10px] text-gray-600 hover:text-gray-400 transition-colors uppercase tracking-widest font-bold">Privacy Policy</a>
+            <a href="#" className="text-[10px] text-gray-600 hover:text-gray-400 transition-colors uppercase tracking-widest font-bold">Terms of Service</a>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+            <span className="text-[10px] text-gray-500 font-bold uppercase tracking-widest">Available for Hire</span>
+          </div>
+        </div>
       </div>
     </footer>
   );
