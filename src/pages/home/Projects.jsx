@@ -137,6 +137,8 @@ export default function Projects() {
                     className="absolute inset-0 w-full h-full object-contain transition-transform duration-[800ms] ease-out group-hover:scale-110"
                     style={{ backgroundColor: "#000000" }}
                     loading="lazy"
+                    decoding="async"
+                    fetchpriority="low"
                   />
 
                   {/* Dark Gradient Overlay */}
@@ -232,6 +234,8 @@ export default function Projects() {
                   src={selectedProject.image}
                   alt={selectedProject.title}
                   className="relative w-full rounded-2xl shadow-2xl border border-white/10 object-cover"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
