@@ -1,8 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Github, Linkedin, Send, CheckCircle, AlertCircle } from "lucide-react";
 
 export default function Contact() {
+  const [formStatus, setFormStatus] = useState(null); // 'success', 'error', null
+  const [isLoading, setIsLoading] = useState(false);
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    setFormStatus(null);
+
+    try {
+      const response = await fetch("https://formspree.io/f/meewprdn", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setFormStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+        setTimeout(() => setFormStatus(null), 5000);
+      } else {
+        setFormStatus("error");
+        setTimeout(() => setFormStatus(null), 5000);
+      }
+    } catch (error) {
+      console.error("Form submission error:", error);
+      setFormStatus("error");
+      setTimeout(() => setFormStatus(null), 5000);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -134,7 +182,7 @@ export default function Contact() {
         >
           <h3 className="text-3xl font-bold text-white mb-8">Send a Message</h3>
           
-          <form className="flex flex-col gap-6 relative z-10">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6 relative z-10">
             
             <div className="grid md:grid-cols-2 gap-6">
               {/* Soft Glass Input: Name */}
@@ -145,6 +193,8 @@ export default function Contact() {
                   id="name"
                   name="name"
                   placeholder="John Doe"
+                  value={formData.name}
+                  onChange={handleInputChange}
                   required
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-[#00C9A7] focus:bg-white/10 transition-all shadow-inner"
                 />
@@ -158,6 +208,8 @@ export default function Contact() {
                   id="email"
                   name="email"
                   placeholder="john@example.com"
+                  value={formData.email}
+                  onChange={handleInputChange}
                   required
                   className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-[#00C9A7] focus:bg-white/10 transition-all shadow-inner"
                 />
@@ -172,6 +224,8 @@ export default function Contact() {
                 id="subject"
                 name="subject"
                 placeholder="Project Inquiry"
+                value={formData.subject}
+                onChange={handleInputChange}
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-[#00C9A7] focus:bg-white/10 transition-all shadow-inner"
               />
             </div>
@@ -184,21 +238,48 @@ export default function Contact() {
                 name="message"
                 rows="5"
                 placeholder="Write your message here..."
+                value={formData.message}
+                onChange={handleInputChange}
                 required
                 className="w-full bg-white/5 border border-white/10 rounded-xl px-5 py-4 text-white placeholder-gray-500 focus:outline-none focus:border-[#00C9A7] focus:bg-white/10 transition-all shadow-inner resize-none"
               ></textarea>
             </div>
 
+            {/* Success Message */}
+            {formStatus === "success" && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-3 bg-green-500/10 border border-green-500/30 text-green-300 p-4 rounded-xl"
+              >
+                <CheckCircle className="w-5 h-5 flex-shrink-0" />
+                <span>Message sent successfully! I'll get back to you soon.</span>
+              </motion.div>
+            )}
+
+            {/* Error Message */}
+            {formStatus === "error" && (
+              <motion.div
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="flex items-center gap-3 bg-red-500/10 border border-red-500/30 text-red-300 p-4 rounded-xl"
+              >
+                <AlertCircle className="w-5 h-5 flex-shrink-0" />
+                <span>Failed to send message. Please try again.</span>
+              </motion.div>
+            )}
+
             {/* Unified Submit Button */}
             <motion.button
               type="submit"
+              disabled={isLoading}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
-              className="mt-4 relative overflow-hidden group bg-[#00C9A7] text-[#060b19] py-4 rounded-xl font-bold shadow-lg transition-all flex items-center justify-center gap-3 disabled:opacity-70"
+              className="mt-4 relative overflow-hidden group bg-[#00C9A7] text-[#060b19] py-4 rounded-xl font-bold shadow-lg transition-all flex items-center justify-center gap-3 disabled:opacity-70 disabled:cursor-not-allowed"
             >
-              <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#00C9A7] to-[#A5FECB] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+              <span className="absolute inset-0 w-full h-full bg-linear-to-r from-[#00C9A7] to-[#A5FECB] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
               <span className="relative z-10 flex items-center gap-2">
-                Send Message <Send className="w-5 h-5 ml-1" />
+                {isLoading ? "Sending..." : "Send Message"} <Send className="w-5 h-5 ml-1" />
               </span>
             </motion.button>
           </form>
