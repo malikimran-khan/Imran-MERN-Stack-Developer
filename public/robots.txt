@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+
+Sitemap: https://imran-mern-stack-developer.vercel.app/sitemap.xml
+Host: imran-mern-stack-developer.vercel.app
+
+# Crawl-delay is not supported by all crawlers; kept off by default.

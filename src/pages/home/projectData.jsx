@@ -45,7 +45,7 @@ export const projects = {
     {
       title: "Netrics",
       description:
-        "An AI-powered LinkedIn automation platform that generates professional posts using OpenAI and allows users to edit and publish content directly to LinkedIn with automation workflows.",
+        "Netrics is an AI-powered LinkedIn automation platform (MERN) that generates professional LinkedIn posts using OpenAI and LangChain, enables editing and scheduling, and automates publishing workflows to help professionals grow their personal brand.",
       tech: "LangChain.js, React, Node.js, MongoDB, OpenAI API",
       image: "/netrics.png",
       link: "https://post-pilot-ai-beige.vercel.app/",
@@ -64,7 +64,7 @@ export const projects = {
     {
       title: "Resume Analyzer",
       description:
-        "An AI-based application that analyzes resumes and provides feedback on strengths, weaknesses, keyword optimization, and job readiness to improve hiring chances.",
+        "Resume Analyzer is an AI-driven MERN application that evaluates resumes for ATS optimization, recommends keyword and skill improvements, and provides actionable feedback to improve interview success.",
       tech: "React, Node.js, MongoDB, OpenAI API",
       image: "/resume-analyzer.png",
       link: "https://resume-analyzer-hduo.vercel.app/",
@@ -104,7 +104,7 @@ export const projects = {
     {
       title: "YouTube Sentiment Bot",
       description:
-        "An AI-powered application that analyzes YouTube comments and determines sentiment (positive, negative, neutral) using LLM pipelines.",
+        "YouTube Sentiment Bot is an AI application that analyzes YouTube comments using LangChain and OpenAI to generate sentiment insights for creators and marketing teams.",
       tech: "LangChain.js, React, Node.js, MongoDB, OpenAI API",
       image: "/youtube-sentiment-bot.png",
       github: "https://github.com/malikimran-khan/youtube-sentiment-bot",
@@ -131,7 +131,7 @@ export const projects = {
     {
       title: "Auto LinkedIn Poster",
       description:
-        "An AI-powered automation tool that generates LinkedIn posts and publishes them automatically using OpenAI and LinkedIn API integration.",
+        "Auto LinkedIn Poster is an AI automation tool (MERN) that crafts high-quality LinkedIn posts using OpenAI and publishes them via LinkedIn API workflows to help users maintain a consistent professional presence.",
       tech: "LangChain.js, React, Node.js, MongoDB, OpenAI API",
       image: "/auto-linkdin-poster.png",
       github:
@@ -141,7 +141,7 @@ export const projects = {
     {
       title: "AI Emporium",
       description:
-        "A multi-role AI-powered eCommerce platform with Admin, Seller, and Buyer dashboards, product management, analytics, and an AI chatbot that retrieves product data directly from the database.",
+        "AI Emporium is an AI-powered e-commerce SaaS (MERN) with role-based dashboards for Admin, Seller, and Buyer, product management, analytics, and an LLM-driven chatbot that improves product discovery and conversions.",
       tech: "React, Node.js, MongoDB, OpenAI API, Chart.js",
       image: "/ai-emporium.png",
       github: "https://github.com/malikimran-khan/Ai-Emporium",

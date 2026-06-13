@@ -56,7 +56,7 @@ export default function About() {
         </motion.h2>
 
         <motion.p variants={itemVariants} className="text-gray-400 text-base md:text-xl max-w-3xl mx-auto leading-relaxed">
-          I am a passionate engineer driven by the desire to build <strong>innovative, scalable solutions</strong> that bridge the gap between complex technology and seamless user experiences.
+          I'm Muhammad Imran, an Associate Software Engineer from Faisalabad specializing in Ruby on Rails, MERN Stack, and AI-powered applications. I deliver scalable web and SaaS products, optimize performance, and integrate AI workflows to increase product value for startups and engineering teams.
         </motion.p>
       </motion.div>
 
@@ -80,7 +80,7 @@ export default function About() {
             </h3>
             
             <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-8">
-              A dedicated software engineer with hands-on experience architecting scalable web applications. I specialize in the <strong>MERN stack</strong> and <strong>Ruby on Rails</strong>, seamlessly integrating <strong>AI solutions</strong> like LangChain to develop deeply intelligent systems that elevate business performance and product value.
+              Dedicated software engineer with hands-on experience building production applications using <strong>Ruby on Rails</strong>, <strong>MERN stack</strong>, and cloud tooling (AWS, Docker). I architect backend systems, design responsive React frontends, and integrate AI (LangChain/OpenAI) to create data-driven user experiences that help businesses scale.
             </p>
 
             <h4 className="text-xl font-bold text-[#00C9A7] flex items-center gap-3 mb-5">

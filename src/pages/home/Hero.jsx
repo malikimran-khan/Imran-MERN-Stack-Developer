@@ -95,13 +95,13 @@ export default function Hero() {
         <motion.h2 variants={itemVariants} className="text-2xl md:text-3xl font-semibold text-gray-300 h-10">
           <TypeAnimation
             sequence={[
-              "Associate Software Engineer",
+              "Associate Software Engineer — Techbolic Solutions",
               2000,
-              "Full Stack Developer",
+              "Ruby on Rails & MERN Stack Developer",
               2000,
-              "AI Integration Specialist",
+              "AWS, Docker & DevOps Enthusiast",
               2000,
-              "Product Developer",
+              "AI Integration Specialist (LangChain, OpenAI)",
               2000,
             ]}
             wrapper="span"
@@ -112,14 +112,14 @@ export default function Hero() {
         </motion.h2>
 
         <motion.p variants={itemVariants} className="text-gray-400 max-w-lg leading-relaxed text-lg border-l-4 border-[#00C9A7] pl-4 bg-white/[0.02] backdrop-blur-sm p-2 rounded-r-lg">
-          Crafting scalable, premium digital experiences. I specialize in building robust product architectures, integrating advanced AI capabilities, and engineering full-stack solutions.
+          I'm Muhammad Imran — an Associate Software Engineer based in Faisalabad, Pakistan. I build production-grade applications with Ruby on Rails, MERN stack (React, Node, Express, MongoDB), and integrate AI systems (LangChain, OpenAI). Open to opportunities and collaborations in full-stack development, AWS deployments, and Docker-based delivery.
         </motion.p>
 
         {/* Social Links */}
         <motion.div variants={itemVariants} className="flex gap-6 mt-6 text-3xl">
           {[
             { icon: <FaGithub />, link: "https://github.com/malikimran-khan", color: "hover:text-[#A5FECB]" },
-            { icon: <FaLinkedin />, link: "https://linkedin.com/in/muhammad-imran-awan/", color: "hover:text-[#3b82f6]" },
+            { icon: <FaLinkedin />, link: "https://www.linkedin.com/in/malik-imran-598b96241/", color: "hover:text-[#3b82f6]" },
             { icon: <FaAws />, link: "#", color: "hover:text-[#FF9900]" },
             { icon: <FaRobot />, link: "#", color: "hover:text-[#00C9A7]" }
           ].map((item, idx) => (
@@ -172,7 +172,8 @@ export default function Hero() {
           <img
             src={"/imran.png"}
             alt="Muhammad Imran portfolio"
-            loading="lazy"
+            loading="eager"
+            decoding="async"
             className="relative w-[300px] h-[300px] md:w-[450px] md:h-[450px] object-cover rounded-full border-[6px] border-[#0a192f] shadow-[0_0_50px_rgba(0,201,167,0.3)] z-10"
           />
 

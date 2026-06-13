@@ -109,7 +109,7 @@ export default function Contact() {
                     <Github className="w-5 h-5" />
                   </motion.a>
                   <motion.a
-                    href="https://linkedin.com/in/malikimranawan"
+                    href="https://www.linkedin.com/in/malik-imran-598b96241/"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="LinkedIn Profile"
@@ -206,22 +206,6 @@ export default function Contact() {
         </motion.div>
       </div>
 
-      {/* Footer Design */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.6, duration: 1 }}
-        className="w-full mt-24 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center z-10 px-4 max-w-7xl"
-      >
-        <p className="text-gray-500 text-sm font-medium tracking-wide text-center md:text-left mb-4 md:mb-0">
-          © {new Date().getFullYear()}{" "}
-          <span className="text-gray-300">Muhammad Imran</span>.  
-          All Rights Reserved.
-        </p>
-        <p className="text-gray-500 text-sm flex items-center gap-2">
-          Made with <span className="text-[#00C9A7]">✦</span> Framer Motion & Tailwind
-        </p>
-      </motion.div>
 
     </section>
   );

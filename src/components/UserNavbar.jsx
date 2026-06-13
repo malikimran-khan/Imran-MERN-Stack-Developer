@@ -103,9 +103,8 @@ export default function UserNavbar() {
           <div className="hidden lg:flex items-center gap-6">
             <div className="flex items-center gap-4 text-xl border-r border-white/10 pr-6">
               <motion.a href="https://github.com/malikimranawan" target="_blank" whileHover={{ y: -3, color: "white" }} className="text-gray-500 transition-colors"><FaGithub /></motion.a>
-              <motion.a href="https://linkedin.com/in/malikimranawan" target="_blank" whileHover={{ y: -3, color: "#3b82f6" }} className="text-gray-500 transition-colors"><FaLinkedin /></motion.a>
+              <motion.a href="https://www.linkedin.com/in/malik-imran-598b96241/" target="_blank" whileHover={{ y: -3, color: "#3b82f6" }} className="text-gray-500 transition-colors"><FaLinkedin /></motion.a>
             </div>
-
             <motion.a
               href="mailto:malikimranawan801@gmail.com"
               whileHover={{ scale: 1.05 }}

@@ -124,7 +124,7 @@ export default function Footer() {
 
   const socialLinks = [
     { name: "GitHub", link: "https://github.com/malikimranawan", icon: <FaGithub />, color: "#333" },
-    { name: "LinkedIn", link: "https://linkedin.com/in/malikimranawan", icon: <FaLinkedin />, color: "#0077b5" },
+    { name: "LinkedIn", link: "https://www.linkedin.com/in/malik-imran-598b96241/", icon: <FaLinkedin />, color: "#0077b5" },
     { name: "Instagram", link: "#", icon: <FaInstagram />, color: "#e4405f" },
     { name: "Email", link: "mailto:malikimranawan801@gmail.com", icon: <FaEnvelope />, color: "#ea4335" },
   ];
