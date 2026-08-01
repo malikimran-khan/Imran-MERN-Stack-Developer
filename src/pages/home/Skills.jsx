@@ -46,16 +46,16 @@ function WaveBackground() {
     >
       <defs>
         <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#00C9A7" stopOpacity="0.18" />
-          <stop offset="100%" stopColor="#00C9A7" stopOpacity="0" />
+          <stop offset="0%" stopColor="#2563EB" stopOpacity="0.14" />
+          <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
         </linearGradient>
         <linearGradient id="waveGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
           <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.15" />
           <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
         </linearGradient>
         <linearGradient id="waveGrad3" x1="50%" y1="0%" x2="50%" y2="100%">
-          <stop offset="0%" stopColor="#A5FECB" stopOpacity="0.08" />
-          <stop offset="100%" stopColor="#A5FECB" stopOpacity="0" />
+          <stop offset="0%" stopColor="#10B981" stopOpacity="0.10" />
+          <stop offset="100%" stopColor="#10B981" stopOpacity="0" />
         </linearGradient>
       </defs>
       <path d="M0,700 C200,640 400,780 600,700 C800,620 1000,760 1200,700 C1320,660 1400,690 1440,680 L1440,900 L0,900 Z" fill="url(#waveGrad1)" opacity="0.6" />
@@ -63,17 +63,17 @@ function WaveBackground() {
       <path d="M0,800 C240,760 480,840 720,790 C960,740 1200,820 1440,780 L1440,900 L0,900 Z" fill="url(#waveGrad3)" opacity="0.7" />
       <path d="M0,0 C300,80 600,-40 900,60 C1100,120 1280,20 1440,50 L1440,0 Z" fill="url(#waveGrad1)" opacity="0.5" />
       <path d="M0,0 C200,50 500,10 750,70 C950,120 1200,40 1440,80 L1440,0 Z" fill="url(#waveGrad2)" opacity="0.35" />
-      <path d="M-100,350 C100,300 250,420 400,360 C520,310 580,390 700,350 C800,320 860,380 950,340 L950,420 C860,460 800,400 700,430 C580,470 520,390 400,440 C250,500 100,380 -100,430 Z" fill="#00C9A7" opacity="0.04" />
+      <path d="M-100,350 C100,300 250,420 400,360 C520,310 580,390 700,350 C800,320 860,380 950,340 L950,420 C860,460 800,400 700,430 C580,470 520,390 400,440 C250,500 100,380 -100,430 Z" fill="#2563EB" opacity="0.04" />
       <path d="M900,200 C1000,160 1100,240 1200,200 C1290,165 1380,210 1440,190 L1440,270 C1380,290 1290,245 1200,280 C1100,320 1000,240 900,280 Z" fill="#3b82f6" opacity="0.05" />
-      <path d="M0,480 C180,455 360,510 540,480 C720,450 900,505 1080,475 C1200,455 1340,490 1440,470" fill="none" stroke="#00C9A7" strokeWidth="1" opacity="0.12" />
-      <path d="M0,510 C200,488 400,535 600,505 C800,475 1000,530 1200,500 C1320,480 1400,510 1440,495" fill="none" stroke="#00C9A7" strokeWidth="0.7" opacity="0.09" />
+      <path d="M0,480 C180,455 360,510 540,480 C720,450 900,505 1080,475 C1200,455 1340,490 1440,470" fill="none" stroke="#2563EB" strokeWidth="1" opacity="0.12" />
+      <path d="M0,510 C200,488 400,535 600,505 C800,475 1000,530 1200,500 C1320,480 1400,510 1440,495" fill="none" stroke="#10B981" strokeWidth="0.7" opacity="0.09" />
       <path d="M0,540 C240,515 480,560 720,530 C960,500 1200,550 1440,520" fill="none" stroke="#3b82f6" strokeWidth="0.8" opacity="0.1" />
-      <path d="M0,420 C300,400 600,445 900,415 C1100,395 1300,430 1440,410" fill="none" stroke="#A5FECB" strokeWidth="0.6" opacity="0.08" />
+      <path d="M0,420 C300,400 600,445 900,415 C1100,395 1300,430 1440,410" fill="none" stroke="#7C3AED" strokeWidth="0.6" opacity="0.08" />
       {[ [120, 260], [340, 180], [560, 310], [780, 200], [1020, 280], [1260, 170], [1400, 310], [80, 600], [300, 650], [520, 590], [740, 640], [960, 600], [1180, 650], [1380, 600], [200, 420], [450, 460], [700, 410], [950, 450], [1150, 415], [1350, 450] ].map(([cx, cy], i) => (
-        <circle key={i} cx={cx} cy={cy} r="1.2" fill={i % 3 === 0 ? "#00C9A7" : i % 3 === 1 ? "#3b82f6" : "#A5FECB"} opacity="0.18" />
+        <circle key={i} cx={cx} cy={cy} r="1.2" fill={i % 3 === 0 ? "#2563EB" : i % 3 === 1 ? "#10B981" : "#7C3AED"} opacity="0.18" />
       ))}
-      <path d="M0,900 Q180,750 0,600" fill="none" stroke="#00C9A7" strokeWidth="1" opacity="0.1" />
-      <path d="M0,900 Q220,720 0,540" fill="none" stroke="#00C9A7" strokeWidth="0.6" opacity="0.07" />
+      <path d="M0,900 Q180,750 0,600" fill="none" stroke="#2563EB" strokeWidth="1" opacity="0.1" />
+      <path d="M0,900 Q220,720 0,540" fill="none" stroke="#10B981" strokeWidth="0.6" opacity="0.07" />
       <path d="M1440,0 Q1260,150 1440,300" fill="none" stroke="#3b82f6" strokeWidth="1" opacity="0.1" />
       <path d="M1440,0 Q1220,180 1440,360" fill="none" stroke="#3b82f6" strokeWidth="0.6" opacity="0.07" />
     </svg>
@@ -86,7 +86,7 @@ export default function Skills() {
   const categories = {
     Frontend: [
       { name: "React.js", icon: <FaReact />, color: "#61DBFB" },
-      { name: "Next.js", icon: <SiNextdotjs />, color: "#FFFFFF" },
+      { name: "Next.js", icon: <SiNextdotjs />, color: "#0F172A" },
       { name: "TypeScript", icon: <SiTypescript />, color: "#3178C6" },
       { name: "Tailwind CSS", icon: <SiTailwindcss />, color: "#38BDF8" },
       { name: "Material-UI", icon: <SiMui />, color: "#007FFF" },
@@ -100,12 +100,12 @@ export default function Skills() {
       { name: "MongoDB", icon: <SiMongodb />, color: "#4DB33D" },
       { name: "PostgreSQL", icon: <SiPostgresql />, color: "#336791" },
       { name: "Firebase", icon: <SiFirebase />, color: "#FFA611" },
-      { name: "REST & GraphQL", icon: <FaServer />, color: "#A5FECB" },
+      { name: "REST & GraphQL", icon: <FaServer />, color: "#10B981" },
     ],
     Integrations: [
       { name: "Secucard API", icon: <FaCreditCard />, color: "#3b82f6" },
       { name: "ChargeCloud", icon: <FaBolt />, color: "#EAB308" },
-      { name: "OCR", icon: <FaFileAlt />, color: "#00C9A7" },
+      { name: "OCR", icon: <FaFileAlt />, color: "#10B981" },
       { name: "Payment Systems", icon: <FaMoneyBillWave />, color: "#22c55e" },
       { name: "Vouchers", icon: <FaTicketAlt />, color: "#f97316" },
       { name: "Multi-Env", icon: <FaGlobe />, color: "#a855f7" },
@@ -115,7 +115,7 @@ export default function Skills() {
       { name: "Docker", icon: <FaDocker />, color: "#0db7ed" },
       { name: "Jenkins", icon: <SiJenkins />, color: "#D24939" },
       { name: "GitHub Actions", icon: <FaGithub />, color: "#E5E7EB" },
-      { name: "Vercel / Netlify", icon: <SiVercel />, color: "#FFFFFF" },
+      { name: "Vercel / Netlify", icon: <SiVercel />, color: "#0F172A" },
       { name: "Postman", icon: <SiPostman />, color: "#FF6C37" },
     ],
     AI: [
@@ -131,36 +131,36 @@ export default function Skills() {
   return (
     <section
       id="Skills"
-      className="relative min-h-screen bg-[#060b19] text-white px-6 md:px-16 py-24 flex flex-col items-center overflow-hidden"
+      className="relative min-h-screen bg-[#F8FAFC] text-slate-950 px-6 md:px-16 py-24 flex flex-col items-center overflow-hidden"
     >
       <WaveBackground />
 
-      <div className="absolute top-[20%] left-[-10%] w-96 h-96 bg-[#00C9A7] rounded-full mix-blend-screen filter blur-[200px] opacity-10 pointer-events-none"></div>
+      <div className="absolute top-[20%] left-[-10%] w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[200px] opacity-10 pointer-events-none"></div>
       <div className="absolute bottom-[10%] right-[-5%] w-[30rem] h-[30rem] bg-[#3b82f6] rounded-full mix-blend-screen filter blur-[200px] opacity-10 pointer-events-none"></div>
 
       <div className="text-center z-10">
-        <span className="inline-block bg-[#0a192f] border border-[#00C9A7]/30 text-[#A5FECB] px-5 py-2 rounded-full text-sm font-semibold tracking-wide backdrop-blur-md shadow-lg mb-6">
+        <span className="inline-block bg-white/85 border border-blue-200 text-blue-700 px-5 py-2 rounded-full text-sm font-semibold tracking-wide backdrop-blur-md shadow-lg mb-6">
           ✦ Arsenal & Technologies
         </span>
         <h2 className="text-4xl md:text-6xl font-extrabold mb-6">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00C9A7] via-[#A5FECB] to-[#3b82f6]">
+          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-500">
             Technical Skills
           </span>
         </h2>
-        <p className="text-gray-400 max-w-2xl mx-auto mb-12 leading-relaxed text-lg">
+        <p className="text-slate-600 max-w-2xl mx-auto mb-12 leading-relaxed text-lg">
           I've honed a diverse skill set in <strong>modern full-stack development</strong> and <strong>AI-powered systems</strong> — blending logic and performance to deliver exceptional digital experiences.
         </p>
       </div>
 
-      <div className="relative flex flex-wrap justify-center gap-2 md:gap-4 mb-16 z-10 p-2 bg-[#0a192f]/60 backdrop-blur-xl border border-white/5 rounded-full shadow-2xl">
+      <div className="relative flex flex-wrap justify-center gap-2 md:gap-4 mb-16 z-10 p-2 bg-white/85 backdrop-blur-xl border border-slate-100 rounded-full shadow-2xl">
         {Object.keys(categories).map((tab) => (
           <button
             key={tab}
             onClick={() => setActiveTab(tab)}
-            className={`relative px-6 py-2.5 rounded-full text-sm md:text-base font-semibold transition-colors duration-300 ${activeTab === tab ? "text-[#060b19]" : "text-gray-400 hover:text-white"}`}
+            className={`relative px-6 py-2.5 rounded-full text-sm md:text-base font-semibold transition-colors duration-300 ${activeTab === tab ? "text-white" : "text-slate-600 hover:text-slate-950"}`}
           >
             {activeTab === tab && (
-              <div className="absolute inset-0 bg-gradient-to-r from-[#00C9A7] to-[#A5FECB] rounded-full shadow-[0_0_15px_rgba(0,201,167,0.4)]" />
+              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-emerald-500 rounded-full shadow-[0_0_15px_rgba(37,99,235,0.28)]" />
             )}
             <span className="relative z-10">{tab}</span>
           </button>
@@ -172,7 +172,7 @@ export default function Skills() {
           {categories[activeTab].map((skill) => (
             <div
               key={skill.name}
-              className="group relative flex flex-col items-center justify-center bg-[#0a192f]/40 backdrop-blur-xl py-8 px-4 rounded-3xl border border-white/5 overflow-hidden transition-all duration-300"
+              className="group relative flex flex-col items-center justify-center bg-white/85 backdrop-blur-xl py-8 px-4 rounded-3xl border border-slate-100 overflow-hidden transition-all duration-300"
             >
               <div
                 className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-2xl"
@@ -181,7 +181,7 @@ export default function Skills() {
               <div className="text-5xl mb-4 transition-transform duration-500 group-hover:scale-110 drop-shadow-md z-10" style={{ color: skill.color }}>
                 {skill.icon}
               </div>
-              <h3 className="text-base font-bold text-gray-200 text-center z-10 transition-colors group-hover:text-white">
+              <h3 className="text-base font-bold text-slate-800 text-center z-10 transition-colors group-hover:text-slate-950">
                 {skill.name}
               </h3>
               <div
@@ -198,10 +198,10 @@ export default function Skills() {
 
       <div className="mt-16 z-10">
         <a
-          href="#projects"
-          className="inline-block relative overflow-hidden group bg-[#0a192f] border border-[#00C9A7]/50 text-[#A5FECB] hover:text-[#060b19] px-10 py-4 rounded-full font-bold shadow-[0_0_20px_rgba(0,201,167,0.15)] transition-all"
+          href="/projects"
+          className="inline-block relative overflow-hidden group bg-white/85 border border-blue-200 text-blue-700 hover:text-white px-10 py-4 rounded-full font-bold shadow-[0_0_20px_rgba(37,99,235,0.14)] transition-all"
         >
-          <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#00C9A7] to-[#A5FECB] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+          <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-600 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
           <span className="relative z-10 transition-colors duration-300">Explore My Projects</span>
         </a>
       </div>

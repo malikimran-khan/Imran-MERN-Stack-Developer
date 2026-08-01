@@ -1,176 +1,224 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaReact, FaDatabase, FaAward, FaBriefcase, FaCheckCircle, FaRocket } from "react-icons/fa";
+import {
+  FaAward,
+  FaBriefcase,
+  FaCheckCircle,
+  FaCode,
+  FaDatabase,
+  FaLaptopCode,
+  FaMapMarkerAlt,
+  FaRocket,
+} from "react-icons/fa";
 import { SiRubyonrails } from "react-icons/si";
 
+const MotionDiv = motion.div;
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+};
+
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+};
+
+const metrics = [
+  { icon: FaBriefcase, value: "1+", label: "Years Experience", color: "text-emerald-600", bg: "bg-emerald-50" },
+  { icon: FaAward, value: "20+", label: "Projects Built", color: "text-blue-600", bg: "bg-blue-50" },
+  { icon: FaCode, value: "10+", label: "Tech Skills", color: "text-purple-600", bg: "bg-purple-50" },
+  { icon: FaDatabase, value: "5+", label: "Databases & APIs", color: "text-orange-600", bg: "bg-orange-50" },
+];
+
+const capabilities = [
+  {
+    title: "Product Engineering",
+    text: "Building maintainable full-stack applications with clear architecture and production-ready delivery.",
+    icon: FaLaptopCode,
+    color: "from-blue-600 to-sky-400",
+    iconBox: "bg-blue-50 text-blue-600",
+    badge: "bg-blue-50 text-blue-700 border-blue-100",
+    ring: "ring-blue-100",
+  },
+  {
+    title: "Ruby on Rails",
+    text: "Working on product-based Rails systems, payment flows, OCR modules, and multi-environment branches.",
+    icon: SiRubyonrails,
+    color: "from-rose-500 to-orange-400",
+    iconBox: "bg-rose-50 text-rose-600",
+    badge: "bg-rose-50 text-rose-700 border-rose-100",
+    ring: "ring-rose-100",
+  },
+  {
+    title: "AI Integration",
+    text: "Connecting LangChain, OpenAI, RAG flows, and automation into practical user-facing products.",
+    icon: FaRocket,
+    color: "from-purple-600 to-fuchsia-500",
+    iconBox: "bg-purple-50 text-purple-600",
+    badge: "bg-purple-50 text-purple-700 border-purple-100",
+    ring: "ring-purple-100",
+  },
+];
+
+const highlights = [
+  "Associate Software Engineer at Techbolic Solutions",
+  "Former MERN Stack Developer at BroshTech",
+  "Experienced with Secucard, ChargeCloud, OCR, LangChain, and OpenAI",
+  "Focused on performance, clean UX, and scalable product structure",
+];
+
 export default function About() {
-  // Staggered Animations
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.2, delayChildren: 0.1 },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.7, ease: "easeOut" } },
-  };
-
-  const cardHover = {
-    rest: { scale: 1, rotateY: 0, boxShadow: "0px 0px 0px rgba(0,0,0,0)" },
-    hover: { 
-      scale: 1.05, 
-      transition: { type: "spring", stiffness: 300, damping: 20 },
-      boxShadow: "0px 20px 40px rgba(0, 201, 167, 0.15)"
-    }
-  };
-
   return (
     <section
       id="About"
       aria-labelledby="about-heading"
-      className="relative min-h-screen bg-[#060b19] text-white px-4 sm:px-6 md:px-20 py-24 flex flex-col items-center justify-center overflow-hidden"
+      className="relative overflow-hidden bg-[#F8FAFC] px-6 py-24 font-['Poppins'] text-slate-950 md:px-12 lg:px-20"
     >
-      {/* Background Ambient Glows */}
-      <div className="absolute top-[-10%] right-[-5%] w-96 h-96 bg-[#00C9A7] rounded-full mix-blend-screen filter blur-[200px] opacity-10 pointer-events-none"></div>
-      <div className="absolute bottom-[-10%] left-[-10%] w-[30rem] h-[30rem] bg-[#3b82f6] rounded-full mix-blend-screen filter blur-[200px] opacity-10 pointer-events-none"></div>
+      <div className="absolute left-[-7rem] top-24 h-80 w-80 rounded-full bg-blue-300/35 blur-3xl" />
+      <div className="absolute right-[-8rem] top-44 h-96 w-96 rounded-full bg-emerald-300/30 blur-3xl" />
+      <div className="absolute bottom-20 left-1/3 h-72 w-72 rounded-full bg-purple-300/25 blur-3xl" />
+      <div className="absolute right-12 top-32 hidden h-44 w-44 bg-[radial-gradient(circle,#94a3b8_1px,transparent_1px)] [background-size:14px_14px] opacity-25 lg:block" />
 
-      {/* Section Header */}
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-100px" }}
-        className="text-center mb-16 md:mb-20 z-10"
-      >
-        <motion.div variants={itemVariants}>
-          <span className="inline-block bg-[#0a192f] border border-[#00C9A7]/30 text-[#A5FECB] px-5 py-2 rounded-full text-sm font-semibold tracking-wide backdrop-blur-md shadow-lg mb-6">
-            ✦ Discover My Journey
-          </span>
-        </motion.div>
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <MotionDiv
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          className="mb-16 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end"
+        >
+          <MotionDiv variants={fadeUp}>
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/85 px-5 py-2 text-xs font-black uppercase tracking-[0.22em] text-blue-700 shadow-lg shadow-blue-100/70 backdrop-blur">
+              <FaCheckCircle className="h-4 w-4 text-emerald-600" />
+              About Me
+            </span>
 
-        <motion.h2 variants={itemVariants} id="about-heading" className="text-4xl sm:text-5xl md:text-7xl font-extrabold tracking-tight mb-6">
-          About <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00C9A7] via-[#A5FECB] to-[#3b82f6]">Me</span>
-        </motion.h2>
+            <h2 id="about-heading" className="max-w-4xl text-5xl font-black leading-tight text-slate-950 md:text-7xl">
+              I turn ideas into{" "}
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-500 bg-clip-text text-transparent">
+                useful web products.
+              </span>
+            </h2>
 
-        <motion.p variants={itemVariants} className="text-gray-400 text-base md:text-xl max-w-3xl mx-auto leading-relaxed">
-          I'm Muhammad Imran, an Associate Software Engineer from Faisalabad specializing in Ruby on Rails, MERN Stack, and AI-powered applications. I deliver scalable web and SaaS products, optimize performance, and integrate AI workflows to increase product value for startups and engineering teams.
-        </motion.p>
-      </motion.div>
-
-      {/* Main Layout Grid */}
-      <motion.div 
-        variants={containerVariants}
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, margin: "-50px" }}
-        className="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full max-w-7xl z-10"
-      >
-        
-        {/* Left Column: Bio & Highlights */}
-        <motion.div variants={itemVariants} className="lg:col-span-7 flex flex-col gap-6">
-          <div className="bg-[#0a192f]/40 backdrop-blur-xl p-8 md:p-10 rounded-3xl border border-white/5 shadow-2xl relative overflow-hidden group h-full">
-            {/* Subtle card glow on hover */}
-            <div className="absolute inset-0 bg-gradient-to-br from-[#00C9A7]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
-
-            <h3 className="text-2xl md:text-3xl font-bold mb-4 text-white">
-              Hello, I'm <span className="text-[#A5FECB]">Muhammad Imran</span>
-            </h3>
-            
-            <p className="text-gray-300 text-base md:text-lg leading-relaxed mb-8">
-              Dedicated software engineer with hands-on experience building production applications using <strong>Ruby on Rails</strong>, <strong>MERN stack</strong>, and cloud tooling (AWS, Docker). I architect backend systems, design responsive React frontends, and integrate AI (LangChain/OpenAI) to create data-driven user experiences that help businesses scale.
+            <p className="mt-6 max-w-2xl text-lg font-medium leading-8 text-slate-600">
+              I'm Muhammad Imran, an Associate Software Engineer from Faisalabad, Pakistan. I build scalable web and SaaS products with Ruby on Rails, MERN Stack, and AI-powered integrations that help teams ship faster and businesses work smarter.
             </p>
+          </MotionDiv>
 
-            <h4 className="text-xl font-bold text-[#00C9A7] flex items-center gap-3 mb-5">
-              <FaCheckCircle className="text-xl" /> Core Highlights
-            </h4>
+          <MotionDiv variants={fadeUp} className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {metrics.map((metric) => {
+              const Icon = metric.icon;
+              return (
+                <div key={metric.label} className="rounded-[1.25rem] border border-slate-100 bg-white/90 p-5 shadow-xl shadow-slate-200/70">
+                  <span className={`mb-4 grid h-11 w-11 place-items-center rounded-2xl ${metric.bg}`}>
+                    <Icon className={`h-5 w-5 ${metric.color}`} />
+                  </span>
+                  <p className="text-2xl font-black text-slate-950">{metric.value}</p>
+                  <p className="mt-1 text-xs font-black uppercase tracking-[0.18em] text-slate-500">{metric.label}</p>
+                </div>
+              );
+            })}
+          </MotionDiv>
+        </MotionDiv>
 
-            <ul className="space-y-4">
-              {[
-                { title: "Associate Software Engineer at Techbolic Solutions", desc: "Building scalable product-based architectures with Ruby on Rails." },
-                { title: "Former MERN Stack Developer at BroshTech", desc: "Built full-stack AI-integrated web and desktop applications (Electron)." },
-                { title: "AI & Modern Tech Integrator", desc: "Experienced in LangChain.js, OpenAI RAG, Secucard APIs, and OCR integrations." },
-                { title: "Performance & UX Obsessed", desc: "Committed to writing clean code and delivering highly optimized, user-centric designs." }
-              ].map((highlight, idx) => (
-                <li key={idx} className="flex flex-col sm:flex-row sm:items-start gap-3 bg-[#060b19]/60 p-4 rounded-2xl border border-white/5 hover:border-[#00C9A7]/30 transition-colors duration-300">
-                  <div className="mt-1 min-w-[24px]">
-                    <FaRocket className="text-[#3b82f6] text-lg" />
-                  </div>
-                  <div>
-                    <strong className="text-gray-100 block mb-1">{highlight.title}</strong>
-                    <span className="text-gray-400 text-sm">{highlight.desc}</span>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-          </div>
-        </motion.div>
-
-        {/* Right Column: Metrics & Latest Experience */}
-        <motion.div variants={itemVariants} className="lg:col-span-5 flex flex-col gap-6">
-          
-          {/* Metrics Grid */}
-          <div className="grid grid-cols-2 gap-4 md:gap-6">
-            {[
-              { icon: <FaBriefcase />, value: "1+", label: "Years Exp.", color: "text-[#00C9A7]" },
-              { icon: <FaAward />, value: "20+", label: "Projects", color: "text-[#A5FECB]" },
-              { icon: <FaReact />, value: "10+", label: "Tech Mastered", color: "text-[#61DAFB]" },
-              { icon: <FaDatabase />, value: "5+", label: "Databases", color: "text-[#3b82f6]" }
-            ].map((metric, idx) => (
-              <motion.div 
-                key={idx}
-                variants={cardHover}
-                initial="rest"
-                whileHover="hover"
-                className="bg-[#0a192f]/40 backdrop-blur-xl p-6 rounded-3xl border border-white/5 flex flex-col items-center justify-center text-center cursor-default"
-              >
-                <div className={`text-4xl mb-3 ${metric.color}`}>{metric.icon}</div>
-                <h4 className="text-3xl font-extrabold text-white mb-1">{metric.value}</h4>
-                <p className="text-gray-400 text-sm font-medium">{metric.label}</p>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* Latest Role Card */}
-          <motion.div 
-            variants={cardHover}
-            initial="rest"
-            whileHover="hover"
-            className="bg-gradient-to-br from-[#0a192f]/80 to-[#060b19]/90 backdrop-blur-xl p-8 rounded-3xl border border-[#CC342D]/20 shadow-lg relative overflow-hidden flex-1 flex flex-col justify-center"
+        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <MotionDiv
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            className="relative overflow-hidden rounded-[2rem] border border-white bg-white p-6 shadow-2xl shadow-blue-950/10 lg:sticky lg:top-28 lg:self-start"
           >
-            {/* Ambient Ruby Glow */}
-            <div className="absolute -bottom-10 -right-10 w-40 h-40 bg-[#CC342D] rounded-full filter blur-[80px] opacity-20 pointer-events-none"></div>
+            <div className="absolute inset-x-0 top-0 h-2 bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-500" />
+            <div className="absolute right-8 top-12 h-28 w-28 rounded-full bg-blue-200/45 blur-3xl" />
+            <div className="absolute bottom-8 left-8 h-28 w-28 rounded-full bg-emerald-200/45 blur-3xl" />
 
-            <div className="flex items-center gap-4 mb-5">
-              <div className="bg-[#CC342D]/10 p-3 rounded-2xl border border-[#CC342D]/30">
-                <SiRubyonrails className="text-4xl text-[#CC342D]" />
-              </div>
-              <div>
-                <h4 className="text-xs text-gray-400 uppercase tracking-wider font-semibold mb-1">Current Role</h4>
-                <h3 className="text-xl font-bold text-white leading-tight">Techbolic Solutions</h3>
-              </div>
-            </div>
-            
-            <h5 className="text-[#ff8a80] font-semibold mb-3">Associate Software Engineer</h5>
-            
-            <p className="text-gray-300 text-sm leading-relaxed mb-6">
-              Engineering product-based applications utilizing Ruby on Rails. Managing complex API integrations including <strong>Secucard</strong> and <strong>ChargeCloud</strong>, while developing OCR modules across varied deployment environments.
-            </p>
-
-            <div className="flex flex-wrap gap-2 mt-auto">
-              {["Ruby on Rails", "Secucard", "OCR", "ChargeCloud"].map((tech, idx) => (
-                <span key={idx} className="bg-[#060b19] border border-white/10 px-3 py-1.5 rounded-full text-xs font-medium text-gray-300">
-                  {tech}
+            <div className="relative z-10">
+              <div className="mb-7 flex items-start justify-between gap-5">
+                <span className="grid h-16 w-16 shrink-0 place-items-center rounded-3xl bg-blue-50 text-blue-600 ring-8 ring-blue-100">
+                  <FaCode className="h-7 w-7" />
                 </span>
-              ))}
-            </div>
-          </motion.div>
+                <span className="rounded-full border border-blue-100 bg-blue-50 px-4 py-2 text-xs font-black uppercase tracking-[0.18em] text-blue-700">
+                  Profile
+                </span>
+              </div>
 
-        </motion.div>
-      </motion.div>
+              <h3 className="text-3xl font-black leading-tight text-slate-950 md:text-4xl">
+                Muhammad Imran
+              </h3>
+              <p className="mt-2 text-xl font-black text-blue-700">Associate Software Engineer</p>
+
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                <div className="flex items-center gap-3 rounded-2xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-600">
+                  <FaMapMarkerAlt className="text-orange-500" />
+                  Faisalabad, Pakistan
+                </div>
+                <div className="flex items-center gap-3 rounded-2xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-600">
+                  <SiRubyonrails className="text-rose-600" />
+                  Rails + MERN
+                </div>
+              </div>
+
+              <div className="mt-7 space-y-3">
+                {highlights.map((highlight) => (
+                  <div key={highlight} className="flex gap-3 rounded-2xl border border-slate-100 bg-white px-4 py-3">
+                    <FaCheckCircle className="mt-1 h-4 w-4 shrink-0 text-emerald-500" />
+                    <p className="text-sm font-semibold leading-6 text-slate-600">{highlight}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-7 flex flex-wrap gap-2">
+                {["Ruby on Rails", "React", "Node.js", "MongoDB", "LangChain", "OpenAI"].map((tech) => (
+                  <span key={tech} className="rounded-full border border-blue-100 bg-blue-50 px-3 py-1.5 text-xs font-black text-blue-700">
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </MotionDiv>
+
+          <MotionDiv
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            className="relative"
+          >
+            <div className="absolute bottom-8 left-6 top-8 hidden w-px bg-gradient-to-b from-blue-200 via-rose-200 to-purple-200 md:block" />
+
+            <div className="space-y-6">
+              {capabilities.map((capability) => {
+                const Icon = capability.icon;
+                return (
+                  <MotionDiv key={capability.title} variants={fadeUp} className="relative md:pl-16">
+                    <div className={`absolute left-0 top-8 hidden h-12 w-12 place-items-center rounded-2xl border border-white bg-white shadow-lg ring-8 ${capability.ring} md:grid`}>
+                      <Icon className={`h-5 w-5 ${capability.iconBox.split(" ")[1]}`} />
+                    </div>
+
+                    <article className="group relative overflow-hidden rounded-[1.5rem] border border-slate-100 bg-white/90 p-6 shadow-xl shadow-slate-200/70 transition-transform duration-300 hover:-translate-y-1">
+                      <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${capability.color}`} />
+                      <div className="mb-5 flex items-start justify-between gap-4">
+                        <div>
+                          <span className={`mb-3 inline-flex rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-[0.16em] ${capability.badge}`}>
+                            Capability
+                          </span>
+                          <h3 className="text-2xl font-black text-slate-950">{capability.title}</h3>
+                        </div>
+                        <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl ${capability.iconBox} md:hidden`}>
+                          <Icon className="h-5 w-5" />
+                        </span>
+                      </div>
+                      <p className="text-sm font-semibold leading-7 text-slate-600">{capability.text}</p>
+                    </article>
+                  </MotionDiv>
+                );
+              })}
+            </div>
+          </MotionDiv>
+        </div>
+      </div>
     </section>
   );
 }
