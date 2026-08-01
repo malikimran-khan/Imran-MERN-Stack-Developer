@@ -1,6 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import MainHome from './pages/home/MainHome';
+import ProjectsPage from './pages/ProjectsPage';
+import FreelancePage from './pages/FreelancePage';
 import UserNavbar from './components/UserNavbar';
 import Footer from './components/Footer';
 import { Helmet } from 'react-helmet';
@@ -28,6 +30,8 @@ export default function App() {
         <main>
           <Routes>
             <Route path="/" element={<MainHome />} />
+            <Route path="/projects" element={<ProjectsPage />} />
+            <Route path="/freelance" element={<FreelancePage />} />
           </Routes>
         </main>
         <Footer />

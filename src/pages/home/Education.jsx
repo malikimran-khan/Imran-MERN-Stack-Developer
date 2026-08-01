@@ -1,224 +1,215 @@
-import React, { useRef } from "react"; 
-import { motion, useMotionValue, useTransform, useSpring } from "framer-motion";
-import { FaGraduationCap, FaBookOpen } from "react-icons/fa";
+import React from "react";
+import { motion } from "framer-motion";
+import { FaBookOpen, FaCalendarAlt, FaCheckCircle, FaGraduationCap, FaMedal, FaUniversity } from "react-icons/fa";
 
-// Component for the individual 3D Tilting Card
-const TiltCard = ({ edu }) => {
-  const cardRef = useRef(null);
+const MotionDiv = motion.div;
 
-  // Motion values to track mouse position
-  const x = useMotionValue(0);
-  const y = useMotionValue(0);
-
-  // Smooth out the raw mouse values
-  const mouseXSpring = useSpring(x, { stiffness: 300, damping: 30 });
-  const mouseYSpring = useSpring(y, { stiffness: 300, damping: 30 });
-
-  // Transform mouse position into rotation values (-15 deg to 15 deg)
-  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["15deg", "-15deg"]);
-  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-15deg", "15deg"]);
-
-  // Dynamic glare effect based on mouse position
-  const glareX = useTransform(mouseXSpring, [-0.5, 0.5], ["100%", "0%"]);
-  const glareY = useTransform(mouseYSpring, [-0.5, 0.5], ["100%", "0%"]);
-
-  const handleMouseMove = (e) => {
-    if (!cardRef.current) return;
-    const rect = cardRef.current.getBoundingClientRect();
-    
-    // Calculate mouse position relative to the card center as a percentage (-0.5 to 0.5)
-    const width = rect.width;
-    const height = rect.height;
-    const mouseX = e.clientX - rect.left;
-    const mouseY = e.clientY - rect.top;
-    
-    const xPct = mouseX / width - 0.5;
-    const yPct = mouseY / height - 0.5;
-    
-    x.set(xPct);
-    y.set(yPct);
-  };
-
-  const handleMouseLeave = () => {
-    x.set(0);
-    y.set(0);
-  };
-
-  return (
-    <motion.div
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.8 }}
-      className="relative w-full md:w-[48%] min-h-[500px]"
-      style={{
-        perspective: "1200px", // Required on the parent to create 3D space
-        transformStyle: "preserve-3d"
-      }}
-    >
-      <motion.div
-        className="absolute inset-0 w-full h-full rounded-[2rem] bg-[#0a192f] border border-white/10 p-8 md:p-12 shadow-[0_30px_60px_rgba(0,0,0,0.6)] flex flex-col justify-between overflow-hidden"
-        style={{
-          rotateX,
-          rotateY,
-          transformStyle: "preserve-3d",
-        }}
-      >
-        {/* Holographic Glare Overlay */}
-        <motion.div 
-          className="absolute inset-0 pointer-events-none z-50 opacity-40 mix-blend-overlay"
-          style={{
-            background: `radial-gradient(circle at ${glareX} ${glareY}, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 60%)`,
-          }}
-        />
-
-        {/* Ambient background glow inside the card */}
-        <div 
-          className={`absolute -bottom-10 -right-10 w-64 h-64 bg-gradient-to-br ${edu.bgImage} mix-blend-screen filter blur-[80px] opacity-30 pointer-events-none`}
-        ></div>
-
-        {/* --- Card Content --- */}
-        <div style={{ transform: "translateZ(50px)" }} className="relative z-10">
-          <div className="flex items-center gap-5 mb-8">
-            <div 
-              className="w-16 h-16 rounded-2xl flex items-center justify-center text-4xl shadow-lg border border-white/10 flex-shrink-0"
-              style={{ backgroundColor: `${edu.accentColor}20`, color: edu.accentColor }}
-            >
-              {edu.icon}
-            </div>
-            <div>
-              <div className="inline-block px-3 py-1 bg-white/5 border border-white/10 rounded-full text-xs text-gray-400 font-medium tracking-widest uppercase mb-2">
-                {edu.duration}
-              </div>
-              <h3 className="text-2xl md:text-3xl font-extrabold text-white leading-tight">
-                {edu.degree}
-              </h3>
-            </div>
-          </div>
-          
-          <h4 className="text-xl font-semibold mb-6" style={{ color: edu.accentColor }}>
-            {edu.institution}
-          </h4>
-
-          <div className="flex items-center gap-3 mb-8">
-            <span className="bg-[#060b19] px-4 py-2 border border-white/5 rounded-xl text-sm font-bold tracking-wider shadow-inner" style={{ color: edu.accentColor }}>
-              {edu.scoreTitle}
-            </span>
-            <span className="text-xl font-bold text-gray-200">{edu.score}</span>
-          </div>
-        </div>
-
-        <div style={{ transform: "translateZ(30px)" }} className="relative z-10">
-          <ul className="space-y-4">
-            {edu.highlights.map((point, i) => (
-              <li key={i} className="flex items-start gap-3">
-                <span className="text-xl leading-none mt-1" style={{ color: edu.accentColor }}>▹</span>
-                <span className="text-gray-300 leading-relaxed text-sm md:text-base">{point}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-      </motion.div>
-    </motion.div>
-  );
+const fadeUp = {
+  hidden: { opacity: 0, y: 28 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
+const stagger = {
+  hidden: {},
+  show: { transition: { staggerChildren: 0.1 } },
+};
+
+const education = [
+  {
+    degree: "Bachelor of Science in Information Technology",
+    institution: "Government College University, Faisalabad (GCUF)",
+    duration: "2021 - 2025",
+    scoreTitle: "CGPA",
+    score: "3.24 / 4.00",
+    type: "Degree",
+    icon: FaGraduationCap,
+    gradient: "from-blue-600 via-purple-600 to-emerald-500",
+    iconBox: "bg-blue-50 text-blue-600",
+    iconText: "text-blue-600",
+    badge: "bg-blue-50 text-blue-700 border-blue-100",
+    ring: "ring-blue-100",
+    highlights: [
+      "Studied computer networks, database management, and software engineering.",
+      "Gained expertise in programming, web technologies, and information security.",
+      "Engaged in research and practical projects emphasizing innovation in IT.",
+    ],
+  },
+  {
+    degree: "FSc Pre-Engineering",
+    institution: "Akhuwat College, Kasur",
+    duration: "2019 - 2021",
+    scoreTitle: "Marks",
+    score: "1060 / 1100",
+    type: "College",
+    icon: FaBookOpen,
+    gradient: "from-emerald-500 to-teal-400",
+    iconBox: "bg-emerald-50 text-emerald-600",
+    iconText: "text-emerald-600",
+    badge: "bg-emerald-50 text-emerald-700 border-emerald-100",
+    ring: "ring-emerald-100",
+    highlights: [
+      "Focused on mathematics, physics, and chemistry to develop analytical skills.",
+      "Built strong problem-solving and logical reasoning foundations.",
+      "Prepared for advanced studies in computing and information systems.",
+    ],
+  },
+];
+
+const summaryCards = [
+  { label: "Primary Field", value: "Information Technology", icon: FaUniversity, color: "text-blue-600", bg: "bg-blue-50" },
+  { label: "Academic Focus", value: "Software Engineering", icon: FaGraduationCap, color: "text-emerald-600", bg: "bg-emerald-50" },
+  { label: "Strong Result", value: "1060 / 1100", icon: FaMedal, color: "text-orange-600", bg: "bg-orange-50" },
+];
 
 export default function Education() {
-  const education = [
-    {
-      degree: "Bachelor of Science in Information Technology",
-      institution: "Government College University, Faisalabad (GCUF)",
-      duration: "2021 – 2025",
-      scoreTitle: "CGPA",
-      score: "3.24 / 4.00",
-      highlights: [
-        "Studied computer networks, database management, and software engineering.",
-        "Gained expertise in programming, web technologies, and information security.",
-        "Engaged in research and practical projects emphasizing innovation in IT.",
-      ],
-      icon: <FaGraduationCap />,
-      accentColor: "#00C9A7",
-      bgImage: "from-[#00C9A7]",
-    },
-    {
-      degree: "FSc Pre-Engineering",
-      institution: "Akhuwat College, Kasur",
-      duration: "2019 – 2021",
-      scoreTitle: "Marks",
-      score: "1060 / 1100",
-      highlights: [
-        "Focused on mathematics, physics, and chemistry to develop analytical skills.",
-        "Built strong problem-solving and logical reasoning foundations.",
-        "Prepared for advanced studies in computing and information systems.",
-      ],
-      icon: <FaBookOpen />,
-      accentColor: "#3b82f6",
-      bgImage: "from-[#3b82f6]",
-    },
-  ];
+  const featured = education[0];
+  const FeaturedIcon = featured.icon;
 
   return (
     <section
       id="education"
-      className="relative min-h-screen bg-[#060b19] text-white px-4 md:px-16 py-24 font-['Poppins'] overflow-hidden flex flex-col items-center"
+      className="relative overflow-hidden bg-[#F8FAFC] px-6 py-24 font-['Poppins'] text-slate-950 md:px-12 lg:px-20"
       aria-label="Education section"
     >
-      {/* Background Ambient Glows */}
-      <div className="absolute top-[20%] right-[10%] w-[40rem] h-[40rem] bg-[#00C9A7] rounded-full mix-blend-screen filter blur-[250px] opacity-[0.08] pointer-events-none"></div>
-      <div className="absolute bottom-[20%] left-[10%] w-[35rem] h-[35rem] bg-[#3b82f6] rounded-full mix-blend-screen filter blur-[250px] opacity-[0.08] pointer-events-none"></div>
+      <div className="absolute left-[-8rem] top-24 h-80 w-80 rounded-full bg-blue-300/35 blur-3xl" />
+      <div className="absolute right-[-8rem] top-52 h-96 w-96 rounded-full bg-emerald-300/30 blur-3xl" />
+      <div className="absolute bottom-20 left-1/4 h-80 w-80 rounded-full bg-purple-300/25 blur-3xl" />
+      <div className="absolute right-12 top-32 hidden h-44 w-44 bg-[radial-gradient(circle,#94a3b8_1px,transparent_1px)] [background-size:14px_14px] opacity-25 lg:block" />
 
-      {/* Header */}
-      <motion.header
-        initial={{ opacity: 0, y: -40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-        className="text-center z-10 mb-20"
-      >
-        <span className="inline-block bg-[#0a192f] border border-[#00C9A7]/30 text-[#A5FECB] px-5 py-2 rounded-full text-sm font-semibold tracking-wide backdrop-blur-md shadow-lg mb-6">
-          ✦ Foundations & Degrees
-        </span>
-        <h2 className="text-5xl md:text-7xl font-extrabold mb-6">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00C9A7] via-[#A5FECB] to-[#3b82f6]">
-            Academic Journey
-          </span>
-        </h2>
-        <p className="text-gray-400 max-w-2xl mx-auto leading-relaxed text-lg mb-4">
-          A continuous pursuit of learning and innovation — building strong foundations in technology, logic, and problem-solving.
-        </p>
-        <p className="hidden md:block text-sm text-[#00C9A7] italic opacity-80">(Hover over the cards to interact)</p>
-      </motion.header>
-
-      {/* Holographic Cards Container */}
-      <div className="w-full max-w-7xl flex flex-col md:flex-row justify-center gap-10 md:gap-14 z-10 mb-20">
-        {education.map((edu, index) => (
-          <TiltCard key={index} edu={edu} />
-        ))}
-      </div>
-
-      {/* CTA */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ delay: 0.3 }}
-        className="mt-10 z-10"
-      >
-        <motion.a 
-          href="#skills"
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          className="inline-block relative overflow-hidden group bg-[#0a192f] border border-[#00C9A7]/50 text-[#A5FECB] hover:text-[#060b19] px-10 py-4 rounded-full font-bold shadow-[0_0_20px_rgba(0,201,167,0.15)] transition-all"
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <MotionDiv
+          variants={stagger}
+          initial="hidden"
+          whileInView="show"
+          viewport={{ once: true, margin: "-80px" }}
+          className="mb-16 grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-end"
         >
-          <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-[#00C9A7] to-[#A5FECB] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-          <span className="relative z-10 transition-colors duration-300">Explore My Skills</span>
-        </motion.a>
-      </motion.div>
+          <MotionDiv variants={fadeUp}>
+            <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/85 px-5 py-2 text-xs font-black uppercase tracking-[0.22em] text-blue-700 shadow-lg shadow-blue-100/70 backdrop-blur">
+              <FaGraduationCap className="h-4 w-4 text-purple-600" />
+              Academic Journey
+            </span>
+            <h2 className="text-5xl font-black leading-tight text-slate-950 md:text-7xl">
+              Academic foundations for{" "}
+              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-500 bg-clip-text text-transparent">
+                practical engineering.
+              </span>
+            </h2>
+            <p className="mt-5 max-w-2xl text-lg font-medium leading-8 text-slate-600">
+              My education built the technical foundation behind my software engineering, product thinking, and problem-solving approach.
+            </p>
+          </MotionDiv>
+
+          <MotionDiv variants={fadeUp} className="grid gap-4 sm:grid-cols-3">
+            {summaryCards.map((card) => {
+              const Icon = card.icon;
+              return (
+                <div key={card.label} className="rounded-[1.25rem] border border-slate-100 bg-white/90 p-5 shadow-xl shadow-slate-200/70">
+                  <span className={`mb-4 grid h-11 w-11 place-items-center rounded-2xl ${card.bg}`}>
+                    <Icon className={`h-5 w-5 ${card.color}`} />
+                  </span>
+                  <p className="text-xs font-black uppercase tracking-[0.18em] text-slate-500">{card.label}</p>
+                  <p className="mt-2 text-lg font-black text-slate-950">{card.value}</p>
+                </div>
+              );
+            })}
+          </MotionDiv>
+        </MotionDiv>
+
+        <div className="grid gap-8 lg:grid-cols-[0.95fr_1.05fr]">
+          <MotionDiv
+            variants={fadeUp}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            className="relative overflow-hidden rounded-[2rem] border border-white bg-white p-6 shadow-2xl shadow-blue-950/10 lg:sticky lg:top-28 lg:self-start"
+          >
+            <div className={`absolute inset-x-0 top-0 h-2 bg-gradient-to-r ${featured.gradient}`} />
+            <div className="absolute right-8 top-12 h-28 w-28 rounded-full bg-blue-200/45 blur-3xl" />
+            <div className="absolute bottom-8 left-8 h-28 w-28 rounded-full bg-emerald-200/45 blur-3xl" />
+
+            <div className="relative z-10">
+              <div className="mb-7 flex items-start justify-between gap-5">
+                <span className={`grid h-16 w-16 shrink-0 place-items-center rounded-3xl ${featured.iconBox} ring-8 ${featured.ring}`}>
+                  <FeaturedIcon className="h-7 w-7" />
+                </span>
+                <span className={`rounded-full border px-4 py-2 text-xs font-black uppercase tracking-[0.18em] ${featured.badge}`}>
+                  Featured
+                </span>
+              </div>
+
+              <h3 className="text-3xl font-black leading-tight text-slate-950 md:text-4xl">{featured.degree}</h3>
+              <p className="mt-2 text-xl font-black text-blue-700">{featured.institution}</p>
+
+              <div className="mt-6 grid gap-3 sm:grid-cols-2">
+                <div className="flex items-center gap-3 rounded-2xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-600">
+                  <FaCalendarAlt className="text-emerald-600" />
+                  {featured.duration}
+                </div>
+                <div className="flex items-center gap-3 rounded-2xl bg-slate-50 px-4 py-3 text-sm font-bold text-slate-600">
+                  <FaMedal className="text-orange-500" />
+                  {featured.scoreTitle}: {featured.score}
+                </div>
+              </div>
+
+              <div className="mt-7 space-y-3">
+                {featured.highlights.map((point) => (
+                  <div key={point} className="flex gap-3 rounded-2xl border border-slate-100 bg-white px-4 py-3">
+                    <FaCheckCircle className="mt-1 h-4 w-4 shrink-0 text-emerald-500" />
+                    <p className="text-sm font-semibold leading-6 text-slate-600">{point}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </MotionDiv>
+
+          <MotionDiv
+            variants={stagger}
+            initial="hidden"
+            whileInView="show"
+            viewport={{ once: true, margin: "-80px" }}
+            className="relative"
+          >
+            <div className="absolute bottom-8 left-6 top-8 hidden w-px bg-gradient-to-b from-blue-200 via-emerald-200 to-purple-200 md:block" />
+            <div className="space-y-6">
+              {education.map((edu) => {
+                const Icon = edu.icon;
+                return (
+                  <MotionDiv key={edu.degree} variants={fadeUp} className="relative md:pl-16">
+                    <div className={`absolute left-0 top-8 hidden h-12 w-12 place-items-center rounded-2xl border border-white bg-white shadow-lg ring-8 ${edu.ring} md:grid`}>
+                      <Icon className={`h-5 w-5 ${edu.iconText}`} />
+                    </div>
+                    <article className="group relative overflow-hidden rounded-[1.5rem] border border-slate-100 bg-white/90 p-6 shadow-xl shadow-slate-200/70 transition-transform duration-300 hover:-translate-y-1">
+                      <div className={`absolute inset-x-0 top-0 h-1 bg-gradient-to-r ${edu.gradient}`} />
+                      <div className="mb-5 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
+                        <div>
+                          <div className="mb-3 flex flex-wrap items-center gap-2">
+                            <span className={`rounded-full border px-3 py-1 text-[11px] font-black uppercase tracking-[0.16em] ${edu.badge}`}>
+                              {edu.type}
+                            </span>
+                            <span className="inline-flex items-center gap-2 rounded-full bg-slate-50 px-3 py-1 text-[11px] font-black uppercase tracking-[0.16em] text-slate-500">
+                              <FaCalendarAlt className="h-3 w-3" />
+                              {edu.duration}
+                            </span>
+                          </div>
+                          <h3 className="text-2xl font-black text-slate-950">{edu.degree}</h3>
+                          <p className="mt-1 text-base font-black text-slate-600">{edu.institution}</p>
+                        </div>
+                        <span className={`grid h-12 w-12 shrink-0 place-items-center rounded-2xl ${edu.iconBox} md:hidden`}>
+                          <Icon className="h-5 w-5" />
+                        </span>
+                      </div>
+                      <p className="inline-flex rounded-2xl bg-slate-50 px-4 py-2 text-sm font-black text-slate-700">
+                        {edu.scoreTitle}: {edu.score}
+                      </p>
+                    </article>
+                  </MotionDiv>
+                );
+              })}
+            </div>
+          </MotionDiv>
+        </div>
+      </div>
     </section>
   );
 }

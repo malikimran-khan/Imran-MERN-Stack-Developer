@@ -5,7 +5,7 @@ import Skills from "./Skills";
 import Experience from "./Experience";
 import Education from "./Education";
 import Contact from "./Contact";
-import Projects from "./Projects";
+import HomeShowcasePreview from "./HomeShowcasePreview";
 
 export default function MainHome() {
 
@@ -45,10 +45,8 @@ export default function MainHome() {
         <Experience />
       </section>
 
-      {/* ✅ PROJECTS SECTION */}
-      <section id="Projects" aria-label="Development Projects">
-        <Projects />
-      </section>
+      {/* ✅ PROJECTS + FREELANCE PREVIEW */}
+      <HomeShowcasePreview />
 
       {/* ✅ EDUCATION SECTION */}
       <section id="Education" aria-label="Educational Background">
