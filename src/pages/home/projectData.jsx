@@ -25,15 +25,6 @@ export const projects = {
     },
 
     {
-      title: "Biz Axis",
-      description:
-        "Biz Axis Global FZC LLC is a trusted UAE-based consulting firm delivering expert Accounting, Taxation, Business Setup, and Financial Advisory services with a strong focus on technology integration and business growth.",
-      tech: "React, Framer Motion, Tailwind, Three.js",
-      image: "/bizzaxis.webp",
-      link: "https://bizaxis.net/",
-    },
-
-    {
       title: "Waaris Fabric Store",
       description:
         "An e-commerce platform for premium fabrics and custom stitching services, allowing users to explore collections, customize outfits, and place orders with a seamless shopping experience.",
@@ -231,14 +222,6 @@ export const projects = {
     },
   ],
   "AI Powered": [
-    {
-      title: "Biz Axis",
-      description:
-        "Biz Axis Global FZC LLC is a UAE-based consulting firm offering Accounting, Taxation, Business Setup, and Financial Advisory services. The platform integrates modern UI/UX with scalable frontend architecture to present complex financial services in a clean, user-friendly way, helping businesses make informed decisions and streamline operations.",
-      tech: "React, Framer Motion, Tailwind, Three.js, Animation, Responsive Design, Financial Dashboard",
-      image: "/bizzaxis.webp",
-      link: "https://bizaxis.net/",
-    },
     {
       title: "YouTube Sentiment Bot",
       description:
