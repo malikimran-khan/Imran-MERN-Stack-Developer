@@ -1,209 +1,109 @@
 import React, { useState } from "react";
-import {
-  FaReact,
-  FaNodeJs,
-  FaPython,
-  FaDocker,
-  FaGitAlt,
-  FaGithub,
-  FaDatabase,
-  FaCreditCard,
-  FaBolt,
-  FaFileAlt,
-  FaMoneyBillWave,
-  FaTicketAlt,
-  FaGlobe,
-  FaServer,
-  FaBrain,
-  FaComments,
-} from "react-icons/fa";
-import {
-  SiNextdotjs,
-  SiTypescript,
-  SiTailwindcss,
-  SiMui,
-  SiMongodb,
-  SiExpress,
-  SiLangchain,
-  SiRedux,
-  SiTensorflow,
-  SiPostgresql,
-  SiVercel,
-  SiFirebase,
-  SiJenkins,
-  SiRubyonrails,
-  SiRuby,
-  SiPostman,
-} from "react-icons/si";
+import { FaBolt, FaBrain, FaCode, FaCreditCard, FaDatabase, FaDocker, FaFileAlt, FaGitAlt, FaGithub, FaNodeJs, FaPython, FaReact, FaServer } from "react-icons/fa";
+import { SiExpress, SiFirebase, SiJenkins, SiLangchain, SiMongodb, SiMui, SiNextdotjs, SiPostgresql, SiPostman, SiRedux, SiRuby, SiRubyonrails, SiTailwindcss, SiTypescript, SiVercel } from "react-icons/si";
 
-function WaveBackground() {
-  return (
-    <svg
-      className="absolute inset-0 w-full h-full pointer-events-none"
-      xmlns="http://www.w3.org/2000/svg"
-      preserveAspectRatio="xMidYMid slice"
-      viewBox="0 0 1440 900"
-    >
-      <defs>
-        <linearGradient id="waveGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stopColor="#2563EB" stopOpacity="0.14" />
-          <stop offset="100%" stopColor="#2563EB" stopOpacity="0" />
-        </linearGradient>
-        <linearGradient id="waveGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" stopColor="#3b82f6" stopOpacity="0.15" />
-          <stop offset="100%" stopColor="#3b82f6" stopOpacity="0" />
-        </linearGradient>
-        <linearGradient id="waveGrad3" x1="50%" y1="0%" x2="50%" y2="100%">
-          <stop offset="0%" stopColor="#10B981" stopOpacity="0.10" />
-          <stop offset="100%" stopColor="#10B981" stopOpacity="0" />
-        </linearGradient>
-      </defs>
-      <path d="M0,700 C200,640 400,780 600,700 C800,620 1000,760 1200,700 C1320,660 1400,690 1440,680 L1440,900 L0,900 Z" fill="url(#waveGrad1)" opacity="0.6" />
-      <path d="M0,740 C180,700 360,800 540,740 C720,680 900,780 1080,720 C1200,680 1340,730 1440,710 L1440,900 L0,900 Z" fill="url(#waveGrad2)" opacity="0.5" />
-      <path d="M0,800 C240,760 480,840 720,790 C960,740 1200,820 1440,780 L1440,900 L0,900 Z" fill="url(#waveGrad3)" opacity="0.7" />
-      <path d="M0,0 C300,80 600,-40 900,60 C1100,120 1280,20 1440,50 L1440,0 Z" fill="url(#waveGrad1)" opacity="0.5" />
-      <path d="M0,0 C200,50 500,10 750,70 C950,120 1200,40 1440,80 L1440,0 Z" fill="url(#waveGrad2)" opacity="0.35" />
-      <path d="M-100,350 C100,300 250,420 400,360 C520,310 580,390 700,350 C800,320 860,380 950,340 L950,420 C860,460 800,400 700,430 C580,470 520,390 400,440 C250,500 100,380 -100,430 Z" fill="#2563EB" opacity="0.04" />
-      <path d="M900,200 C1000,160 1100,240 1200,200 C1290,165 1380,210 1440,190 L1440,270 C1380,290 1290,245 1200,280 C1100,320 1000,240 900,280 Z" fill="#3b82f6" opacity="0.05" />
-      <path d="M0,480 C180,455 360,510 540,480 C720,450 900,505 1080,475 C1200,455 1340,490 1440,470" fill="none" stroke="#2563EB" strokeWidth="1" opacity="0.12" />
-      <path d="M0,510 C200,488 400,535 600,505 C800,475 1000,530 1200,500 C1320,480 1400,510 1440,495" fill="none" stroke="#10B981" strokeWidth="0.7" opacity="0.09" />
-      <path d="M0,540 C240,515 480,560 720,530 C960,500 1200,550 1440,520" fill="none" stroke="#3b82f6" strokeWidth="0.8" opacity="0.1" />
-      <path d="M0,420 C300,400 600,445 900,415 C1100,395 1300,430 1440,410" fill="none" stroke="#7C3AED" strokeWidth="0.6" opacity="0.08" />
-      {[ [120, 260], [340, 180], [560, 310], [780, 200], [1020, 280], [1260, 170], [1400, 310], [80, 600], [300, 650], [520, 590], [740, 640], [960, 600], [1180, 650], [1380, 600], [200, 420], [450, 460], [700, 410], [950, 450], [1150, 415], [1350, 450] ].map(([cx, cy], i) => (
-        <circle key={i} cx={cx} cy={cy} r="1.2" fill={i % 3 === 0 ? "#2563EB" : i % 3 === 1 ? "#10B981" : "#7C3AED"} opacity="0.18" />
-      ))}
-      <path d="M0,900 Q180,750 0,600" fill="none" stroke="#2563EB" strokeWidth="1" opacity="0.1" />
-      <path d="M0,900 Q220,720 0,540" fill="none" stroke="#10B981" strokeWidth="0.6" opacity="0.07" />
-      <path d="M1440,0 Q1260,150 1440,300" fill="none" stroke="#3b82f6" strokeWidth="1" opacity="0.1" />
-      <path d="M1440,0 Q1220,180 1440,360" fill="none" stroke="#3b82f6" strokeWidth="0.6" opacity="0.07" />
-    </svg>
-  );
-}
+const categories = {
+  Frontend: [
+    { name: "React.js", icon: FaReact },
+    { name: "Next.js", icon: SiNextdotjs },
+    { name: "TypeScript", icon: SiTypescript },
+    { name: "Tailwind CSS", icon: SiTailwindcss },
+    { name: "Material UI", icon: SiMui },
+    { name: "Redux Toolkit", icon: SiRedux },
+  ],
+  Backend: [
+    { name: "Ruby on Rails", icon: SiRubyonrails },
+    { name: "Ruby", icon: SiRuby },
+    { name: "Node.js", icon: FaNodeJs },
+    { name: "Express.js", icon: SiExpress },
+    { name: "MongoDB", icon: SiMongodb },
+    { name: "PostgreSQL", icon: SiPostgresql },
+    { name: "Firebase", icon: SiFirebase },
+    { name: "REST APIs", icon: FaServer },
+  ],
+  Integrations: [
+    { name: "Secucard API", icon: FaCreditCard },
+    { name: "ChargeCloud", icon: FaBolt },
+    { name: "OCR", icon: FaFileAlt },
+    { name: "Payment Flows", icon: FaDatabase },
+    { name: "Multi-Env", icon: FaServer },
+  ],
+  Tools: [
+    { name: "Git", icon: FaGitAlt },
+    { name: "GitHub", icon: FaGithub },
+    { name: "Docker", icon: FaDocker },
+    { name: "Jenkins", icon: SiJenkins },
+    { name: "Vercel", icon: SiVercel },
+    { name: "Postman", icon: SiPostman },
+  ],
+  AI: [
+    { name: "LangChain.js", icon: SiLangchain },
+    { name: "OpenAI / RAG", icon: FaBrain },
+    { name: "Python AI", icon: FaPython },
+    { name: "AI Agents", icon: FaCode },
+  ],
+};
 
 export default function Skills() {
   const [activeTab, setActiveTab] = useState("Frontend");
-
-  const categories = {
-    Frontend: [
-      { name: "React.js", icon: <FaReact />, color: "#61DBFB" },
-      { name: "Next.js", icon: <SiNextdotjs />, color: "#0F172A" },
-      { name: "TypeScript", icon: <SiTypescript />, color: "#3178C6" },
-      { name: "Tailwind CSS", icon: <SiTailwindcss />, color: "#38BDF8" },
-      { name: "Material-UI", icon: <SiMui />, color: "#007FFF" },
-      { name: "Redux Toolkit", icon: <SiRedux />, color: "#764ABC" },
-    ],
-    Backend: [
-      { name: "Ruby on Rails", icon: <SiRubyonrails />, color: "#CC0000" },
-      { name: "Ruby", icon: <SiRuby />, color: "#CC342D" },
-      { name: "Node.js", icon: <FaNodeJs />, color: "#3C873A" },
-      { name: "Express.js", icon: <SiExpress />, color: "#D1D5DB" },
-      { name: "MongoDB", icon: <SiMongodb />, color: "#4DB33D" },
-      { name: "PostgreSQL", icon: <SiPostgresql />, color: "#336791" },
-      { name: "Firebase", icon: <SiFirebase />, color: "#FFA611" },
-      { name: "REST & GraphQL", icon: <FaServer />, color: "#10B981" },
-    ],
-    Integrations: [
-      { name: "Secucard API", icon: <FaCreditCard />, color: "#3b82f6" },
-      { name: "ChargeCloud", icon: <FaBolt />, color: "#EAB308" },
-      { name: "OCR", icon: <FaFileAlt />, color: "#10B981" },
-      { name: "Payment Systems", icon: <FaMoneyBillWave />, color: "#22c55e" },
-      { name: "Vouchers", icon: <FaTicketAlt />, color: "#f97316" },
-      { name: "Multi-Env", icon: <FaGlobe />, color: "#a855f7" },
-    ],
-    Tools: [
-      { name: "Git", icon: <FaGitAlt />, color: "#F1502F" },
-      { name: "Docker", icon: <FaDocker />, color: "#0db7ed" },
-      { name: "Jenkins", icon: <SiJenkins />, color: "#D24939" },
-      { name: "GitHub Actions", icon: <FaGithub />, color: "#E5E7EB" },
-      { name: "Vercel / Netlify", icon: <SiVercel />, color: "#0F172A" },
-      { name: "Postman", icon: <SiPostman />, color: "#FF6C37" },
-    ],
-    AI: [
-      { name: "LangChain.js", icon: <SiLangchain />, color: "#00B4D8" },
-      { name: "TensorFlow", icon: <SiTensorflow />, color: "#FF6F00" },
-      { name: "Python AI", icon: <FaPython />, color: "#FFD43B" },
-      { name: "Neural Networks", icon: <FaBrain />, color: "#ec4899" },
-      { name: "OpenAI / RAG", icon: <SiLangchain />, color: "#10a37f" },
-      { name: "AI Chat Agents", icon: <FaComments />, color: "#3b82f6" },
-    ],
-  };
+  const skills = categories[activeTab];
 
   return (
-    <section
-      id="Skills"
-      className="relative min-h-screen bg-[#F8FAFC] text-slate-950 px-6 md:px-16 py-24 flex flex-col items-center overflow-hidden"
-    >
-      <WaveBackground />
-
-      <div className="absolute top-[20%] left-[-10%] w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[200px] opacity-10 pointer-events-none"></div>
-      <div className="absolute bottom-[10%] right-[-5%] w-[30rem] h-[30rem] bg-[#3b82f6] rounded-full mix-blend-screen filter blur-[200px] opacity-10 pointer-events-none"></div>
-
-      <div className="text-center z-10">
-        <span className="inline-block bg-white/85 border border-blue-200 text-blue-700 px-5 py-2 rounded-full text-sm font-semibold tracking-wide backdrop-blur-md shadow-lg mb-6">
-          ✦ Arsenal & Technologies
-        </span>
-        <h2 className="text-4xl md:text-6xl font-extrabold mb-6">
-          <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-purple-600 to-emerald-500">
-            Technical Skills
-          </span>
-        </h2>
-        <p className="text-slate-600 max-w-2xl mx-auto mb-12 leading-relaxed text-lg">
-          I've honed a diverse skill set in <strong>modern full-stack development</strong> and <strong>AI-powered systems</strong> — blending logic and performance to deliver exceptional digital experiences.
-        </p>
+    <section id="skills" className="relative overflow-hidden px-5 py-24 text-white">
+      <div className="pointer-events-none absolute inset-0 opacity-35" aria-hidden="true">
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.04)_1px,transparent_1px)] bg-[size:68px_68px]" />
+        <div className="absolute left-[9%] top-28 h-2 w-2 rounded-full bg-[var(--color-accent)]" />
+        <div className="absolute right-[14%] bottom-32 h-3 w-3 rounded-full bg-[var(--color-accent)]" />
       </div>
 
-      <div className="relative flex flex-wrap justify-center gap-2 md:gap-4 mb-16 z-10 p-2 bg-white/85 backdrop-blur-xl border border-slate-100 rounded-full shadow-2xl">
-        {Object.keys(categories).map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setActiveTab(tab)}
-            className={`relative px-6 py-2.5 rounded-full text-sm md:text-base font-semibold transition-colors duration-300 ${activeTab === tab ? "text-white" : "text-slate-600 hover:text-slate-950"}`}
-          >
-            {activeTab === tab && (
-              <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-emerald-500 rounded-full shadow-[0_0_15px_rgba(37,99,235,0.28)]" />
-            )}
-            <span className="relative z-10">{tab}</span>
-          </button>
-        ))}
-      </div>
+      <div className="relative z-10 mx-auto max-w-7xl">
+        <div className="mx-auto max-w-3xl text-center">
+          <span className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">Arsenal & Technologies</span>
+          <h2 className="mt-4 font-display text-6xl font-bold leading-none text-white md:text-8xl">Technical Skills</h2>
+          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[var(--color-text-muted)]">
+            A focused stack for full-stack development, product engineering, integrations, and AI-powered workflows.
+          </p>
+        </div>
 
-      <div className="w-full max-w-6xl min-h-[400px] z-10 relative">
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6">
-          {categories[activeTab].map((skill) => (
-            <div
-              key={skill.name}
-              className="group relative flex flex-col items-center justify-center bg-white/85 backdrop-blur-xl py-8 px-4 rounded-3xl border border-slate-100 overflow-hidden transition-all duration-300"
+        <div className="mt-10 flex flex-wrap justify-center gap-3">
+          {Object.keys(categories).map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              onClick={() => setActiveTab(tab)}
+              className={`rounded-[var(--radius-pill)] border px-5 py-2 text-sm font-bold transition-colors ${
+                activeTab === tab
+                  ? "border-[var(--color-accent)] bg-[var(--color-accent)] text-[var(--color-on-accent)]"
+                  : "border-white/12 bg-white/[0.03] text-white/78 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
+              }`}
             >
-              <div
-                className="absolute inset-0 opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-2xl"
-                style={{ backgroundColor: skill.color }}
-              ></div>
-              <div className="text-5xl mb-4 transition-transform duration-500 group-hover:scale-110 drop-shadow-md z-10" style={{ color: skill.color }}>
-                {skill.icon}
-              </div>
-              <h3 className="text-base font-bold text-slate-800 text-center z-10 transition-colors group-hover:text-slate-950">
-                {skill.name}
-              </h3>
-              <div
-                className="absolute bottom-0 left-0 w-full h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{
-                  backgroundColor: skill.color,
-                  boxShadow: `0 -5px 15px ${skill.color}80`,
-                }}
-              ></div>
-            </div>
+              {tab}
+            </button>
           ))}
         </div>
-      </div>
 
-      <div className="mt-16 z-10">
-        <a
-          href="/projects"
-          className="inline-block relative overflow-hidden group bg-white/85 border border-blue-200 text-blue-700 hover:text-white px-10 py-4 rounded-full font-bold shadow-[0_0_20px_rgba(37,99,235,0.14)] transition-all"
-        >
-          <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-blue-600 to-emerald-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
-          <span className="relative z-10 transition-colors duration-300">Explore My Projects</span>
-        </a>
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {skills.map((skill) => {
+            const Icon = skill.icon;
+            return (
+              <article
+                key={skill.name}
+                className="group rounded-[var(--radius-card)] border border-white/10 bg-[var(--color-surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)]/60 hover:shadow-[0_24px_90px_rgba(212,255,79,0.08)]"
+              >
+                <div className="mb-8 flex items-center justify-between gap-4">
+                  <span className="text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-text-muted)]">{activeTab}</span>
+                  <span className="grid h-12 w-12 place-items-center rounded-full bg-[var(--color-accent)]/10 text-[var(--color-accent)] transition-colors group-hover:bg-[var(--color-accent)] group-hover:text-[var(--color-on-accent)]">
+                    <Icon className="h-6 w-6" />
+                  </span>
+                </div>
+                <h3 className="font-display text-3xl font-bold leading-none text-white">{skill.name}</h3>
+                <div className="mt-6 h-1 w-full overflow-hidden rounded-full bg-white/10">
+                  <div className="h-full w-2/3 rounded-full bg-[var(--color-accent)] transition-all duration-300 group-hover:w-full" />
+                </div>
+              </article>
+            );
+          })}
+        </div>
       </div>
     </section>
   );

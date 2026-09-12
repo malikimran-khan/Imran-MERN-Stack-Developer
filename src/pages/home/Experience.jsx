@@ -238,7 +238,7 @@ export default function Experience() {
             <div className="absolute bottom-8 left-6 top-8 hidden w-px bg-gradient-to-b from-blue-200 via-emerald-200 to-purple-200 md:block" />
 
             <div className="space-y-6">
-              {experiences.map((experience, index) => {
+              {experiences.map((experience) => {
                 const Icon = experience.icon;
                 return (
                   <MotionDiv

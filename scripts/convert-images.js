@@ -2,6 +2,8 @@ import fs from 'fs/promises';
 import path from 'path';
 import sharp from 'sharp';
 
+/* global process */
+
 const srcDir = path.resolve(process.cwd(), 'public');
 const exts = ['.png', '.jpg', '.jpeg'];
 
@@ -32,11 +34,15 @@ async function convertImage(file) {
     try {
       const statWebp = await fs.stat(webpOut);
       if (statWebp.mtimeMs >= statIn.mtimeMs) skipWebp = true;
-    } catch {}
+    } catch {
+      skipWebp = false;
+    }
     try {
       const statAvif = await fs.stat(avifOut);
       if (statAvif.mtimeMs >= statIn.mtimeMs) skipAvif = true;
-    } catch {}
+    } catch {
+      skipAvif = false;
+    }
 
     if (!skipWebp) {
       await sharp(file).webp({ quality: 80 }).toFile(webpOut);
