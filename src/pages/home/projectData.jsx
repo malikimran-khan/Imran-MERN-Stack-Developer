@@ -16,6 +16,24 @@ export const categories = [
 export const projects = {
   "Full Stack": [
     {
+      title: "Deskbolic",
+      description:
+        "Deskbolic is a multi-tenant SaaS help desk platform featuring a customer-facing chat widget, real-time messaging, and an AI support agent. It uses RAG-based replies over embedded help-center content, copilot tools for agents, and a full billing, wallet, and subscription system.",
+      tech: "Ruby on Rails, PostgreSQL, ActionCable, Sidekiq, Turbo Streams, OpenAI API",
+      image: "/deskbolic.png",
+      link: "https://deskbolic.com/",
+    },
+
+    {
+      title: "Raabta Tag",
+      description:
+        "Raabta Tag is a privacy-first smart parking QR system for Pakistan. Vehicle owners register a QR tag and get instant alerts when it's scanned, letting others reach them without ever revealing their phone number.",
+      tech: "React, Node.js, Dynamic QR Code System",
+      image: "/raabta-tag.png",
+      link: "https://www.raabtatag.com/",
+    },
+
+    {
       title: "Ai Verse",
       description:
         "Ai Verse is a cutting-edge digital agency and software house, specializing in web development, games, 3D modeling, digital marketing, and creative software solutions. We craft innovative digital experiences that combine technology and creativity, helping businesses stand out online, achieve measurable results, and embrace future-ready solutions.",
