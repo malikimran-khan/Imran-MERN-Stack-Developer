@@ -1,27 +1,9 @@
 import React, { useEffect, useMemo, useState } from "react";
-import { motion as Motion } from "framer-motion";
-import { ArrowUpRight, Github, Layers3, Sparkles } from "lucide-react";
+import { Github } from "lucide-react";
 import { portfolioContent } from "../content/portfolioContent";
-
-const introSequence = {
-  hidden: {},
-  show: {
-    transition: {
-      staggerChildren: 0.16,
-      delayChildren: 0.08,
-    },
-  },
-};
-
-const revealUp = {
-  hidden: { opacity: 0, y: 26, filter: "blur(8px)" },
-  show: {
-    opacity: 1,
-    y: 0,
-    filter: "blur(0px)",
-    transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
-  },
-};
+import { revealScale } from "../utils/motion";
+import AnimatedText from "../components/animations/AnimatedText";
+import Reveal from "../components/animations/Reveal";
 
 function normalizeProject(project) {
   return {
@@ -45,123 +27,130 @@ function getUniqueProjects() {
   }, []);
 }
 
-function ProjectAction({ href, icon, children, primary = false }) {
-  if (!href) return null;
+function ProjectShowcase({ project, index, total }) {
+  const [imageFailed, setImageFailed] = useState(false);
+  const isReversed = index % 2 === 1;
+  // Rows alternate: text enters from one side, the image from the opposite side.
+  const textDirection = isReversed ? "right" : "left";
+  const imageDirection = isReversed ? "left" : "right";
+  const href = project.link || project.github;
+  const initials = project.title
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .slice(0, 2)
+    .toUpperCase();
 
   return (
-    <a
-      href={href}
-      target="_blank"
-      rel="noreferrer"
-      className={`inline-flex items-center gap-2 rounded-[var(--radius-pill)] px-4 py-2 text-sm font-bold transition-all ${
-        primary
-          ? "bg-[var(--color-accent)] text-[var(--color-on-accent)] hover:-translate-y-0.5"
-          : "border border-white/12 text-white/82 hover:border-[var(--color-accent)] hover:text-[var(--color-accent)]"
-      }`}
+    <Reveal
+      as="article"
+      group
+      stagger={0.14}
+      className="grid items-center gap-8 lg:grid-cols-2 lg:gap-14"
     >
-      {icon}
-      {children}
-    </a>
-  );
-}
-
-function FeaturedProject({ project }) {
-  return (
-    <Motion.article
-      layout
-      initial={{ opacity: 0, y: 28 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-      className="group overflow-hidden rounded-[var(--radius-card)] border border-[var(--color-accent)]/20 bg-[#202020] shadow-[0_30px_90px_rgba(0,0,0,0.26)]"
-    >
-      <div className="grid gap-0 lg:grid-cols-[0.95fr_1.05fr]">
-        <div className="flex flex-col justify-between p-6 md:p-9">
-          <div>
-            <div className="mb-6 inline-flex items-center gap-2 rounded-[var(--radius-pill)] bg-[var(--color-accent)] px-4 py-2 text-xs font-bold uppercase tracking-[0.16em] text-[var(--color-on-accent)]">
-              <Sparkles className="h-4 w-4" />
-              Current Spotlight
-            </div>
-            <p className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">{project.category}</p>
-            <h2 className="mt-4 font-display text-5xl font-bold leading-none text-white md:text-7xl">{project.title}</h2>
-            <p className="mt-5 text-base leading-8 text-[var(--color-text-muted)] md:text-lg">{project.description}</p>
-          </div>
-
-          <div className="mt-8">
-            <div className="mb-6 flex flex-wrap gap-2">
-              {project.tech.split(",").slice(0, 6).map((tech) => (
-                <span key={tech.trim()} className="rounded-[var(--radius-pill)] border border-white/10 px-3 py-1.5 text-xs text-white/72">
-                  {tech.trim()}
-                </span>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <ProjectAction href={project.link || project.github} icon={<ArrowUpRight className="h-4 w-4" />} primary>
-                Explore Project
-              </ProjectAction>
-              <ProjectAction href={project.github} icon={<Github className="h-4 w-4" />}>
+      <Reveal
+        as="div"
+        inherit
+        group
+        stagger={0.09}
+        className={`flex flex-col justify-center ${isReversed ? "lg:order-2" : ""}`}
+      >
+        <Reveal
+          as="span"
+          inherit
+          direction={textDirection}
+          distance={20}
+          className="font-display mb-2 text-2xl font-bold leading-none text-white sm:text-4xl md:text-5xl"
+        >
+          {String(index + 1).padStart(2, "0")} / {String(total).padStart(2, "0")}
+        </Reveal>
+        <AnimatedText
+          as="h3"
+          inherit
+          text={project.title}
+          direction={textDirection}
+          distance={30}
+          stagger={0.05}
+          className="font-display mb-3 text-3xl font-bold uppercase leading-none text-white sm:text-4xl md:text-6xl lg:text-7xl"
+        />
+        <Reveal
+          as="p"
+          inherit
+          direction={textDirection}
+          distance={22}
+          className="max-w-xl text-sm leading-6 text-[var(--color-text-muted)] sm:text-lg sm:leading-8 md:text-xl md:leading-9"
+        >
+          {project.description}
+        </Reveal>
+        {project.tech && (
+          <Reveal
+            as="p"
+            inherit
+            direction={textDirection}
+            distance={18}
+            className="mt-4 text-xs font-semibold uppercase tracking-[0.12em] text-white/55 sm:text-sm"
+          >
+            {project.tech}
+          </Reveal>
+        )}
+        {href && (
+          <Reveal
+            as="div"
+            inherit
+            direction={textDirection}
+            distance={18}
+            className="mt-4 flex flex-wrap gap-3 sm:mt-8"
+          >
+            <a
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex rounded-[var(--radius-pill)] border border-[var(--color-accent)] bg-black/55 px-4 py-2 text-sm font-bold text-[var(--color-accent)] backdrop-blur-md transition-colors hover:bg-[var(--color-accent)] hover:text-[var(--color-on-accent)] sm:px-7 sm:py-3 sm:text-base"
+            >
+              Explore Project
+            </a>
+            {project.link && project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-white/15 px-4 py-2 text-sm font-bold text-white/75 transition-colors hover:border-[var(--color-accent)] hover:text-[var(--color-accent)] sm:px-7 sm:py-3 sm:text-base"
+              >
+                <Github className="h-4 w-4" />
                 GitHub
-              </ProjectAction>
-            </div>
-          </div>
-        </div>
-        <div className="relative min-h-[300px] overflow-hidden bg-black/20 lg:min-h-[520px]">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(212,255,79,0.18),transparent_34%)]" />
+              </a>
+            )}
+          </Reveal>
+        )}
+      </Reveal>
+
+      <Reveal
+        as="div"
+        inherit
+        variants={revealScale({ from: 1.04, direction: imageDirection, distance: 28, duration: 0.8 })}
+        className={`relative aspect-[16/11] overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[var(--color-surface)] p-3 shadow-2xl shadow-black/30 sm:p-5 ${isReversed ? "lg:order-1" : ""}`}
+      >
+        <div
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(212,255,79,0.10),transparent_60%)]"
+          aria-hidden="true"
+        />
+        {project.image && !imageFailed ? (
           <img
             src={project.image}
             alt={project.title}
-            className="relative h-full w-full object-cover brightness-110 saturate-125 contrast-105 transition-transform duration-500 group-hover:scale-[1.035]"
+            loading="lazy"
+            decoding="async"
+            onError={() => setImageFailed(true)}
+            className="relative h-full w-full object-contain object-center"
           />
-        </div>
-      </div>
-    </Motion.article>
-  );
-}
-
-function MasonryProjectCard({ project, index }) {
-  const isLarge = index % 7 === 0 || index % 7 === 5;
-  const isTall = index % 5 === 2;
-
-  return (
-    <Motion.article
-      layout
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-70px" }}
-      transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-      className={`group overflow-hidden rounded-[var(--radius-card)] border border-white/10 bg-[#202020] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)]/45 hover:shadow-[0_0_45px_rgba(212,255,79,0.08)] ${
-        isLarge ? "lg:col-span-2" : ""
-      }`}
-    >
-      <div className={`relative overflow-hidden bg-black/20 ${isLarge ? "h-[430px]" : isTall ? "h-[380px]" : "h-72"}`}>
-        <img
-          src={project.image}
-          alt={project.title}
-          className="h-full w-full object-cover brightness-110 saturate-125 contrast-105 transition-transform duration-500 group-hover:scale-105"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#141414] via-[#141414]/20 to-transparent opacity-85" />
-        <span className="absolute left-5 top-5 rounded-[var(--radius-pill)] bg-[var(--color-accent)] px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-[var(--color-on-accent)]">
-          {project.category}
-        </span>
-      </div>
-      <div className="p-6">
-        <div className="flex flex-col justify-between gap-5 sm:flex-row sm:items-start">
-          <div className="min-w-0">
-            <h3 className="font-display text-4xl font-bold leading-none text-white md:text-5xl">{project.title}</h3>
-            <p className="mt-3 line-clamp-2 text-sm leading-7 text-[var(--color-text-muted)]">{project.description}</p>
+        ) : (
+          <div className="relative flex h-full w-full flex-col items-center justify-center gap-3">
+            <span className="font-display text-6xl font-bold leading-none text-[var(--color-accent)]">{initials}</span>
+            <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/45">Preview coming soon</span>
           </div>
-          <ProjectAction href={project.link || project.github} icon={<ArrowUpRight className="h-4 w-4" />} primary>
-            View
-          </ProjectAction>
-        </div>
-        <div className="mt-5 flex flex-wrap gap-2">
-          {project.tech.split(",").slice(0, isLarge ? 6 : 4).map((tech) => (
-            <span key={tech.trim()} className="rounded-[var(--radius-pill)] border border-white/10 px-3 py-1 text-[11px] text-white/64">
-              {tech.trim()}
-            </span>
-          ))}
-        </div>
-      </div>
-    </Motion.article>
+        )}
+      </Reveal>
+    </Reveal>
   );
 }
 
@@ -176,8 +165,6 @@ export default function ProjectsPage() {
         : projects.filter((project) => project.category === activeFilter),
     [activeFilter, projects]
   );
-  const featured = filteredProjects[0];
-  const remainingProjects = filteredProjects.slice(1);
 
   useEffect(() => {
     document.title = "Projects | Muhammad Imran";
@@ -185,45 +172,36 @@ export default function ProjectsPage() {
   }, []);
 
   return (
-    <main className="relative overflow-hidden px-5 pt-32 text-white">
-      <div className="pointer-events-none absolute inset-0 opacity-35" aria-hidden="true">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.045)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.045)_1px,transparent_1px)] bg-[size:64px_64px]" />
-        <div className="absolute left-[8%] top-40 h-2.5 w-2.5 rounded-full bg-[var(--color-accent)]" />
-        <div className="absolute right-[12%] top-[22rem] h-3 w-3 rounded-full bg-[var(--color-accent)]" />
-        <div className="absolute bottom-44 left-[18%] h-2 w-2 rounded-full bg-[var(--color-accent)]" />
-      </div>
+    <main className="px-5 pt-28 pb-24 text-white">
+      <section className="mx-auto max-w-7xl">
+        <div className="section-heading">
+          <AnimatedText
+            as="h2"
+            text={portfolioContent.projects.title}
+            className="!text-white"
+            stagger={0.06}
+          />
+          <AnimatedText
+            as="p"
+            text={portfolioContent.projects.description}
+            className="!text-[var(--color-text-muted)]"
+            distance={18}
+            stagger={0.02}
+            delay={0.1}
+          />
+        </div>
 
-      <section className="relative z-10 mx-auto max-w-7xl pb-24">
-        <Motion.div
-          variants={introSequence}
-          initial="hidden"
-          animate="show"
-          className="mx-auto max-w-4xl text-center"
-        >
-          <Motion.div variants={revealUp} className="mx-auto mb-6 inline-flex items-center gap-2 rounded-[var(--radius-pill)] border border-[var(--color-accent)]/35 bg-[var(--color-accent)]/10 px-4 py-2 text-xs font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">
-            <Layers3 className="h-4 w-4" />
-            Full Portfolio
-          </Motion.div>
-          <Motion.h1 variants={revealUp} className="font-display text-6xl font-bold leading-none text-white md:text-8xl lg:text-9xl">
-            SELECTED PROJECTS
-          </Motion.h1>
-          <Motion.p variants={revealUp} className="mx-auto mt-6 max-w-2xl text-base leading-8 text-[var(--color-text-muted)] md:text-lg">
-            A clear look at the web apps, AI tools, automation systems, and business websites I have built.
-          </Motion.p>
-        </Motion.div>
-
-        <Motion.div
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.62, duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-          className="mx-auto mt-10 flex max-w-4xl flex-wrap justify-center gap-3"
-          >
+        <Reveal group stagger={0.05} className="mx-auto mb-16 flex max-w-4xl flex-wrap justify-center gap-3">
               {filters.map((filter) => {
                 const isActive = activeFilter === filter;
                 const count = filter === "All" ? projects.length : projects.filter((project) => project.category === filter).length;
 
                 return (
-                  <button
+                  <Reveal
+                    as="button"
+                    inherit
+                    direction="up"
+                    distance={16}
                     type="button"
                     key={filter}
                     onClick={() => setActiveFilter(filter)}
@@ -235,61 +213,21 @@ export default function ProjectsPage() {
                   >
                     <span>{filter}</span>
                     <span className={isActive ? "text-black/70" : "text-white/40"}>{count}</span>
-                  </button>
+                  </Reveal>
                 );
               })}
-        </Motion.div>
+        </Reveal>
 
-        <Motion.div
-          key={`stats-${activeFilter}`}
-          initial={{ opacity: 0, y: 22 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-12 grid gap-4 md:grid-cols-3"
-        >
-          {[
-            { label: activeFilter === "All" ? "Visible Projects" : activeFilter, value: `${filteredProjects.length}+` },
-            { label: "AI Powered", value: `${projects.filter((project) => project.category === "AI Powered").length}+` },
-            { label: "Project Types", value: "3" },
-          ].map((stat) => (
-            <div key={stat.label} className="rounded-[var(--radius-card)] border border-white/10 bg-white/[0.035] p-5 text-center">
-              <strong className="font-display text-5xl font-bold leading-none text-[var(--color-accent)]">{stat.value}</strong>
-              <p className="mt-2 text-xs uppercase tracking-[0.16em] text-white/52">{stat.label}</p>
-            </div>
+        <div className="flex flex-col gap-20 lg:gap-28">
+          {filteredProjects.map((project, index) => (
+            <ProjectShowcase
+              key={project.title}
+              project={project}
+              index={index}
+              total={filteredProjects.length}
+            />
           ))}
-        </Motion.div>
-
-        {featured && (
-          <div key={`featured-${activeFilter}`} className="mt-14">
-            <FeaturedProject project={featured} />
-          </div>
-        )}
-
-        <Motion.div
-              key={`library-title-${activeFilter}`}
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-          className="mt-16 flex flex-col justify-between gap-4 md:flex-row md:items-end"
-            >
-              <div>
-                <span className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">
-                  {remainingProjects.length} more {activeFilter === "All" ? "projects" : activeFilter.toLowerCase()}
-                </span>
-                <h2 className="mt-3 font-display text-5xl font-bold leading-none text-white md:text-7xl">
-              Case Study Gallery
-                </h2>
-              </div>
-              <p className="max-w-xl text-sm leading-7 text-[var(--color-text-muted)] md:text-right">
-            Visual project cards with short context, stack highlights, and direct links.
-              </p>
-            </Motion.div>
-
-        <Motion.div layout className="mt-8 grid auto-rows-auto gap-6 lg:grid-cols-3">
-              {remainingProjects.map((project, index) => (
-            <MasonryProjectCard key={project.title} project={project} index={index} />
-              ))}
-            </Motion.div>
+        </div>
       </section>
     </main>
   );

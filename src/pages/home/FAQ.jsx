@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { ChevronUp } from "lucide-react";
 import { portfolioContent } from "../../content/portfolioContent";
+import AnimatedText from "../../components/animations/AnimatedText";
+import Reveal from "../../components/animations/Reveal";
 
 export default function FAQ() {
   const [openIndex, setOpenIndex] = useState(-1);
@@ -10,17 +12,36 @@ export default function FAQ() {
     <section className="px-5 py-24">
       <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[0.85fr_1.45fr]">
         <div className="lg:sticky lg:top-28 lg:self-start">
-          <h2 className="font-display max-w-md text-5xl font-bold uppercase leading-none text-white md:text-7xl">
-            {faq.title}
-          </h2>
-          <p className="mt-6 max-w-md text-base leading-8 text-[var(--color-text-muted)]">{faq.description}</p>
+          <AnimatedText
+            as="h2"
+            text={faq.title}
+            className="font-display max-w-md text-5xl font-bold uppercase leading-none text-white md:text-7xl"
+            direction="left"
+            stagger={0.06}
+          />
+          <AnimatedText
+            as="p"
+            text={faq.description}
+            className="mt-6 max-w-md text-base leading-8 text-[var(--color-text-muted)]"
+            direction="left"
+            distance={20}
+            stagger={0.02}
+            delay={0.1}
+          />
         </div>
 
-        <div className="border-t border-white/14">
+        <Reveal group stagger={0.08} className="border-t border-white/14">
           {faq.items.map((item, index) => {
             const isOpen = openIndex === index;
             return (
-              <article key={item.question} className="border-b border-white/14">
+              <Reveal
+                as="article"
+                inherit
+                direction="right"
+                distance={22}
+                key={item.question}
+                className="border-b border-white/14"
+              >
                 <button
                   type="button"
                   onClick={() => setOpenIndex(isOpen ? -1 : index)}
@@ -40,10 +61,10 @@ export default function FAQ() {
                     {item.answer}
                   </p>
                 </div>
-              </article>
+              </Reveal>
             );
           })}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

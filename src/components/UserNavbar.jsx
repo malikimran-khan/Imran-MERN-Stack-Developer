@@ -44,7 +44,7 @@ export default function UserNavbar() {
     <Motion.header style={{ opacity, y }} className={`fixed inset-x-0 top-4 z-50 px-4 ${isHidden && !isOpen ? "pointer-events-none" : ""}`}>
       <div className="mx-auto flex max-w-3xl items-center justify-between gap-3 rounded-[var(--radius-pill)] border border-white/10 bg-[var(--color-nav-bg)] px-3 py-2 shadow-2xl shadow-black/25 backdrop-blur-xl">
         <button type="button" onClick={() => goTo(nav.links[0])} className="flex min-w-0 items-center gap-2">
-          <img src={nav.avatar} alt="" className="h-10 w-10 rounded-full object-cover ring-2 ring-white/15" />
+          <img src={nav.avatar} alt="" decoding="async" className="h-10 w-10 rounded-full object-cover ring-2 ring-white/15" />
         </button>
 
         <nav className="hidden items-center gap-1 md:flex" aria-label="Primary">

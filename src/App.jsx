@@ -8,6 +8,7 @@ import BlogsPage from './pages/BlogsPage';
 import UserNavbar from './components/UserNavbar';
 import Footer from './components/Footer';
 import { Helmet } from 'react-helmet';
+import { MotionConfig } from 'framer-motion';
 
 export default function App() {
   return (
@@ -27,19 +28,21 @@ export default function App() {
         <meta property="og:image" content="https://yourwebsite.com/preview-image.png" />
       </Helmet>
 
-      <BrowserRouter>
-        <UserNavbar />
-        <main>
-          <Routes>
-            <Route path="/" element={<MainHome />} />
-            <Route path="/about" element={<AboutPage />} />
-            <Route path="/projects" element={<ProjectsPage />} />
-            <Route path="/blogs" element={<BlogsPage />} />
-            <Route path="/freelance" element={<FreelancePage />} />
-          </Routes>
-        </main>
-        <Footer />
-      </BrowserRouter>
+      <MotionConfig reducedMotion="user">
+        <BrowserRouter>
+          <UserNavbar />
+          <main>
+            <Routes>
+              <Route path="/" element={<MainHome />} />
+              <Route path="/about" element={<AboutPage />} />
+              <Route path="/projects" element={<ProjectsPage />} />
+              <Route path="/blogs" element={<BlogsPage />} />
+              <Route path="/freelance" element={<FreelancePage />} />
+            </Routes>
+          </main>
+          <Footer />
+        </BrowserRouter>
+      </MotionConfig>
     </div>
   );
 }

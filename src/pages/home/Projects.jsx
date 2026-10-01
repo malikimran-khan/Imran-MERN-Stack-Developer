@@ -2,6 +2,8 @@ import React, { useRef } from "react";
 import { motion as Motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { portfolioContent } from "../../content/portfolioContent";
+import AnimatedText from "../../components/animations/AnimatedText";
+import Reveal from "../../components/animations/Reveal";
 
 function ProjectImageCard({ project, index, total, scrollYProgress }) {
   const enterStart = Math.max((index - 1) / total, 0);
@@ -21,7 +23,7 @@ function ProjectImageCard({ project, index, total, scrollYProgress }) {
       className="absolute inset-0 overflow-hidden rounded-[var(--radius-card)]"
       style={{ y, scale, opacity, zIndex: index + 1 }}
     >
-      <img src={project.image} alt="" className="relative mx-auto h-full max-h-full w-full max-w-full object-contain object-center" />
+      <img src={project.image} alt="" loading="lazy" decoding="async" className="relative mx-auto h-full max-h-full w-full max-w-full object-contain object-center" />
         {/* button moved to text block for better layout */}
     </Motion.article>
   );
@@ -104,8 +106,20 @@ export default function Projects() {
   return (
     <section id="projects" className="px-5 py-24 text-white">
       <div className="section-heading">
-        <h2 className="!text-white">{projects.title}</h2>
-        <p className="!text-[var(--color-text-muted)]">{projects.description}</p>
+        <AnimatedText
+          as="h2"
+          text={projects.title}
+          className="!text-white"
+          stagger={0.06}
+        />
+        <AnimatedText
+          as="p"
+          text={projects.description}
+          className="!text-[var(--color-text-muted)]"
+          distance={18}
+          stagger={0.02}
+          delay={0.1}
+        />
       </div>
 
       <div ref={stackRef} className="mx-auto max-w-7xl" style={{ height: `${visibleProjects.length * 105}vh` }}>
@@ -141,9 +155,11 @@ export default function Projects() {
       </div>
 
       <div className="mt-10 text-center">
-        <Link to="/projects" className="inline-flex rounded-[var(--radius-pill)] border border-[var(--color-accent)] px-7 py-3 text-sm font-bold text-[var(--color-accent)] transition-colors hover:bg-[var(--color-accent)] hover:text-[var(--color-on-accent)]">
-          {projects.cta}
-        </Link>
+        <Reveal direction="up" distance={20} className="inline-block">
+          <Link to="/projects" className="inline-flex rounded-[var(--radius-pill)] border border-[var(--color-accent)] px-7 py-3 text-sm font-bold text-[var(--color-accent)] transition-colors hover:bg-[var(--color-accent)] hover:text-[var(--color-on-accent)]">
+            {projects.cta}
+          </Link>
+        </Reveal>
       </div>
     </section>
   );

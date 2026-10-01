@@ -1,5 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { REVEAL, revealContainer } from "../../utils/motion";
 import {
   FaArrowRight,
   FaCheckCircle,
@@ -47,15 +48,9 @@ import {
   Zap,
 } from "lucide-react";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
+const fadeUp = REVEAL.up;
 
-const stagger = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.08 } },
-};
+const stagger = revealContainer({ stagger: 0.08 });
 
 const MotionDiv = motion.div;
 

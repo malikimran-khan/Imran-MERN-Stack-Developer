@@ -1,8 +1,13 @@
 import React from "react";
+import { motion } from "framer-motion";
 import { BadgeCheck, Code2, Cpu, Rocket, Sparkles, Star } from "lucide-react";
 import { portfolioContent } from "../../content/portfolioContent";
 import { useCountUp } from "../../utils/useCountUp";
+import { REVEAL } from "../../utils/motion";
+import AnimatedText from "../../components/animations/AnimatedText";
+import Reveal from "../../components/animations/Reveal";
 
+const MotionArticle = motion.article;
 const workIcons = [Rocket, Code2, Cpu, BadgeCheck];
 
 function Rating() {
@@ -19,7 +24,10 @@ function WorkCard({ item, index }) {
   const Icon = workIcons[index] || Sparkles;
 
   return (
-    <article className="group flex min-h-[300px] flex-col justify-between rounded-[var(--radius-card)] border border-white/10 bg-[var(--color-surface)] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.24)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)]/60 hover:shadow-[0_24px_90px_rgba(212,255,79,0.08)]">
+    <MotionArticle
+      variants={REVEAL.up}
+      className="group flex min-h-[300px] flex-col justify-between rounded-[var(--radius-card)] border border-white/10 bg-[var(--color-surface)] p-6 shadow-[0_20px_70px_rgba(0,0,0,0.24)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)]/60 hover:shadow-[0_24px_90px_rgba(212,255,79,0.08)]"
+    >
       <div>
         <div className="mb-6 flex items-start justify-between gap-4">
           <span className="rounded-[var(--radius-pill)] border border-white/10 bg-white/[0.03] px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em] text-[var(--color-accent)]">
@@ -34,13 +42,13 @@ function WorkCard({ item, index }) {
       </div>
 
       <div className="mt-8 flex items-center gap-3 border-t border-white/10 pt-5">
-        <img src={item.avatar} alt="" className="h-12 w-12 rounded-full border border-white/10 object-cover" />
+        <img src={item.avatar} alt="" loading="lazy" decoding="async" className="h-12 w-12 rounded-full border border-white/10 object-cover" />
         <div>
           <strong className="block text-sm font-bold text-white">{item.name}</strong>
           <span className="text-sm text-[var(--color-text-muted)]">{item.role}</span>
         </div>
       </div>
-    </article>
+    </MotionArticle>
   );
 }
 
@@ -48,7 +56,7 @@ function MetricCard({ item }) {
   const [value, ref] = useCountUp(item.value);
 
   return (
-    <article ref={ref} className="flex min-h-[300px] flex-col justify-between rounded-[var(--radius-card)] bg-[var(--color-accent)] p-6 text-[var(--color-on-accent)] shadow-[0_24px_90px_rgba(212,255,79,0.16)] transition-transform duration-300 hover:-translate-y-1">
+    <MotionArticle ref={ref} variants={REVEAL.up} className="flex min-h-[300px] flex-col justify-between rounded-[var(--radius-card)] bg-[var(--color-accent)] p-6 text-[var(--color-on-accent)] shadow-[0_24px_90px_rgba(212,255,79,0.16)] transition-transform duration-300 hover:-translate-y-1">
       <div className="flex items-center justify-between gap-4">
         <span className="rounded-[var(--radius-pill)] border border-black/10 bg-black/5 px-3 py-1.5 text-xs font-bold uppercase tracking-[0.14em]">
           Metric
@@ -63,7 +71,7 @@ function MetricCard({ item }) {
         </strong>
         <span className="mt-3 block text-sm font-bold uppercase tracking-[0.16em] text-black/70">{item.label}</span>
       </div>
-    </article>
+    </MotionArticle>
   );
 }
 
@@ -88,11 +96,23 @@ export default function Testimonials() {
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="mx-auto mb-14 max-w-3xl text-center">
-          <h2 className="font-display text-6xl font-bold leading-none text-white md:text-8xl">{testimonials.title}</h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[var(--color-text-muted)]">{testimonials.description}</p>
+          <AnimatedText
+            as="h2"
+            text={testimonials.title}
+            className="font-display text-6xl font-bold leading-none text-white md:text-8xl"
+            stagger={0.06}
+          />
+          <AnimatedText
+            as="p"
+            text={testimonials.description}
+            className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[var(--color-text-muted)]"
+            distance={18}
+            stagger={0.02}
+            delay={0.1}
+          />
         </div>
 
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <Reveal group stagger={0.08} className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
           {gridItems.map((item, index) =>
             item.type === "metric" ? (
               <MetricCard key={item.data.label} item={item.data} />
@@ -100,7 +120,7 @@ export default function Testimonials() {
               <WorkCard key={item.data.name} item={item.data} index={index} />
             )
           )}
-        </div>
+        </Reveal>
       </div>
     </section>
   );

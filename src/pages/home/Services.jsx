@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Check, ChevronDown } from "lucide-react";
 import { portfolioContent } from "../../content/portfolioContent";
+import AnimatedText from "../../components/animations/AnimatedText";
+import Reveal from "../../components/animations/Reveal";
 
 export default function Services() {
   const [openIndex, setOpenIndex] = useState(-1);
@@ -10,14 +12,35 @@ export default function Services() {
     <section id="services" className="min-h-screen px-5 py-24">
       <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[minmax(0,560px)_minmax(320px,430px)] lg:justify-between">
         <div>
-          <h2 className="font-display text-5xl font-bold leading-none text-white md:text-7xl">{services.title}</h2>
-          <p className="mt-5 max-w-md text-base leading-7 text-[var(--color-text-muted)]">{services.description}</p>
+          <AnimatedText
+            as="h2"
+            text={services.title}
+            className="font-display text-5xl font-bold leading-none text-white md:text-7xl"
+            direction="left"
+            stagger={0.05}
+          />
+          <AnimatedText
+            as="p"
+            text={services.description}
+            className="mt-5 max-w-md text-base leading-7 text-[var(--color-text-muted)]"
+            direction="left"
+            distance={20}
+            stagger={0.02}
+            delay={0.08}
+          />
 
-          <div className="mt-12 border-t border-white/14">
+          <Reveal group stagger={0.08} className="mt-12 border-t border-white/14">
             {services.items.map((item, index) => {
               const isOpen = openIndex === index;
               return (
-                <article key={item.title} className="border-b border-white/14">
+                <Reveal
+                  as="article"
+                  inherit
+                  direction="left"
+                  distance={24}
+                  key={item.title}
+                  className="border-b border-white/14"
+                >
                   <button
                     type="button"
                     onClick={() => setOpenIndex(isOpen ? -1 : index)}
@@ -41,10 +64,10 @@ export default function Services() {
                       </ul>
                     </div>
                   </div>
-                </article>
+                </Reveal>
               );
             })}
-          </div>
+          </Reveal>
         </div>
 
         <div className="hidden h-[520px] lg:block" aria-hidden="true" />
