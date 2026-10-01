@@ -1,18 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaBookOpen, FaCalendarAlt, FaCheckCircle, FaGraduationCap, FaMedal, FaUniversity } from "react-icons/fa";
+import { REVEAL, revealContainer } from "../../utils/motion";
 
 const MotionDiv = motion.div;
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
+const fadeUp = REVEAL.up;
 
-const stagger = {
-  hidden: {},
-  show: { transition: { staggerChildren: 0.1 } },
-};
+const stagger = revealContainer({ stagger: 0.1 });
 
 const education = [
   {

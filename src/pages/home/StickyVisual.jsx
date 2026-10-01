@@ -41,7 +41,7 @@ export default function StickyVisual({ targetRef }) {
         >
           <Motion.div className="relative h-full w-full rounded-[var(--radius-card)] shadow-2xl shadow-black/45" style={{ rotateY: flipRotateY, transformStyle: "preserve-3d" }}>
             <div className="card-face overflow-hidden rounded-[var(--radius-card)] bg-[var(--color-surface)]">
-              <img src={stickyVisual.images[0].src} alt="" className="h-full w-full object-cover grayscale-[12%]" />
+              <img src={stickyVisual.images[0].src} alt="" loading="eager" fetchPriority="high" decoding="async" className="h-full w-full object-cover grayscale-[12%]" />
             </div>
 
             <div className="card-face card-back flex flex-col justify-between rounded-[var(--radius-card)] border border-white/10 bg-[var(--color-surface)] p-8">

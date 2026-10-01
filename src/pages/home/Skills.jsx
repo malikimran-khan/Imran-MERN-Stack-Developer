@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FaBolt, FaBrain, FaCode, FaCreditCard, FaDatabase, FaDocker, FaFileAlt, FaGitAlt, FaGithub, FaNodeJs, FaPython, FaReact, FaServer } from "react-icons/fa";
 import { SiExpress, SiFirebase, SiJenkins, SiLangchain, SiMongodb, SiMui, SiNextdotjs, SiPostgresql, SiPostman, SiRedux, SiRuby, SiRubyonrails, SiTailwindcss, SiTypescript, SiVercel } from "react-icons/si";
+import AnimatedText from "../../components/animations/AnimatedText";
+import Reveal from "../../components/animations/Reveal";
 
 const categories = {
   Frontend: [
@@ -58,16 +60,36 @@ export default function Skills() {
 
       <div className="relative z-10 mx-auto max-w-7xl">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]">Arsenal & Technologies</span>
-          <h2 className="mt-4 font-display text-6xl font-bold leading-none text-white md:text-8xl">Technical Skills</h2>
-          <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[var(--color-text-muted)]">
-            A focused stack for full-stack development, product engineering, integrations, and AI-powered workflows.
-          </p>
+          <AnimatedText
+            as="span"
+            text="Arsenal & Technologies"
+            className="text-sm font-bold uppercase tracking-[0.18em] text-[var(--color-accent)]"
+            distance={16}
+          />
+          <AnimatedText
+            as="h2"
+            text="Technical Skills"
+            className="mt-4 font-display text-6xl font-bold leading-none text-white md:text-8xl"
+            stagger={0.06}
+            delay={0.08}
+          />
+          <AnimatedText
+            as="p"
+            text="A focused stack for full-stack development, product engineering, integrations, and AI-powered workflows."
+            className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[var(--color-text-muted)]"
+            distance={18}
+            stagger={0.02}
+            delay={0.16}
+          />
         </div>
 
-        <div className="mt-10 flex flex-wrap justify-center gap-3">
+        <Reveal group stagger={0.05} className="mt-10 flex flex-wrap justify-center gap-3">
           {Object.keys(categories).map((tab) => (
-            <button
+            <Reveal
+              as="button"
+              inherit
+              direction="up"
+              distance={16}
               key={tab}
               type="button"
               onClick={() => setActiveTab(tab)}
@@ -78,15 +100,18 @@ export default function Skills() {
               }`}
             >
               {tab}
-            </button>
+            </Reveal>
           ))}
-        </div>
+        </Reveal>
 
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <Reveal group stagger={0.06} className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {skills.map((skill) => {
             const Icon = skill.icon;
             return (
-              <article
+              <Reveal
+                as="article"
+                inherit
+                direction="up"
                 key={skill.name}
                 className="group rounded-[var(--radius-card)] border border-white/10 bg-[var(--color-surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)]/60 hover:shadow-[0_24px_90px_rgba(212,255,79,0.08)]"
               >
@@ -100,10 +125,10 @@ export default function Skills() {
                 <div className="mt-6 h-1 w-full overflow-hidden rounded-full bg-white/10">
                   <div className="h-full w-2/3 rounded-full bg-[var(--color-accent)] transition-all duration-300 group-hover:w-full" />
                 </div>
-              </article>
+              </Reveal>
             );
           })}
-        </div>
+        </Reveal>
       </div>
     </section>
   );
