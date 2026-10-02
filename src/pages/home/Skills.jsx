@@ -104,14 +104,21 @@ export default function Skills() {
           ))}
         </Reveal>
 
-        <Reveal group stagger={0.06} className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {skills.map((skill) => {
+        {/* Keyed by `activeTab` so each tab switch mounts a fresh list, and every
+            card runs its own reveal. Framer Motion only staggers children that
+            exist when the parent animates, so a card added later (a new tab)
+            would otherwise stay stuck at its hidden state. Self-contained
+            reveals avoid that entirely, and the index-based `delay` keeps the
+            staggered, left-to-right feel. */}
+        <div key={activeTab} className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+          {skills.map((skill, index) => {
             const Icon = skill.icon;
             return (
               <Reveal
                 as="article"
-                inherit
                 direction="up"
+                distance={26}
+                delay={Math.min(index, 8) * 0.06}
                 key={skill.name}
                 className="group rounded-[var(--radius-card)] border border-white/10 bg-[var(--color-surface)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)]/60 hover:shadow-[0_24px_90px_rgba(212,255,79,0.08)]"
               >
@@ -128,7 +135,7 @@ export default function Skills() {
               </Reveal>
             );
           })}
-        </Reveal>
+        </div>
       </div>
     </section>
   );
