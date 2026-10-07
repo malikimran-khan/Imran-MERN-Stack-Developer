@@ -1,5 +1,5 @@
 import React from "react";
-import { Github, Instagram, Linkedin, Mail, MailIcon, Phone } from "lucide-react";
+import { Facebook, Github, Globe, Instagram, Linkedin, Mail, MailIcon, Phone } from "lucide-react";
 import { portfolioContent } from "../../content/portfolioContent";
 import { useCountUp } from "../../utils/useCountUp";
 import OutlineButton from "../../components/OutlineButton";
@@ -22,7 +22,7 @@ function Stat({ stat }) {
 
 export default function About() {
   const { about, socials } = portfolioContent;
-  const icons = [Github, Linkedin, Instagram, MailIcon];
+  const icons = [Globe, Github, Linkedin, Instagram, Facebook, MailIcon];
 
   return (
     <section id="about" className="min-h-screen px-5 py-24">
