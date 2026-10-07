@@ -1,11 +1,11 @@
 import React from "react";
-import { Github, Instagram, Linkedin, Mail, MailIcon, Phone } from "lucide-react";
+import { Facebook, Github, Globe, Instagram, Linkedin, Mail, MailIcon, Phone } from "lucide-react";
 import { portfolioContent } from "../content/portfolioContent";
 import Reveal from "./animations/Reveal";
 
 export default function Footer() {
   const { about, footer, socials } = portfolioContent;
-  const icons = [Github, Linkedin, Instagram, MailIcon];
+  const icons = [Globe, Github, Linkedin, Instagram, Facebook, MailIcon];
 
   return (
     <footer className="border-t border-white/10 bg-[var(--color-bg)] px-5 py-12 text-white">

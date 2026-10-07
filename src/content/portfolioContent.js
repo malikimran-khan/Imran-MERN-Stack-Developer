@@ -99,9 +99,11 @@ export const portfolioContent = {
     storyTarget: "/about",
   },
   socials: [
-    { label: "GitHub", href: "https://github.com/malikimranawan" },
+    { label: "Portfolio", href: "https://imran-mern-stack-developer.vercel.app/" },
+    { label: "GitHub", href: "https://github.com/malikimran-khan" },
     { label: "LinkedIn", href: "https://www.linkedin.com/in/malik-imran-598b96241/" },
-    { label: "Instagram", href: "#" },
+    { label: "Instagram", href: "https://www.instagram.com/malik_imran_dev/" },
+    { label: "Facebook", href: "https://www.facebook.com/MuhammadImran2666" },
     { label: "Email", href: "mailto:imranwebcreator@gmail.com" },
   ],
   projects: {
